@@ -6,7 +6,7 @@ function colorEcho () {
 }
 
 colorEcho "Cloning dotfiles..."
-git clone git@github.com:goschevski/dotfiles.git
+git clone git@github.com:SimonKrenn/dotfiles.git
 chmod +x ~/dotfiles/bin/*
 
 colorEcho "Setup some OSX settings..."
@@ -108,9 +108,3 @@ done
 colorEcho "Setup vim"
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 vim +PlugInstall +qall
-
-
-colorEcho "Setup hosts files"
-sudo su -
-echo "0 15 * * * /Users/gosevski/dotfiles/bin/generateHosts" > /tmp/mycron
-crontab /tmp/mycron
