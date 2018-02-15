@@ -1,0 +1,30 @@
+[core]
+    excludesfile = ~/.gitignore
+    editor = vim
+[user]
+    name = Aleksandar Gosevski
+    email = gosevski@vast.com
+[github]
+    user = goschevski
+[diff]
+    tool = vimdiff
+[difftool]
+    prompt = false
+[alias]
+    d = difftool
+	dsf = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\" && git diff --color \"$@\" | diff-so-fancy  | less --tabs=4 -RFX; }; f"
+[color]
+    ui = true
+[merge]
+	tool = vimdiff
+[mergetool "diffconflicts"]
+	trustExitCode = true
+[mergetool]
+	keepBackup = false
+[push]
+	default = simple
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22

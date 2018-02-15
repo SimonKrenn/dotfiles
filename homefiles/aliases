@@ -1,0 +1,138 @@
+
+alias tl="tmux ls"
+function ta () {
+    if [ -z "$1" ]; then
+        tmux attach
+    else
+        tmux attach -t $1
+    fi
+}
+function tk () { tmux kill-session -t $1 }
+function tc () { tmux new -s $1 }
+
+# Reload
+alias re="source ~/.zshrc"
+
+# Edit hosts
+alias hos="sudo -E vim /etc/hosts"
+
+# Set color scheme
+function color () {
+    export THEME=$1
+    BASE16_SHELL="$HOME/.config/base16-shell/scripts/base16-$1.sh"
+    source $BASE16_SHELL
+}
+
+# Set random color scheme
+function rndcolor () {
+    SELECTED=$(ls ~/.config/base16-shell/scripts/ | grep -v light | gshuf -n 1 | cut -d . -f 1 | awk -F "base16-" '{print $2}')
+
+    color $SELECTED
+    echo "Color scheme is $SELECTED"
+}
+
+# List colors
+function lscolor () {
+    ls ~/.config/base16-shell/scripts/ | grep -v light
+}
+
+# Read markdown
+rmd () {
+    grep -v "\-\-\-\-\-" "$*" | pandoc -s -f markdown -t man | groff -T utf8 -man | less
+}
+
+# Calendar events
+function ev () {
+    if [ $1 ]; then
+        daysToAdd=$1
+    else
+        daysToAdd=0
+    fi
+
+    icalBuddy -f -npn -iep 'title,datetime' -ps '| : |' -po 'datetime,title' -eed eventsToday+$daysToAdd
+}
+
+# Weather
+alias we="curl http://wttr.in/\?m"
+
+# asciinema rec
+alias rec="asciinema rec"
+
+# Imgur upload
+alias img="imgur-screenshot.sh -l true"
+
+# Unrar all .rar files in current folder
+alias unrarall='find ./ -name "*.rar" -execdir unrar e {} \;'
+
+# List files
+alias ls="ls -G"
+alias la="ls -lAFh"
+
+# Back folders
+alias .="cd ../"
+alias ..="cd ../../"
+alias ...="cd ../../../"
+alias ....="cd ../../../../"
+
+# Folders
+alias sites="cd ~/Sites"
+alias akordi="cd ~/Google\ Drive/Akordi && vim"
+alias down="cd ~/Downloads"
+alias desk="cd ~/Desktop"
+alias dotf="cd ~/dotfiles"
+
+# Folder sizes
+alias sizes="du -xhd1 | sort -n"
+
+# Youtube Download
+alias mp3="youtube-dl -x --audio-format mp3 --audio-quality 0"
+
+# Get OS X Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
+alias update="softwareupdate -i -a; brew update; brew upgrade"
+
+# IP addresses
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias localip="ipconfig getifaddr en0"
+
+# Brew cask
+alias cask="brew cask"
+
+# Brew and cask cleanup & Flush Directory Service cache & Empty the Trash on all mounted volumes and main HDD & Clear Apple’s System Logs
+alias cleanup="brew cleanup; brew cask cleanup; dscacheutil -flushcache; killall -HUP mDNSResponder; rm -rfv /Volumes/*/.Trashes; rm -rfv ~/.Trash; sudo rm -rfv /private/var/log/asl/*.asl"
+
+# Clean install of node modules
+alias mylog="nodemon server.js | grep --line-buffered 'MYLOG'"
+alias ni="rm -rf node_modules; npm i"
+alias nis="npm i --save --save-exact"
+alias nid="npm i --save-dev --save-exact"
+alias yi="rm -rf node_modules; yarn install"
+alias yis="yarn add --exact"
+alias yid="yarn add --dev --exact"
+
+# Docker
+alias dlc="docker ps -a"
+alias dsc="docker stop"
+alias dcc='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
+alias drc="docker rm"
+alias dli="docker images"
+alias dri="docker rmi"
+alias dci='docker rmi $(docker images -a -q)'
+
+# kill procces chooser
+function kp () {
+    PRC=${1:-"[n]ode"}
+    ps -ef | grep $PRC | pick | sed -r 's/\s+/\|/g' | cut -d '|' -f 3 | xargs kill -9
+}
+
+alias gd="git dsf | less"
+alias ts="tig status"
+function retag () {
+    git tag -d $1 && git push origin :refs/tags/$1 && git tag $1
+}
+
+# JSON pretty print
+alias json='python -m json.tool'
+
+# Url Encode/Decode
+alias decode='python -c "import sys, urllib as ul; print ul.unquote_plus(sys.argv[1])"'
+alias encode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1])"'

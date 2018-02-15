@@ -1,0 +1,371 @@
+call plug#begin('~/.vim/plugged')
+
+" Files buffers navigation
+Plug 'scrooloose/nerdtree'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'christoomey/vim-tmux-navigator'
+
+" Search and movement
+Plug 'mileszs/ack.vim'
+Plug 'embear/vim-foldsearch'
+Plug 'yuttie/comfortable-motion.vim'
+Plug 'brooth/far.vim'
+Plug 'easymotion/vim-easymotion'
+
+" Git and command line
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'metakirby5/codi.vim'
+Plug 'sunaku/vim-dasht'
+Plug 'joonty/vim-do'
+
+" Snippets and autocomplete
+Plug 'Shougo/neocomplete.vim'
+Plug 'Shougo/neocomplete'
+Plug 'Shougo/neosnippet'
+Plug 'mattn/emmet-vim'
+Plug 'dhruvasagar/vim-table-mode'
+
+" Code edit
+Plug 'w0rp/ale'
+Plug 'cohama/lexima.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-commentary'
+
+" Code highlight
+Plug 'sheerun/vim-polyglot'
+Plug 'Glench/Vim-Jinja2-Syntax'
+
+" Markdown
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+
+" Color schemes
+Plug 'chriskempson/base16-vim'
+
+" Add plugins to &runtimepath
+call plug#end()
+
+" ================================================
+" Color scheme
+" ================================================
+let base16colorspace=256
+set background=dark
+execute "colorscheme base16-".$THEME
+
+" ================================================
+" General config
+" ================================================
+set relativenumber              "Line numbers are good
+set number                      "Line numbers are good
+set binary                      "don't add new line on end of file (git)
+set gdefault                    "Set global flag for search and replace
+set cursorline                  "Highlight row
+set autoread                    "Reload files changed outside vim
+set smartcase                   "Smart case search if there is uppercase
+set ignorecase                  "case insensitive search
+set hlsearch                    "highlight search results
+set incsearch                   "show matches in real time
+set clipboard+=unnamed          "use system clipboard
+set fileencoding=utf-8          "Set utf-8 encoding on write
+set laststatus=0
+set ruler                       "Show line/column number
+set hidden                      "Switch buffers when they are not saved"
+set belloff=all                 "turn off bells
+set mouse=a                     "enable mouse
+set lazyredraw                  "lazy redraw for macors
+set timeoutlen=1000             "Fast escape
+set ttimeoutlen=0               "Fast escape
+set foldcolumn=0                "Hide fold column
+syntax on                       "Turn on syntax highlighting
+
+" ================================================
+" Colors
+" ================================================
+highlight clear FoldColumn                     "Use same color for padding as background
+highlight LineNr ctermfg=19 ctermbg=NONE         "Change color of line numbers
+highlight CursorLineNr ctermfg=20 ctermbg=19     "Change color of line numbers
+highlight CursorLine ctermbg=19                  "Current line
+highlight VertSplit ctermbg=NONE ctermfg=NONE    "Remove border background
+highlight EndOfBuffer ctermfg=NONE ctermbg=NONE  "Color of ~ at end of the file
+
+" ================================================
+" Cursor style in tmux
+" ================================================
+let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+
+" ================================================
+" Indentation
+" ================================================
+set smarttab
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+set expandtab
+set smartindent
+set autoindent
+
+" ================================================
+" Completion
+" ================================================
+set wildmode=list:full
+set wildmenu
+set wildignore=*.o,*.obj,*~
+set wildignore+=*vim/backups*
+set wildignore+=*sass-cache*
+set wildignore+=*vendor/**
+set wildignore+=*node_modules/**
+set wildignore+=*DS_Store*
+set wildignore+=*.gem
+set wildignore+=log/**
+set wildignore+=tmp/**
+set wildignore+=*.png,*.jpg,*.gif
+
+" ================================================
+" Swap files
+" ================================================
+set noswapfile
+set nobackup
+set nowb
+
+" ================================================
+" Functions
+" ================================================
+function! FixFile()
+    let l = line(".")
+    let c = col(".")
+    " Fix indentation
+    exec "normal! gg=G"
+    " Delete trailing slashes
+    %s/\s\+$//e
+    " Replace tabs with spaces
+    %s/\t/    /e
+    call cursor(l, c)
+endfunction
+
+function! NERDTreeToggleInCurDir()
+    " If NERDTree is open in the current buffer
+    if (exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1)
+        exe ":NERDTreeClose"
+    else
+        if (expand("%:t") != '')
+            exe ":NERDTreeFind"
+        else
+            exe ":NERDTreeToggle"
+        endif
+    endif
+endfunction
+
+" ================================================
+" Auto-Commands
+" ================================================
+" Show nunjucks as jinja
+autocmd BufNewFile,BufReadPost *.nunj set filetype=jinja
+autocmd BufNewFile,BufReadPost *.njk set filetype=jinja
+" Goyo and Limelight sync
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+
+" ================================================
+" Key mappings (bindings)
+" ================================================
+" Map leader
+let mapleader = "\<Space>"
+
+" Reload vim config
+nnoremap <Leader><Leader>r :source ~/.vimrc<CR>
+
+" Notes
+nnoremap <Leader>n :e ~/Google\ Drive/Notes/
+
+" Chords
+nnoremap <Leader>c magg:vsplit<CR>:set noscrollbind<CR><C-w>l<C-f>:set scrollbind<CR><C-w>h:set scrollbind<CR>`a
+
+" Close splits
+nnoremap = :only<CR>
+
+" Disable Ex mode
+noremap Q <NOP>
+
+" Copy file path
+nnoremap <Leader>y :let @* = expand("%")<CR>
+
+" Copy to the end of the line
+nnoremap Y y$
+
+" Line start and end
+nnoremap L $
+vnoremap L $h
+nnoremap H ^
+vnoremap H ^
+
+" Fast navigation
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-l> <C-w>l
+
+" Quickfix and location lists
+map <Leader>co :copen<CR>
+map <Leader>cc :cclose<CR>
+map <Leader>cn :cn<CR>
+map <Leader>cp :cp<CR>
+map <Leader>lo :lopen<CR>
+map <Leader>lc :lclose<CR>
+
+" Search selected
+vnoremap // y/<C-R>"<CR>N
+
+" Move selected
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" Search under the cursor and back to that instance
+nnoremap \ *N
+" Search under the cursor and change it
+nnoremap ' *Ncgn
+
+" Easy command mode
+nnoremap ; :
+vnoremap ; :
+
+" Switch between buffers quickly
+map <Leader><Tab> <C-^>
+
+" Switch between buffers quickly
+nnoremap <Leader>x :bdelete<CR>
+
+" Down is really the next line
+nnoremap j gj
+nnoremap k gk
+
+" Delete content of the file
+nnoremap <Leader>d ggdG
+
+" Add empty line and stay in command mode
+nmap <Leader>j o<Esc>k
+nmap <Leader>k O<Esc>j
+
+" Fast exit to normal mode
+inoremap jj <Esc>
+inoremap jk <Esc>
+
+" Center highlighted search
+nnoremap n nzz
+nnoremap N Nzz
+
+" Substitute
+nnoremap <Leader>sf :Far \V %<left><left>
+nnoremap <Leader>sr :%s///<left><left><C-f>i
+
+" Fast save
+nnoremap <Leader>w :w<CR>
+
+" Fast quit
+nnoremap <Leader>q :q<CR>
+
+" Shorthand for making window smaller and bigger
+nnoremap <Leader>, <C-w>10<
+nnoremap <Leader>. <C-w>10>
+
+" Hide highlight
+nnoremap <silent> <BS> :noh<CR>
+
+" Indenting in visual and normal mode
+xnoremap <s-tab> <gv
+xnoremap <tab> >gv
+nnoremap <tab> >>
+nnoremap <s-tab> <<
+
+" Clear trailing whitespaces
+nnoremap <Leader>i :call FixFile()<CR>
+
+" ================================================
+" Plugin settings and mappings (bindings)
+" ================================================
+
+" NERDTree
+nnoremap - :call NERDTreeToggleInCurDir()<CR>
+let NERDTreeShowHidden=1
+
+" Fzf
+if isdirectory(".git")
+    nnoremap <Leader>p :GFiles!<CR>
+else
+    nnoremap <Leader>p :Files!<CR>
+endif
+nnoremap <Leader>o :Buffers!<CR>
+nnoremap <Leader>[ :Files!<CR>
+nnoremap <Leader>gf :Commits!<CR>
+nnoremap <Leader>gh :BCommits!<CR>
+nnoremap <Leader>m :Maps!<CR>
+nnoremap <Leader>\ :Filetypes!<CR>
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
+" Fugitive commands
+nnoremap <Leader>gst :Gstatus<CR>
+nnoremap <Leader>gss :Do git stash<CR>
+nnoremap <Leader>gsp :Do git stash pop<CR>
+nnoremap <Leader>gpl :Do git pull --rebase<CR>
+nnoremap <Leader>gps :Do git push<CR>
+nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gb :Gblame<CR>
+nnoremap <C-n> :echo fugitive#statusline()<CR>
+nnoremap <Leader>gco :Gread<CR>:w<CR>
+
+" Ack Search
+nnoremap <Leader>f :Ack -F -S ""<Left>
+nnoremap <Leader>a :Ack <cword><cr>
+let g:ackprg = 'rg --vimgrep'
+
+" Fold searches
+let g:foldsearch_disable_mappings=1
+nnoremap <Leader>/ :Fs<CR>
+
+" Run Codi
+nnoremap , :Codi!!<CR>
+
+" Search with dasht
+nnoremap <Leader><Leader>k :Dasht!<Space>
+nnoremap <Leader><Leader>K :call Dasht([expand('<cWORD>'), expand('<cword>')], '!')<CR>
+vnoremap <Leader><Leader>K y:<C-U>call Dasht(getreg(0), '!')<CR>
+
+" GitGutter
+let g:gitgutter_realtime = 0
+hi GitGutterAdd          ctermbg=NONE
+hi GitGutterChange       ctermbg=NONE
+hi GitGutterDelete       ctermbg=NONE
+hi GitGutterChangeDelete ctermbg=NONE
+
+" Ale
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\}
+let g:ale_fixers = {
+\   'javascript': [
+\       'eslint'
+\   ],
+\}
+
+" Neocomplete
+let g:neocomplete#enable_at_startup = 1
+ 
+" Easymotion
+nmap s <Plug>(easymotion-overwin-f2)
+let g:EasyMotion_smartcase = 1
+
+" Neosnippet
+let g:neosnippet#disable_runtime_snippets = {'_' : 1}
+let g:neosnippet#snippets_directory = '~/dotfiles/snippets'
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+smap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_jump)" : "\<TAB>"
+
