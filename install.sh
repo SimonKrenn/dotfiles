@@ -90,6 +90,8 @@ npm i -g is-up
 npm i -g caniuse-cmd
 npm i -g hget
 npm i -g @angular/cli
+npm i -g polymer-cli
+npm i -g bower
 
 
 colorEcho "Install and setup oh-my-zsh..."
