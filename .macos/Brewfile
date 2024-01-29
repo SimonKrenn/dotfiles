@@ -1,0 +1,42 @@
+# taps
+tap "homebrew/bundle" 
+tap "homebrew/cask-fonts" # nerd fonts
+
+# packages
+brew 'git' # version control
+brew 'neovim' # text-editor
+brew 'tmux' # terminal mutliplexer
+brew 'fish' # shell
+brew 'bat' # cat(1) alternative
+brew 'erdtree' # tree cmd
+brew 'gh' # github cli
+brew 'glab' # gitlab cli
+brew 'starship' # prompt
+brew 'fzf' # fuzzy-finder
+brew 'docker' # container
+brew 'fnm' # node version manager
+brew 'lazygit' # git tui
+brew 'ast-grep' # ast-based search, modify, etc..
+brew 'koekeishiya/formulae/skhd' # macos hotkey daemon
+brew 'fisher' # fish plugin-manager 
+brew 'stow' # symlink manager
+# brew 'yabai' # window-manager
+
+# envs
+brew 'bun'
+
+# Casks
+cask 'arc' #browser
+cask 'visual-studio-code' # text-editor 
+cask '1password' # password manager
+cask '1password-cli' # password manager cli
+cask 'notion' # notes
+cask 'obsidian' # notes
+cask 'jetbrains-toolbox' # jetbrains ide manager
+cask 'alacritty' # terminal emulator
+cask 'bruno' # API IDE
+cask 'raycast' # spotlight replacement
+cask 'fig' # terminal autocomplete
+
+# fonts
+brew 'font-monaspice-nerd-font'

@@ -1,0 +1,217 @@
+{
+  //Workbench
+  "workbench.colorTheme": "One Hunter Theme",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.layoutControl.enabled": true,
+  "workbench.list.smoothScrolling": true,
+  "workbench.startupEditor": "none",
+
+  //Window
+  "window.title": "${dirty}${separator}${activeEditorShort}${separator}${rootName}${separator}${appName}",
+  "window.commandCenter": true,
+
+  //Files
+  "files.autoSave": "onFocusChange",
+  "files.defaultLanguage": "markdown",
+
+  //Terminal
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.tabs.title": "${process}${task}",
+  "terminal.integrated.tabs.description": "${task}${separator}${local}${separator}${cwdFolder}",
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font Mono",
+  "terminal.integrated.shellIntegration.enabled": true,
+  "terminal.integrated.env.osx": {
+    "FIG_NEW_SESSION": "1"
+  },
+
+  //Editor
+  "editor.inlayHints.fontFamily": "JetBrains Mono",
+  "editor.fontFamily": "JetBrains Mono",
+  "editor.letterSpacing": 0.2,
+  "editor.semanticHighlighting.enabled": true,
+  "editor.fontSize": 14.5,
+  "editor.fontLigatures": true,
+  "editor.linkedEditing": true,
+  "editor.fontWeight": "normal",
+  "editor.cursorBlinking": "phase",
+  "editor.cursorStyle": "line",
+  "editor.guides.bracketPairs": true,
+  "editor.guides.bracketPairsHorizontal": true,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.smoothScrolling": true,
+  "editor.minimap.enabled": false,
+  "editor.accessibilitySupport": "off",
+  "editor.codeActionsOnSave": {},
+
+  //Live_Server
+  "liveServer.settings.donotVerifyTags": true,
+  "liveServer.settings.donotShowInfoMsg": true,
+
+  //JS/TS
+  "typescript.inlayHints.enumMemberValues.enabled": true,
+  "typescript.implementationsCodeLens.enabled": true,
+  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "javascript.inlayHints.parameterNames.enabled": "all",
+  "js/ts.implicitProjectConfig.experimentalDecorators": true,
+
+  //Formatting
+
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+  },
+
+  //Gitlens
+  "gitlens.defaultDateFormat": null,
+  "gitlens.hovers.currentLine.over": "line",
+
+  //i18n Ally
+  "i18n-ally.extract.ignored": [":", ";"],
+  "i18n-ally.autoDetection": false,
+  "i18n-ally.indent": 4,
+
+  //ToDo
+  "todohighlight.keywords": [
+    {
+      "text": "todo:",
+      "color": "red",
+      "border": "1px solid red",
+      "borderRadius": "2px", //NOTE: using borderRadius along with `border` or you will see nothing change
+      "backgroundColor": "red"
+    },
+    {
+      "text": "NOTE:",
+      "color": "#ff0000",
+      "backgroundColor": "yellow",
+      "overviewRulerColor": "grey"
+    }
+  ],
+  "todohighlight.keywordsPattern": "CVTA(-\\w*)+",
+  "todohighlight.defaultStyle": {
+    "color": "#010C13",
+    "backgroundColor": "#2DD881",
+    "overviewRulerColor": "#010C13",
+    "cursor": "pointer",
+    "borderRadius": "1px",
+    "selectionHighlight": "#2DD881",
+    "activeForeground": "#2DD881"
+  },
+
+  //Misc
+  "cssPeek.supportTags": false,
+  "sync.autoDownload": true,
+  "security.workspace.trust.untrustedFiles": "open",
+  "vsicons.dontShowNewVersionMessage": true,
+  "npm.enableRunFromFolder": true,
+  "cSpell.userWords": [
+    "AGENTEMAILADDRESS",
+    "AGENTREPLY",
+    "browserinfo",
+    "CLOSEMODAL",
+    "CVTA",
+    "fluentui",
+    "freshdesk",
+    "IFRAMELOADED",
+    "LOGORDERS",
+    "minh",
+    "ngneat",
+    "Preselection",
+    "resizers",
+    "Roboto",
+    "STATUSCHANGE",
+    "Sublabel",
+    "sublabels",
+    "TEAMID",
+    "teamviewer",
+    "textblock",
+    "textblocks",
+    "TICKETAGENTNOTIFICATION",
+    "TICKETCHANGED",
+    "TICKETCREATED",
+    "TICKETDESCRIPTION",
+    "TICKETDISABLED",
+    "TICKETESCALATION",
+    "TICKETNAME",
+    "TICKETSTATUS",
+    "TICKETURL",
+    "timetrack",
+    "transloco",
+    "Twemoji",
+    "USEREMAILADDRESS",
+    "USERPHONENUMBER"
+  ],
+  "gitlens.codeLens.scopes": ["document", "containers", "blocks"],
+
+  //Experimental
+  "git.mergeEditor": false,
+  "material-icon-theme.activeIconPack": "angular_ngrx",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+
+  "jest.autoRun": {},
+  "diffEditor.ignoreTrimWhitespace": false,
+
+  //token action
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": [
+          //following will be in italic (=FlottFlott)
+          "comment",
+          "entity.name.type.class", //class names
+          "keyword", //import, export, return…
+          "constant", //String, Number, Boolean…, this, super
+          "storage.modifier", //static keyword
+          "storage.type.class.js" //class keyword
+        ],
+        "settings": {
+          "fontStyle": "italic"
+        }
+      },
+      {
+        "scope": [
+          //following will be excluded from italics (VSCode has some defaults for italics)
+          "invalid",
+          "keyword.operator",
+          "constant.numeric.css",
+          "keyword.other.unit.px.css",
+          "constant.numeric.decimal.js",
+          "constant.numeric.json"
+        ],
+        "settings": {
+          "fontStyle": ""
+        }
+      }
+    ]
+  },
+  "svelte.enable-ts-plugin": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
+
