@@ -1,1 +1,10 @@
-shell = /usr/local/bin/fish
+[shell]
+program = "/opt/homebrew/bin/fish"
+
+[font] 
+size = 13.5
+normal = {family = "MonaspiceNe Nerd Font", style = "Regular"}
+builtin_box_drawing = true
+
+[window]
+opacity = 0.9999
