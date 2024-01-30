@@ -1,0 +1,15 @@
+[user]
+  name = Simon Krenn
+[init]
+  defaultBranch = main
+[core]
+  editor = nvim
+[web]
+  browser = arc
+[diff]
+  tool = nvimdiff
+  guitoll = nvimdiff
+[difftool]
+  prompt = false
+[difftool "nvimdiff"]
+  cmd = "nvim -d"
