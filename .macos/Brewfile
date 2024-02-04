@@ -40,6 +40,6 @@ cask 'alacritty' # terminal emulator
 cask 'bruno' # API IDE
 cask 'raycast' # spotlight replacement
 cask 'fig' # terminal autocomplete
-
+cask 'raindropio' # bookmark managerer
 # fonts
 brew 'font-monaspice-nerd-font'
