@@ -1,0 +1,27 @@
+{
+    "workspace.library": [
+        "/Users/simonkrenn/.config/nvim",
+        "/Users/simonkrenn/.local/share/nvim/lazy/lazy.nvim",
+        "/Users/simonkrenn/.local/share/nvim/lazy/neodev.nvim",
+        "/Users/simonkrenn/.local/share/nvim/lazy/fidget.nvim",
+        "/Users/simonkrenn/.local/share/nvim/lazy/mason-lspconfig.nvim",
+        "/Users/simonkrenn/.local/share/nvim/lazy/mason.nvim",
+        "/Users/simonkrenn/.local/share/nvim/lazy/nvim-lspconfig",
+        "/Users/simonkrenn/.local/share/nvim/lazy/gitsigns.nvim",
+        "/Users/simonkrenn/.local/share/nvim/lazy/nvim-treesitter-textobjects",
+        "/Users/simonkrenn/.local/share/nvim/lazy/nvim-treesitter",
+        "/Users/simonkrenn/.local/share/nvim/lazy/vim-fugitive",
+        "/Users/simonkrenn/.local/share/nvim/lazy/telescope-fzf-native.nvim",
+        "/Users/simonkrenn/.local/share/nvim/lazy/plenary.nvim",
+        "/Users/simonkrenn/.local/share/nvim/lazy/telescope.nvim",
+        "/Users/simonkrenn/.local/share/nvim/lazy/telescope-file-browser.nvim",
+        "/Users/simonkrenn/.local/share/nvim/lazy/darkplus.nvim",
+        "/usr/local/Cellar/neovim/0.9.2/share/nvim/runtime",
+        "/usr/local/Cellar/neovim/0.9.2/share/nvim/runtime/pack/dist/opt/matchit",
+        "/usr/local/Cellar/neovim/0.9.2/lib/nvim",
+        "/Users/simonkrenn/.local/state/nvim/lazy/readme",
+        "/Users/simonkrenn/.local/share/nvim/lazy/darkplus.nvim/after",
+        "${3rd}/luassert/library"
+    ],
+    "workspace.checkThirdParty": false
+}
