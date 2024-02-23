@@ -23,6 +23,8 @@ brew 'fisher' # fish plugin-manager
 brew 'eza' # ls replacement
 brew 'stow' # symlink manager
 brew 'joshuto' # file explorer
+brew 'zoxide' # better cd
+brew 'fd' # find replacement
 # brew 'yabai' # window-manager
 
 # envs

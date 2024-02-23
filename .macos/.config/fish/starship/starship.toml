@@ -1,1 +1,24 @@
 "$schema" = 'https://starship.rs/config-schema.json';
+
+ format= """
+"""
+
+palette = 'my_theme'
+
+[palettes.my_theme]
+black_bright   = '#45505b'
+red_bright     = '#E61F44'
+green_bright   = '#B7F0E5'
+yellow_bright  = '#A7C7ED'
+blue_bright    = '#A7C7ED'
+magenta_bright = '#EE808B'
+cyan_bright    = '#D7C9F0'
+white_bright   = '#E0E0E0'
+black   = '#34393E'
+red     = '#E61F44'
+green   = '#5BD1B9'
+yellow  = '#53A1FA'
+blue    = '#53A1FA'
+magenta = '#F4457D'
+cyan    = '#B267E6'
+white   = '#E0E0E0'
