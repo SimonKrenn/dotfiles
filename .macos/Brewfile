@@ -22,9 +22,10 @@ brew 'koekeishiya/formulae/skhd' # macos hotkey daemon
 brew 'fisher' # fish plugin-manager
 brew 'eza' # ls replacement
 brew 'stow' # symlink manager
-brew 'joshuto' # file explorer
+brew 'yazi' # file explorer
 brew 'zoxide' # better cd
 brew 'fd' # find replacement
+brew 'rg' # repgrip
 # brew 'yabai' # window-manager
 
 # envs
