@@ -8,7 +8,7 @@ return {
 	build = ':TSUpdate',
 	opts = {
 		-- Add languages to be installed here that you want installed for treesitter
-		ensure_installed = { 'lua', 'typescript', 'vimdoc', 'html', "java" },
+		ensure_installed = { 'lua', 'typescript', 'vimdoc', 'html', "java", "yaml" },
 		highlight = { enable = true },
 		indent = { enable = true },
 		incremental_selection = {
@@ -38,20 +38,20 @@ return {
 				enable = true,
 				set_jumps = true, -- whether to set jumps in the jumplist
 				goto_next_start = {
-					[']m'] = '@function.outer',
-					[']]'] = '@class.outer',
+					[')f'] = '@function.outer',
+					[')c'] = '@class.outer',
 				},
 				goto_next_end = {
-					[']M'] = '@function.outer',
-					[']['] = '@class.outer',
+					[')F'] = '@function.outer',
+					[')C'] = '@class.outer',
 				},
 				goto_previous_start = {
-					['[m'] = '@function.outer',
-					['[['] = '@class.outer',
+					['(f'] = '@function.outer',
+					['(c'] = '@class.outer',
 				},
 				goto_previous_end = {
-					['[M'] = '@function.outer',
-					['[]'] = '@class.outer',
+					['(F'] = '@function.outer',
+					['(C'] = '@class.outer',
 				},
 			},
 			swap = {
