@@ -12,4 +12,10 @@
 [difftool]
   prompt = false
 [difftool "nvimdiff"]
-  cmd = "nvim -d"
+	cmd = "nvim -d"
+[global]
+	poop = push
+	pee = commit
+	eat = fetch
+
+
