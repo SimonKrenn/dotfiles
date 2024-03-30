@@ -8,5 +8,5 @@ return {
 	},
 	extensions = {
 		'neo-tree'
-	}
+	},
 }
