@@ -26,7 +26,8 @@ brew 'yazi' # file explorer
 brew 'zoxide' # better cd
 brew 'fd' # find replacement
 brew 'rg' # repgrip
-# brew 'yabai' # window-manager
+brew 'yabai' # window-manager
+brew 'direnv' # direnv
 
 # envs
 brew 'bun'

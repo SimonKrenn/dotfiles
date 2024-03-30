@@ -18,20 +18,39 @@ foreground = '#E0E0E0'
 text = '#191d21'
 cursor = '#E0E0E0'
 
+[env]
+TERM = 'xterm-256color'
+
+
+
+# local bg = '#101113'
+# -- '#0B0E14'
+# local fg = '#F1F2F8'
+#
+# local red = '#FF4747'
+# local redBright = '#FF6B6B'
+# local greenBright = '#5CFFB6'
+# local green = '#00F587'
+# local yellow = '#D7F75B'
+# local purple = '#7C53ED'
+# local lightBlue = '#ABFFFF'
+# local yellow2 = '#A4CF4A'
+# local orange = '#F68A3E'
+
 # Normal colors
 [colors.normal]
-black   = '#34393E'
-red     = '#E61F44'
-green   = '#5BD1B9'
-yellow  = '#53A1FA'
-blue    = '#53A1FA'
-magenta = '#F4457D'
+black   = '#101113'
+red     = '#FF4747'
+green   = '#00F587'
+yellow  = '#D7F75B'
+blue    = '#ABFFFF'
+magenta = '#7C53ED'
 cyan    = '#B267E6'
-white   = '#E0E0E0'
+white   = '#F1F2F8'
 
 # Bright colors
 [colors.bright]
-black   = '#45505b'
+black   = '#101113'
 red     = '#E61F44'
 green   = '#B7F0E5'
 yellow  = '#A7C7ED'
