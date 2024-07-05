@@ -5,6 +5,7 @@ alias lg="lazygit"
 alias edit="nvim"
 alias browse="yazi"
 alias ya="yazi"
+alias cd='z'
 
 function ya
 	set tmp (mktemp -t "yazi-cwd.XXXXX")
