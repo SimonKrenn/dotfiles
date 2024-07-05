@@ -5,3 +5,9 @@ customCommands:
     context: files
     loadingText: 'opening commitizen'
     subprocess: true
+
+gui:
+  showFileIcons: true
+  nerdFontsVersion: "3"
+  showIcons: true
+
