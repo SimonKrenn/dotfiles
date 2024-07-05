@@ -12,6 +12,7 @@ keymap('n', '<leader>ff', require('telescope.builtin').find_files, { desc = "[F]
 keymap('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = "[F]ind current [W]ord" })
 keymap('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = "[F]ind [G]rep" })
 keymap('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
+keymap("n", "<leader>fl", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
 keymap('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 keymap('n', '<leader>/', function()
 	-- You can pass additional configuration to telescope to change theme, layout, etc.
@@ -20,6 +21,8 @@ keymap('n', '<leader>/', function()
 		previewer = false,
 	})
 end, { desc = '[/] Fuzzily search in current buffer]' })
+keymap('n', '<leader>fm', require('telescope.builtin').marks, { desc = "[F]ind [M]arks" })
+keymap('n', '<leader>tp', require('telescope.builtin').builtin, { desc = "[T]elescope [P]ickers" })
 
 --Neotree--
 keymap('n', '<leader>nf', '<Cmd>Neotree toggle<CR>')

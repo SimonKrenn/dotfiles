@@ -9,10 +9,9 @@ builtin_box_drawing = true
 [window]
 opacity = 0.9999
 startup_mode = "Maximized"
-
 [colors.primary]
-background = '#15181B'
-foreground = '#E0E0E0'
+background = '#15141b'
+foreground = '#edecee'
 
 [colors.cursor]
 text = '#191d21'
@@ -39,22 +38,27 @@ TERM = 'xterm-256color'
 
 # Normal colors
 [colors.normal]
-black   = '#101113'
-red     = '#FF4747'
-green   = '#00F587'
-yellow  = '#D7F75B'
-blue    = '#ABFFFF'
-magenta = '#7C53ED'
-cyan    = '#B267E6'
-white   = '#F1F2F8'
+black   = '#110f18'
+red     = '#ff6767'
+green   = '#61ffca'
+yellow  = '#ffca85'
+blue    = '#a277ff'
+magenta = '#a277ff'
+cyan    = '#61ffca'
+white   = '#edecee'
 
 # Bright colors
 [colors.bright]
-black   = '#101113'
-red     = '#E61F44'
-green   = '#B7F0E5'
-yellow  = '#A7C7ED'
-blue    = '#A7C7ED'
-magenta = '#EE808B'
-cyan    = '#D7C9F0'
-white   = '#E0E0E0'
+black   = '#4d4d4d'
+red     = '#ff6767'
+green   = '#61ffca'
+yellow  = '#ffca85'
+blue    = '#a277ff'
+magenta = '#a277ff'
+cyan    = '#61ffca'
+white   = '#edecee'
+
+[colors.selection]
+text       = 'CellForeground'
+background = '#29263c'
+
