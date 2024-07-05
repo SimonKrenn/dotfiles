@@ -28,6 +28,7 @@ brew 'fd' # find replacement
 brew 'rg' # repgrip
 brew 'yabai' # window-manager
 brew 'direnv' # direnv
+brew 'commitizen' # commit-cli
 
 # envs
 brew 'bun'
