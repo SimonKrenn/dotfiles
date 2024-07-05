@@ -6,3 +6,4 @@ stow -v -d $PWD/.config -t $HOME/.config/tmux/ tmux
 stow -v -d $PWD/.config -t $HOME/.config/yazi yazi
 stow -v -d $PWD/.config -t $HOME/.config/git git
 stow -v -d $PWD/.config -t $HOME/.config/skhd skhd
+stow -v -d $PWD/.config -t $HOME/.config/lazygit lazygit
