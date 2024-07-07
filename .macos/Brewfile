@@ -2,6 +2,7 @@
 tap "homebrew/bundle" 
 tap "homebrew/cask-fonts" # nerd fonts
 tap "oven-sh/bun"
+tap "arl/arl"
 
 # packages
 brew 'git' # version control
@@ -30,6 +31,9 @@ brew 'yabai' # window-manager
 brew 'direnv' # direnv
 brew 'commitizen' # commit-cli
 brew 'btop' # resource monitor
+
+#tmux plugins
+brew 'gitmux'
 
 # envs
 brew 'bun'
