@@ -18,5 +18,3 @@
 	gpgsign = true
 [user]
 	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKOZCQsHAYrEv2BzBLelFzdSX9aVx0sgXZBxdhS9Ojam
-[alias]
-	cc = 'cz c'
