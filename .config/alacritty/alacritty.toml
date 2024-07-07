@@ -10,8 +10,8 @@ builtin_box_drawing = true
 opacity = 0.9999
 startup_mode = "Maximized"
 [colors.primary]
-background = '#15141b'
-foreground = '#edecee'
+background = '#0F111A'
+foreground = '#A6ACCD'
 
 [colors.cursor]
 text = '#191d21'
@@ -20,43 +20,25 @@ cursor = '#E0E0E0'
 [env]
 TERM = 'xterm-256color'
 
-
-
-# local bg = '#101113'
-# -- '#0B0E14'
-# local fg = '#F1F2F8'
-#
-# local red = '#FF4747'
-# local redBright = '#FF6B6B'
-# local greenBright = '#5CFFB6'
-# local green = '#00F587'
-# local yellow = '#D7F75B'
-# local purple = '#7C53ED'
-# local lightBlue = '#ABFFFF'
-# local yellow2 = '#A4CF4A'
-# local orange = '#F68A3E'
-
-# Normal colors
-[colors.normal]
-black   = '#110f18'
-red     = '#ff6767'
-green   = '#61ffca'
-yellow  = '#ffca85'
-blue    = '#a277ff'
-magenta = '#a277ff'
-cyan    = '#61ffca'
-white   = '#edecee'
-
-# Bright colors
 [colors.bright]
-black   = '#4d4d4d'
-red     = '#ff6767'
-green   = '#61ffca'
-yellow  = '#ffca85'
-blue    = '#a277ff'
-magenta = '#a277ff'
-cyan    = '#61ffca'
-white   = '#edecee'
+black	= '#0F1119'
+red		= '#DC6068'
+green 	= '#91B859'
+yellow  = '#F6A434'
+blue    = '#6182B8'
+magenta = '#7C4DFF'
+cyan    = '#39ADB5'
+white   = '#EFFFFF'
+
+[colors.normal]
+black   = '#0F1119'
+red     = '#E53935'
+green   = '#ABCF76'
+yellow  = '#E6B455'
+blue    = '#6E98EB'
+magenta = '#B480D6'
+cyan    = '#71C6E7'
+white   = '#EFFFFF'
 
 [colors.selection]
 text       = 'CellForeground'
