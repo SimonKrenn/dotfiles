@@ -7,15 +7,16 @@
 [web]
   browser = arc
 [diff]
-  tool = nvimdiff
-  guitoll = nvimdiff
-[difftool]
-  prompt = false
+	tool = nvimdiff
 [difftool "nvimdiff"]
-  cmd = "nvim -d"
-[global]
-  poop = push
-  pee = commit
-  eat = fetch
-
-
+	cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[commit]
+	gpgsign = true
+[user]
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKOZCQsHAYrEv2BzBLelFzdSX9aVx0sgXZBxdhS9Ojam
+[alias]
+	cc = 'cz c'
