@@ -29,6 +29,7 @@ brew 'rg' # repgrip
 brew 'yabai' # window-manager
 brew 'direnv' # direnv
 brew 'commitizen' # commit-cli
+brew 'btop' # resource monitor
 
 # envs
 brew 'bun'
@@ -46,6 +47,7 @@ cask 'alacritty' # terminal emulator
 cask 'bruno' # API IDE
 cask 'raycast' # spotlight replacement
 cask 'fig' # terminal autocomplete
-cask 'raindropio' # bookmark managerer
+cask 'raindropio' # bookmark manager
+
 # fonts
 brew 'font-monaspice-nerd-font'
