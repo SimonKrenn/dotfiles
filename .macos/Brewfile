@@ -2,6 +2,7 @@
 tap "homebrew/bundle" 
 tap "homebrew/cask-fonts" # nerd fonts
 tap "oven-sh/bun"
+tap "arl/arl"
 
 # packages
 brew 'git' # version control
@@ -28,6 +29,11 @@ brew 'fd' # find replacement
 brew 'rg' # repgrip
 brew 'yabai' # window-manager
 brew 'direnv' # direnv
+brew 'commitizen' # commit-cli
+brew 'btop' # resource monitor
+
+#tmux plugins
+brew 'gitmux'
 
 # envs
 brew 'bun'
@@ -45,6 +51,7 @@ cask 'alacritty' # terminal emulator
 cask 'bruno' # API IDE
 cask 'raycast' # spotlight replacement
 cask 'fig' # terminal autocomplete
-cask 'raindropio' # bookmark managerer
+cask 'raindropio' # bookmark manager
+
 # fonts
 brew 'font-monaspice-nerd-font'

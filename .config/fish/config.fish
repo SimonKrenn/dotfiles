@@ -19,6 +19,7 @@ end
 # set --export BUN_INSTALL "$HOME/.bun"
 # set --export PATH $BUN_INSTALL/bin $PATH
 
-
 # env vars
-export EDITOR=nvim
+set -q XDG_CONFIG_HOME || set -Ux XDG_CONFIG_HOME $HOME/.config
+set -q XDG_HOME || set -Ux XDG_HOME $HOME
+set -q EDITOR || set -Ux EDITOR nvim
