@@ -9,6 +9,7 @@ return {
 	keys = {
 		-- stylua: ignore
 		{ "<leader>uE", function() require("edgy").select() end, desc = "Edgy Select Window" },
+		{ "<leader>ue", function() require("edgy").toggle() end, desc = "Edgy Toggle" }
 	},
 	opts = {
 		bottom = {
@@ -22,7 +23,7 @@ return {
 				end,
 			},
 			"Trouble",
-			{ ft = "qf", title = "QuickFix" },
+			{ ft = "qf",            title = "QuickFix" },
 			{
 				ft = "help",
 				size = { height = 20 },
@@ -31,6 +32,7 @@ return {
 					return vim.bo[buf].buftype == "help"
 				end,
 			},
+			{ ft = "spectre_panel", size = { height = 0.4 } },
 		},
 		left = {
 			-- Neo-tree filesystem always takes half the screen height
@@ -65,6 +67,13 @@ return {
 				pinned = true,
 				open = "Outline"
 			},
+		},
+		right = {
+			-- {
+			-- 	title = "Spectre",
+			-- 	ft = "spectre-panel",
+			-- 	size = { width = 0.4 },
+			-- }
 		},
 	},
 }
