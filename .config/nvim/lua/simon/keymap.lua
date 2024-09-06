@@ -28,4 +28,4 @@ keymap('n', '<leader>tp', require('telescope.builtin').builtin, { desc = "[T]ele
 keymap('n', '<leader>nf', '<Cmd>Neotree toggle<CR>')
 keymap('n', '<leader>ng', '<Cmd>Neotree git_status<CR>')
 keymap('n', '<leader>ns', '<Cmd>Neotree toggle document_symbols<CR>')
-keymap('t', '<C-space>', "<C-\\><C-n><C-w>h", { silent = true })
+keymap('t', '<C-Esc>', "<C-\\><C-n><C-w>h", { silent = true })

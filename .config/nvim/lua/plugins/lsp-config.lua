@@ -43,7 +43,7 @@ return {
 		require("lazyvim.util").format.register(formatter)
 	end,
 	config = function()
-		local servers = { 'tsserver', 'eslintd', 'eslint', 'lua_ls', 'angularls', "yamlls" }
+		local servers = { 'ts_ls', 'eslint_d', 'eslint', 'lua_ls', 'angularls', "yamlls" }
 		require('mason').setup({})
 		require('mason-lspconfig').setup({
 			ensure_installed = servers

@@ -8,7 +8,7 @@ return {
 	build = ':TSUpdate',
 	opts = {
 		-- Add languages to be installed here that you want installed for treesitter
-		ensure_installed = { 'lua', 'typescript', 'vimdoc', 'html', "java", "yaml" },
+		ensure_installed = { 'lua', 'typescript', 'vimdoc', 'html', "java", "yaml", "jsdoc", "tsdoc", "javascript", "json", "jsonc", "toml", "bash", "fish", "typescriptreact" },
 		highlight = { enable = true, },
 		additional_vim_regex_highlighting = false,
 		indent = { enable = true },

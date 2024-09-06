@@ -3,3 +3,8 @@ cmd - 0x2B : skhd -k "alt + 5"
 cmd - 0x2F : skhd -k "alt + 8"
 ctrl - 0x2B : skhd -k "alt + 6"
 ctrl - 0x2F : skhd -k "alt + 9"
+cmd + shift - e : open -n -a "Microsoft Edge"
+
+caps [
+	"alacritty" : "esc" 
+]
