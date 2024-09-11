@@ -1,0 +1,17 @@
+[user]
+	email = simon.krenn@teamviewer.com
+	name = Simon Krenn
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKOZCQsHAYrEv2BzBLelFzdSX9aVx0sgXZBxdhS9Ojam
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[commit]
+	gpgsign = true
+
+

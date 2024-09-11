@@ -1,6 +1,6 @@
 fish_add_path /opt/homebrew/bin
 starship init fish | source
-zoxide init fish | source
+zoxide init fish --cmd cd| source
 direnv hook fish | source
 op completion fish | source
 fnm env --use-on-cd | source
