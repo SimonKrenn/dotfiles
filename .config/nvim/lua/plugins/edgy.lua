@@ -1,6 +1,6 @@
 return {
 	"folke/edgy.nvim",
-	enabled = true,
+	enabled = false,
 	event = "VeryLazy",
 	init = function()
 		vim.opt.laststatus = 3
@@ -23,7 +23,13 @@ return {
 				end,
 			},
 			"Trouble",
-			{ ft = "qf",            title = "QuickFix" },
+			{
+				ft = "qf",
+				title = "QuickFix",
+				size = {
+					height = 30
+				}
+			},
 			{
 				ft = "help",
 				size = { height = 20 },

@@ -1,5 +1,6 @@
 return {
 	"nvim-neo-tree/neo-tree.nvim",
+	enabled = false,
 	branch = "v3.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
@@ -24,7 +25,13 @@ return {
 			},
 			filesystem = {
 				follow_current_file = true,
-				hijack_netrw_behavior = "open_default"
+				hijack_netrw_behavior = "open_default",
+				window = {
+					position = "float"
+				},
+				filtered_items = {
+					visible = true
+				}
 			},
 			git_status = {
 				window = {
@@ -38,7 +45,7 @@ return {
 			},
 			buffers = {
 				follow_current_file = {
-					enabled = true,  -- This will find and focus the file in the active buffer every time
+					enabled = true, -- This will find and focus the file in the active buffer every time
 					--              -- the current file is changed while the tree is open.
 					leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
 				},

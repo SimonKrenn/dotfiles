@@ -9,6 +9,7 @@ builtin_box_drawing = true
 [window]
 opacity = 0.9999
 startup_mode = "Maximized"
+option_as_alt = "OnlyLeft"
 [colors.primary]
 background = '#0F111A'
 foreground = '#A6ACCD'
