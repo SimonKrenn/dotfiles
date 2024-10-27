@@ -27,7 +27,7 @@ return {
 				follow_current_file = true,
 				hijack_netrw_behavior = "open_default",
 				window = {
-					position = "float"
+					position = "bottom"
 				},
 				filtered_items = {
 					visible = true
@@ -53,6 +53,7 @@ return {
 				show_unloaded = true,
 				window = {
 					mappings = {
+
 						["bd"] = "buffer_delete",
 						["<bs>"] = "navigate_up",
 						["."] = "set_root",
