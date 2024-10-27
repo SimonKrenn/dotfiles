@@ -31,7 +31,8 @@ brew 'yabai' # window-manager
 brew 'direnv' # direnv
 brew 'commitizen' # commit-cli
 brew 'btop' # resource monitor
-
+brew 'atuin' # magic shell history
+ 
 #tmux plugins
 brew 'gitmux'
 
@@ -41,6 +42,7 @@ brew 'go'
 
 # Casks
 cask 'arc' #browser
+cask 'chrome' #its chrome
 cask 'visual-studio-code' # text-editor 
 cask '1password' # password manager
 cask '1password-cli' # password manager cli
