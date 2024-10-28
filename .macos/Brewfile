@@ -35,6 +35,7 @@ brew 'atuin' # magic shell history
  
 #tmux plugins
 brew 'gitmux'
+brew 'tmuxinator'
 
 # envs
 brew 'bun'
@@ -52,8 +53,8 @@ cask 'jetbrains-toolbox' # jetbrains ide manager
 cask 'alacritty' # terminal emulator
 cask 'bruno' # API IDE
 cask 'raycast' # spotlight replacement
-cask 'fig' # terminal autocomplete
 cask 'raindropio' # bookmark manager
+cask 'karabiner-elements'
 
 # fonts
 brew 'font-monaspice-nerd-font'

@@ -8,6 +8,7 @@ mkdir $HOME/.config/git
 mkdir $HOME/.config/skhd
 mkdir $HOME/.config/lazygit
 mkdir $HOME/.config/yabai
+mkdir $HOME/.config/tmuxinator
 
 echo 'stowing files'
 stow -v -d $PWD/.config -t $HOME tmux
@@ -20,3 +21,4 @@ stow -v -d $PWD/.config -t $HOME/.config/git git
 stow -v -d $PWD/.config -t $HOME/.config/skhd skhd
 stow -v -d $PWD/.config -t $HOME/.config/lazygit lazygit
 stow -v -d $PWD/.config -t $HOME/.config/yabai yabai
+stow -v -d $PWD/.config -t $HOME/.config/tmuxinator tmuxinator
