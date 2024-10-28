@@ -25,9 +25,4 @@ keymap('n', '<leader>fm', require('telescope.builtin').marks, { desc = "[F]ind [
 keymap('n', '<leader>tp', require('telescope.builtin').builtin, { desc = "[T]elescope [P]ickers" })
 keymap('n', '<leader>nf', ':Telescope file_browser path=%:p:h select_buffer=true<CR>')
 
---Neotree--
--- keymap('n', '<leader>nf', '<Cmd>Neotree toggle<CR>')
--- keymap('n', '<leader>ng', '<Cmd>Neotree git_status<CR>')
--- keymap('n', '<leader>ns', '<Cmd>Neotree toggle document_symbols<CR>')
--- keymap('t', '<C-Esc>', "<C-\\><C-n><C-w>h", { silent = true })
 keymap('t', '<esc>', '<C-\\><C-n>', { silent = true })

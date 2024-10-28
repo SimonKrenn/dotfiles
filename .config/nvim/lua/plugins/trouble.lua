@@ -6,12 +6,12 @@ return {
 		{
 			"<leader>xx",
 			"<cmd>Trouble document_diagnostics<cr>",
-			desc = "Diagnostics (Trouble)",
+			desc = "Document Diagnostics (Trouble)",
 		},
 		{
 			"<leader>xX",
-			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-			desc = "Buffer Diagnostics (Trouble)",
+			"<cmd>Trouble workspace_diagnostics<cr>",
+			desc = "Workspace Diagnostics (Trouble)",
 		},
 		{
 			"<leader>cs",
