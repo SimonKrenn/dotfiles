@@ -23,4 +23,4 @@ stow -v -d $PWD/.config -t $HOME/.config/skhd skhd
 stow -v -d $PWD/.config -t $HOME/.config/lazygit lazygit
 stow -v -d $PWD/.config -t $HOME/.config/yabai yabai
 stow -v -d $PWD/.config -t $HOME/.config/tmuxinator tmuxinator
-stow -v -d $PWD/.config -t $HOME/.config/atuin atuin
+stow -v -d $PWD/.config -t $HOME/.config/atuin atuin --adopt
