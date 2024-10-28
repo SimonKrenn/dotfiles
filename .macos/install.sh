@@ -1,3 +1,3 @@
-#!/usr/bin/env sh
+#!/usr/bin/env fish
 
 brew bundle
