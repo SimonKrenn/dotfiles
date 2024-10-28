@@ -9,6 +9,7 @@ alias y="yarn"
 alias pn='pnpm'
 alias g='git'
 alias find='fd'
+alias mux='tmuxinator'
 function ya
 	set tmp (mktemp -t "yazi-cwd.XXXXX")
 	yazi $argv --cwd-file="$tmp"
