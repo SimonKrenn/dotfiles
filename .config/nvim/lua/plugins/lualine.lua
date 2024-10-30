@@ -2,6 +2,7 @@
 return {
 	'nvim-lualine/lualine.nvim',
 	opts = {
+		theme = 'auto',
 		icons_enabled = false,
 		component_separators = '|',
 		section_separators = '',
