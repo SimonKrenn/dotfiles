@@ -4,6 +4,7 @@ zoxide init fish --cmd cd| source
 direnv hook fish | source
 op completion fish | source
 fnm env --use-on-cd | source
+fzf --fish | source
 atuin init fish | source
 # global Aliases
 
@@ -19,6 +20,7 @@ end
 # bun
 # set --export BUN_INSTALL "$HOME/.bun"
 # set --export PATH $BUN_INSTALL/bin $PATH
+fzf_configure_bindings --directory=\cf --variables=\cv
 
 # env vars
 set -q XDG_CONFIG_HOME || set -Ux XDG_CONFIG_HOME $HOME/.config
