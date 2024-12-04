@@ -26,3 +26,8 @@ keymap('n', '<leader>tp', require('telescope.builtin').builtin, { desc = "[T]ele
 keymap('n', '<leader>nf', ':Telescope file_browser path=%:p:h select_buffer=true<CR>')
 
 keymap('t', '<esc>', '<C-\\><C-n>', { silent = true })
+vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
+	expr = true,
+	replace_keycodes = false
+})
+vim.g.copilot_no_tab_map = true
