@@ -59,8 +59,9 @@ return {
 				end, { 'i', 's' }),
 			},
 			sources = {
-				{ name = "path" },
+				{ name = "copilot" },
 				{ name = 'nvim_lsp', },
+				{ name = "path" },
 				{ name = 'luasnip' },
 			},
 		})
