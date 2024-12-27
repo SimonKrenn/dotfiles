@@ -32,6 +32,7 @@ brew 'direnv' # direnv
 brew 'commitizen' # commit-cli
 brew 'btop' # resource monitor
 brew 'atuin' # magic shell history
+brew 'ghostty' # terminal emulator
  
 #tmux plugins
 brew 'gitmux'
@@ -50,7 +51,6 @@ cask '1password-cli' # password manager cli
 cask 'notion' # notes
 cask 'obsidian' # notes
 cask 'jetbrains-toolbox' # jetbrains ide manager
-cask 'alacritty' # terminal emulator
 cask 'bruno' # API IDE
 cask 'raycast' # spotlight replacement
 cask 'raindropio' # bookmark manager
