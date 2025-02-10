@@ -36,14 +36,7 @@ return {
 			},
 		},
 		extensions = {
-			file_browser = {
-				theme = "ivy",
-				hidden = {
-					file_browser = true,
-					folder_browser = true,
-				},
-				hijack_netrw = true,
-			}
+
 		}
 	},
 	config = function(_, opts)
@@ -58,7 +51,6 @@ return {
 		}
 
 		require('telescope').setup(opts)
-		require('telescope').load_extension "file_browser"
 		require("telescope").load_extension("live_grep_args");
 		pcall(require('telescope').load_extension, 'fzf')
 	end

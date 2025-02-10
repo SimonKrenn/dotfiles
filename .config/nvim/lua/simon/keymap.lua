@@ -23,7 +23,6 @@ keymap('n', '<leader>/', function()
 end, { desc = '[/] Fuzzily search in current buffer]' })
 keymap('n', '<leader>fm', require('telescope.builtin').marks, { desc = "[F]ind [M]arks" })
 keymap('n', '<leader>tp', require('telescope.builtin').builtin, { desc = "[T]elescope [P]ickers" })
-keymap('n', '<leader>nf', ':Telescope file_browser path=%:p:h select_buffer=true<CR>')
 
 keymap('t', '<esc>', '<C-\\><C-n>', { silent = true })
 vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
