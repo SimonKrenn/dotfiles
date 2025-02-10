@@ -11,6 +11,7 @@ mkdir $HOME/.config/yabai
 mkdir $HOME/.config/tmuxinator
 mkdir $HOME/.config/atuin
 mkdir $HOME/.config/ghostty
+mkdir $HOME/.config/hammerspoon
 
 echo 'stowing files'
 stow -v -d $PWD/.config -t $HOME tmux
@@ -26,3 +27,4 @@ stow -v -d $PWD/.config -t $HOME/.config/yabai yabai
 stow -v -d $PWD/.config -t $HOME/.config/tmuxinator tmuxinator
 stow -v -d $PWD/.config -t $HOME/.config/ghostty ghostty
 stow -v -d $PWD/.config -t $HOME/.config/atuin atuin --adopt
+stow -v -d $PWD/.config -t $HOME/.config/hammerspoon hammerspoon --adopt

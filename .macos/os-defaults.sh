@@ -11,3 +11,6 @@ defaults write com.apple.finder "FXPreferredViewStyle" -string "clmv"
 defaults write com.apple.finder "AppleShowAllFiles" -bool "false"
 # show library folder in finder
 chflags nohidden ~/Library
+
+#hammerspoon config file location (default is $HOME/.hammerspoon)
+defaults write org.hammerspoon.Hammerspoon MJConfigFile "~/.config/hammerspoon/init.lua"

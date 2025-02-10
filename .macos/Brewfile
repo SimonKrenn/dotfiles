@@ -55,6 +55,7 @@ cask 'bruno' # API IDE
 cask 'raycast' # spotlight replacement
 cask 'raindropio' # bookmark manager
 cask 'karabiner-elements'
+cask 'hammerspoon' # automation/automation
 
 # fonts
 brew 'font-monaspice-nerd-font'
