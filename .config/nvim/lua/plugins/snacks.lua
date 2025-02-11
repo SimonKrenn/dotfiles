@@ -5,6 +5,8 @@ return {
 	opts = {
 		statuscolumn = { enabled = true },
 		dashboard = { enabled = true },
+		indent = { enabled = true },
+		toggle = { enabled = true },
 		explorer = {
 			enabled = true
 		},
@@ -32,9 +34,13 @@ return {
 		}
 	},
 	keys = {
-		{ "<leader>lg", function() Snacks.lazygit() end,   desc = "Lazygit" },
-		{ "<leader>gB", function() Snacks.gitbrowse() end, desc = "Gitbrowse" },
-		{ "<c-/>",      function() Snacks.terminal() end,  desc = "Toggle Terminal" },
-		{ "<leader>nf", function() Snacks.explorer() end,  desc = "Snacks Explorer" },
+		{ "<leader>lg",       function() Snacks.lazygit() end,      desc = "Lazygit" },
+		{ "<leader>gB",       function() Snacks.gitbrowse() end,    desc = "Gitbrowse" },
+		{ "<c-/>",            function() Snacks.terminal() end,     desc = "Toggle Terminal" },
+		{ "<leader>nf",       function() Snacks.explorer() end,     desc = "Snacks Explorer" },
+		{ "<leader>ff",       function() Snacks.picker.files() end, desc = "File Picker" },
+		{ "<leader>fg",       function() Snacks.picker.grep() end,  desc = "File Picker" },
+		{ "<leader><leader>", function() Snacks.picker.smart() end, desc = "Smart Picker" },
+
 	}
 }
