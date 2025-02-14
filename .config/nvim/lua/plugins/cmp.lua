@@ -62,7 +62,8 @@ return {
 				{ name = 'nvim_lsp', },
 				{ name = "path" },
 				{ name = 'luasnip' },
-				{ name = "copilot" },
+				{ name = 'minuet' },
+				-- { name = "copilot" },
 			},
 		})
 
