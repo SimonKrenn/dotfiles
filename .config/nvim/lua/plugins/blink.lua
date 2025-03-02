@@ -20,13 +20,16 @@ return {
 		},
 
 		sources = {
-			default = { 'lsp', 'path', 'snippets', 'buffer', 'copilot' },
+			default = { 'lsp', 'path', 'snippets', 'buffer', 'copilot', "minuet" },
 			providers = {
 				copilot = {
 					name = 'copilot',
 					module = "blink-cmp-copilot",
-					score_offset = 100,
 					async = true,
+				},
+				minuet = {
+					name = "minuet",
+					module = "minuet.blink",
 				}
 			}
 		},
