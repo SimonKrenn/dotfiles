@@ -1,16 +1,12 @@
 return {
-	-- LSP Configuration & Plugins
 	'neovim/nvim-lspconfig',
 	event = 'VeryLazy',
 	dependencies = {
-		-- Automatically install LSPs to stdpath for neovim
 		'williamboman/mason.nvim',
 		'williamboman/mason-lspconfig.nvim',
 
-		-- Useful status updates for LSP
 		{ 'j-hui/fidget.nvim', opts = {} },
 
-		-- Additional lua configuration
 		'folke/neodev.nvim'
 	},
 	setup = function()
@@ -23,6 +19,7 @@ return {
 			priority = 200,
 			filter = "eslint"
 		})
+	
 
 		if not pcall(require, "vim.lsp._dynamic") then
 			formatter.name = "eslint: EslintFixAll"
@@ -49,8 +46,6 @@ return {
 			ensure_installed = servers
 		})
 
-		-- LSP settings.
-		--  This function gets run when an LSP connects to a particular buffer.
 		local on_attach = function(_, bufnr)
 			local nmap = function(keys, func, desc)
 				if desc then
@@ -62,12 +57,8 @@ return {
 
 			nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
 			nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-			-- See `:help K` for why this keymap
 			nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-			-- TODO find a workaround for this
-			--nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
-			-- Lesser used LSP functionality
 			nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 			nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
 			nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
@@ -75,7 +66,6 @@ return {
 				print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 			end, '[W]orkspace [L]ist Folders')
 
-			-- Create a command `:Format` local to the LSP buffer
 			vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
 				if vim.lsp.buf.format then
 					vim.lsp.buf.format()
@@ -99,16 +89,13 @@ return {
 			settings = {
 				Lua = {
 					runtime = {
-						-- Tell the language server which version of Lua you're using (most likely LuaJIT)
 						version = 'LuaJIT',
-						-- Setup your lua path
 						path = runtime_path,
 					},
 					diagnostics = {
 						globals = { 'vim' },
 					},
 					workspace = { library = vim.api.nvim_get_runtime_file('', true) },
-					-- Do not send telemetry data containing a randomized but unique identifier
 					telemetry = { enable = false },
 				},
 			},
