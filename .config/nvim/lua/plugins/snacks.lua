@@ -12,6 +12,10 @@ return {
 		},
 		picker = {
 			sources = {
+				files = {
+					hidden = true,
+					ignored = true
+				},
 				explorer = {
 					finder = "explorer",
 					sort = { fields = { "sort" } },
@@ -28,7 +32,9 @@ return {
 					config = function(opts)
 						return require("snacks.picker.source.explorer").setup(opts)
 					end,
-
+				},
+				projects = {
+					dev = { "~/Workspace" }
 				}
 			}
 		}
