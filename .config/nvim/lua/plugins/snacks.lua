@@ -16,6 +16,10 @@ return {
 					hidden = true,
 					ignored = true
 				},
+				grep = {
+					hidden = true,
+					ignored = true,
+				},
 				explorer = {
 					finder = "explorer",
 					sort = { fields = { "sort" } },
@@ -45,8 +49,14 @@ return {
 		{ "<c-/>",            function() Snacks.terminal() end,     desc = "Toggle Terminal" },
 		{ "<leader>nf",       function() Snacks.explorer() end,     desc = "Snacks Explorer" },
 		{ "<leader>ff",       function() Snacks.picker.files() end, desc = "File Picker" },
-		{ "<leader>fg",       function() Snacks.picker.grep() end,  desc = "File Picker" },
+		{ "<leader>fg",       function() Snacks.picker.grep() end,  desc = "Grep Picker" },
 		{ "<leader><leader>", function() Snacks.picker.smart() end, desc = "Smart Picker" },
-
+		{ "<leader>sp",       function() Snacks.picker() end,       desc = "All Pickers" },
+		{ "gd",	function() Snacks.picker.lsp_definitions() end, desc = "LSP: Definitions" },
+		{ "gr", function() Snacks.picker.lsp_references() end, desc = "LSP: References"},
+		{ "gI", function() Snacks.picker.lsp_implementations() end, desc = "LSP: Implementations"},
+		{ "D", function() Snacks.picker.lsp_type_definition() end, desc = "LSP: Type Definition"},
+		{"ds", function() Snacks.picker.lsp_document_symbols() end, desc = "LSP: Document Symbols"},
+		{"ws", function() Snacks.picker.lsp_dynamic_workspace_symbols() end, desc = "LSP: Workspace Symbols"},
 	}
 }
