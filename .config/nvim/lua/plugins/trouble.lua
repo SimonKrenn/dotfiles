@@ -5,13 +5,13 @@ return {
 	keys = {
 		{
 			"<leader>xx",
-			"<cmd>Trouble document_diagnostics<cr>",
-			desc = "Document Diagnostics (Trouble)",
+			"<cmd>Trouble diagnostics toggle<cr>",
+			desc = "Diagnostics (Trouble)",
 		},
 		{
 			"<leader>xX",
-			"<cmd>Trouble workspace_diagnostics<cr>",
-			desc = "Workspace Diagnostics (Trouble)",
+			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+			desc = "Buffer Diagnostics (Trouble)",
 		},
 		{
 			"<leader>cs",
@@ -33,5 +33,5 @@ return {
 			"<cmd>Trouble qflist toggle<cr>",
 			desc = "Quickfix List (Trouble)",
 		},
-	},
+	}
 }
