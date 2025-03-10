@@ -9,7 +9,7 @@ local windowLayout = {
 	{ "Microsoft Outlook", nil, screenRight,  hs.layout.maximized, nil, nil },
 }
 
-hs.hotkey.bind({ "cmd", "alt" }, "L", function()
+hs.hotkey.bind({ "cmd", "alt", "shift", "ctrl" }, "L", function()
 	hs.layout.apply(windowLayout)
 end)
 

@@ -19,7 +19,7 @@ return {
 			priority = 200,
 			filter = "eslint"
 		})
-	
+
 
 		if not pcall(require, "vim.lsp._dynamic") then
 			formatter.name = "eslint: EslintFixAll"
@@ -40,7 +40,7 @@ return {
 		require("lazyvim.util").format.register(formatter)
 	end,
 	config = function()
-		local servers = { 'eslint_d', 'eslint', 'lua_ls', 'angularls', "yamlls" }
+		local servers = { 'eslint_d', 'eslint', 'lua_ls', "yamlls", "biome", "mdx_analyzer" }
 		require('mason').setup({})
 		require('mason-lspconfig').setup({
 			ensure_installed = servers
@@ -82,6 +82,14 @@ return {
 				capabilities = capabilities,
 			})
 		end
+		require 'lspconfig'.tailwindcss.setup {}
+		require("lspconfig").mdx_analyzer.setup({
+			cmd = { "mdx-analyzer", "--stdio" },
+			filetypes = { "mdx" },
+			root_dir = require("lspconfig.util").root_pattern(".git", "package.json"),
+		})
+
+		require 'lspconfig'.biome.setup {}
 
 		require('lspconfig').lua_ls.setup {
 			on_attach = on_attach,

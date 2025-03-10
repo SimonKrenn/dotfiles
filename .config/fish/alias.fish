@@ -17,4 +17,4 @@ function ya
 		cd -- "$cwd"
 	end
 	rm -f -- "$tmp"
-end
+end  
