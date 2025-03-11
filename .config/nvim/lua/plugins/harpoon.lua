@@ -25,7 +25,7 @@ return {
 					local harpoon = require('harpoon')
 					harpoon.ui:toggle_quick_menu(harpoon:list())
 				end,
-				desc = "Harppon Quick Menu",
+				desc = "Harpoon Quick Menu",
 			},
 		}
 		for i = 1, 5 do
