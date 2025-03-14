@@ -40,7 +40,7 @@ return {
 		require("lazyvim.util").format.register(formatter)
 	end,
 	config = function()
-		local servers = { 'eslint_d', 'eslint', 'lua_ls', "yamlls", "biome", "mdx_analyzer" }
+		local servers = { 'eslint_d', 'eslint', 'lua_ls', "yamlls", "biome", "mdx_analyzer", "vtsls" }
 		require('mason').setup({})
 		require('mason-lspconfig').setup({
 			ensure_installed = servers
@@ -89,7 +89,11 @@ return {
 			root_dir = require("lspconfig.util").root_pattern(".git", "package.json"),
 		})
 
-		require 'lspconfig'.biome.setup {}
+		require('lspconfig').biome.setup {}
+
+		require('lspconfig').vtsls.setup({
+
+		})
 
 		require('lspconfig').lua_ls.setup {
 			on_attach = on_attach,
