@@ -1,18 +1,31 @@
 return {
 	'milanglacier/minuet-ai.nvim',
+	enabled = true,
 	config = function()
 		require('minuet').setup {
-			debug = false,
-			notify = false,
 			provider = 'openai_fim_compatible',
+			n_completions = 1, -- recommend for local model for resource saving
+			-- I recommend beginning with a small context window size and incrementally
+			-- expanding it, depending on your local computing power. A context window
+			-- of 512, serves as an good starting point to estimate your computing
+			-- power. Once you have a reliable estimate of your local computing power,
+			-- you should adjust the context window to a larger value.
 			context_window = 512,
+			notify = false,
+			blink = {
+				enable_auto_complete = true,
+			},
 			provider_options = {
 				openai_fim_compatible = {
 					api_key = 'TERM',
 					name = 'Ollama',
 					end_point = 'http://localhost:11434/v1/completions',
-					model = 'deepseek-coder-v2:16b',
+					model = 'qwen2.5-coder:latest',
+					optional = {
+						top_p = 0.9,
+					},
 				},
-			}, }
+			},
+		}
 	end,
 }

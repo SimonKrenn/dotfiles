@@ -7,7 +7,7 @@ return {
 		-- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
 		-- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
 		-- See the full "keymap" documentation for information on defining your own keymap.
-		keymap = { preset = 'enter' },
+		keymap = { preset = 'super-tab' },
 
 		appearance = {
 			-- Sets the fallback highlight groups to nvim-cmp's highlight groups
@@ -15,23 +15,67 @@ return {
 			-- Will be removed in a future release
 			use_nvim_cmp_as_default = true,
 			-- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-			-- Adjusts spacing to ensure icons are aligned
-			nerd_font_variant = 'mono'
-		},
+			-- Adjusts sp		acing to ensure icons are aligned
+			nerd_font_variant = 'mono',
+			kind_icons = {
+				Text = '󰉿',
+				Method = '󰊕',
+				Function = '󰊕',
+				Constructor = '󰒓',
 
-		sources = {
-			default = { 'lsp', 'path', 'snippets', 'buffer', 'copilot', "minuet" },
-			providers = {
-				copilot = {
-					name = 'copilot',
-					module = "blink-cmp-copilot",
-					async = true,
+				Field = '󰜢',
+				Variable = '󰆦',
+				Property = '󰖷',
+
+				Class = '󱡠',
+				Interface = '󱡠',
+				Struct = '󱡠',
+				Module = '󰅩',
+
+				Unit = '󰪚',
+				Value = '󰦨',
+				Enum = '󰦨',
+				EnumMember = '󰦨',
+
+				Keyword = '󰻾',
+				Constant = '󰏿',
+
+				Snippet = '󱄽',
+				Color = '󰏘',
+				File = '󰈔',
+				Reference = '󰬲',
+				Folder = '󰉋',
+				Event = '󱐋',
+				Operator = '󰪚',
+				TypeParameter = '󰬛',
+				Ollama = '󰳆',
+			},
+		},
+		
+		completion = {
+			menu = {
+				draw = {
+					treesitter = { "lsp" },
+					columns = { { "label", "label_description", }, { "kind_icon", "source_name" } },
 				},
-				minuet = {
-					name = "minuet",
-					module = "minuet.blink",
-				}
+			},
+			documentation = {
+				auto_show = true,
+				auto_show_delay_ms = 200,
+			},
+			ghost_text = {
+				enabled = true,
 			}
+		},
+		sources = {
+			default = { 'lsp', 'path', 'snippets', 'buffer', "codecompanion", "minuet" },
+			providers = {
+				minuet = {
+					name = 'minuet',
+					module = 'minuet.blink',
+					score_offset = 8, -- Gives minuet higher priority among suggestions
+				},
+			},
 		},
 	},
 	opts_extend = { "sources.default" }
