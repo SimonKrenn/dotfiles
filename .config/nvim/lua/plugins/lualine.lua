@@ -11,6 +11,9 @@ return {
 				{
 					'filename',
 					path = 1,
+				},
+				{
+					'codecompanion'
 				}
 			}
 		}
@@ -18,4 +21,5 @@ return {
 	extensions = {
 		'neo-tree'
 	},
+
 }

@@ -82,17 +82,10 @@ return {
 				capabilities = capabilities,
 			})
 		end
-		require 'lspconfig'.tailwindcss.setup {}
 		require("lspconfig").mdx_analyzer.setup({
 			cmd = { "mdx-analyzer", "--stdio" },
 			filetypes = { "mdx" },
 			root_dir = require("lspconfig.util").root_pattern(".git", "package.json"),
-		})
-
-		require('lspconfig').biome.setup {}
-
-		require('lspconfig').vtsls.setup({
-
 		})
 
 		require('lspconfig').lua_ls.setup {
