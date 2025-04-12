@@ -17,6 +17,9 @@ if [ -f $HOME/.config/fish/private-alias.fish ]
 	source $HOME/.config/fish/private-alias.fish
 end
 
+# path 
+set PATH /Users/int004977/.local/share/bob/nvim-bin/ $PATH
+
 # bun
 # set --export BUN_INSTALL "$HOME/.bun"
 # set --export PATH $BUN_INSTALL/bin $PATH

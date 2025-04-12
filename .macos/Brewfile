@@ -6,7 +6,7 @@ tap "arl/arl"
 
 # packages
 brew 'git' # version control
-brew 'neovim' # text-editor
+brew 'bob' # neovim version manager
 brew 'tmux' # terminal mutliplexer
 brew 'fish' # shell
 brew 'bat' # cat(1) alternative
