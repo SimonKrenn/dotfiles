@@ -9,38 +9,8 @@ return {
 
 		'folke/neodev.nvim'
 	},
-	setup = function()
-		local function get_client(buf)
-			return require("lazyvim.util").lsp.get_client({ name = eslint, bufnr = buf })[1]
-		end
-		local formatter = require("lazyvim.util").lsp.formatter({
-			name = "eslint: lsp",
-			primary = false,
-			priority = 200,
-			filter = "eslint"
-		})
-
-
-		if not pcall(require, "vim.lsp._dynamic") then
-			formatter.name = "eslint: EslintFixAll"
-			formatter.sources = function(buf)
-				local client = get_client(buf)
-				return client and { "eslint" } or {}
-			end
-			formatter.format = function(buf)
-				local client = get_client(buf)
-				if client then
-					local diag = vim.diagnostic.get(buf, { namespace = vim.lsp.diagnostic.get_namespace(client.id) })
-					if #diag > 0 then
-						vim.cmd("EslintFixAll")
-					end
-				end
-			end
-		end
-		require("lazyvim.util").format.register(formatter)
-	end,
 	config = function()
-		local servers = { 'eslint_d', 'eslint', 'lua_ls', "yamlls", "biome", "mdx_analyzer", "vtsls" }
+		local servers = { 'eslint_d', 'eslint', 'lua_ls', "yamlls", "biome", "vtsls" }
 		require('mason').setup({})
 		require('mason-lspconfig').setup({
 			ensure_installed = servers
@@ -82,10 +52,11 @@ return {
 				capabilities = capabilities,
 			})
 		end
+
 		require("lspconfig").mdx_analyzer.setup({
-			cmd = { "mdx-analyzer", "--stdio" },
-			filetypes = { "mdx" },
-			root_dir = require("lspconfig.util").root_pattern(".git", "package.json"),
+			filetypes = { "markdown.mdx", "mdx" },
+			capabilities = capabilities,
+			root_dir = require('lspconfig.util').root_pattern('.git'),
 		})
 
 		require('lspconfig').lua_ls.setup {
