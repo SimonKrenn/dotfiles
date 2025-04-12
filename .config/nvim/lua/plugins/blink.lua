@@ -51,7 +51,7 @@ return {
 				Ollama = '󰳆',
 			},
 		},
-		
+
 		completion = {
 			menu = {
 				draw = {
@@ -65,7 +65,9 @@ return {
 			},
 			ghost_text = {
 				enabled = true,
-			}
+				show_with_menu = false
+			},
+
 		},
 		sources = {
 			default = { 'lsp', 'path', 'snippets', 'buffer', "codecompanion", "minuet" },

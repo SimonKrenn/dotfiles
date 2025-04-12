@@ -49,6 +49,7 @@ return {
 		{ "<c-/>",            function() Snacks.terminal() end,                             desc = "Toggle Terminal" },
 		{ "<leader>nf",       function() Snacks.explorer() end,                             desc = "Snacks Explorer" },
 		{ "<leader>ff",       function() Snacks.picker.files() end,                         desc = "File Picker" },
+		{ "<leader>gs",       function() Snacks.picker.git_status() end,                    desc = "Git Status" },
 		{ "<leader>fg",       function() Snacks.picker.grep() end,                          desc = "Grep Picker" },
 		{ "<leader><leader>", function() Snacks.picker.smart() end,                         desc = "Smart Picker" },
 		{ "<leader>sp",       function() Snacks.picker() end,                               desc = "All Pickers" },
