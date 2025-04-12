@@ -8,26 +8,15 @@ return {
 		require("codecompanion").setup({
 			strategies = {
 				chat = {
-					adapater = "ollama"
+					adapater = "copilot"
 				},
 				inline = {
-					adapter = "ollama",
+					adapter = "copilot",
 				},
 				agent = {
-					adapter = "ollama",
+					adapter = "copilot",
 				},
 			},
-			adapaters = {
-				ollama = function()
-					return require("codecompanion.adapters").extend("ollama", {
-						schema = {
-							model = {
-								default = "qwen2.5-coder:latest",
-							},
-						},
-					})
-				end,
-			}
 		})
-	end,
+	end
 }
