@@ -2,7 +2,6 @@ return {
 	"folke/noice.nvim",
 	event = "VeryLazy",
 	opts = {
-		-- add any options here
 	},
 	dependencies = {
 		-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
@@ -21,11 +20,6 @@ return {
 				lsp_doc_border = true,
 				inc_rename = true
 			},
-		})
-		require("notify").setup({
-			render = "compact",
-			timeout = 3000,
-			stages = "static",
 		})
 	end
 }

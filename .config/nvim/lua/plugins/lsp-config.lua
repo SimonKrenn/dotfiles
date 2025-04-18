@@ -5,12 +5,12 @@ return {
 		'williamboman/mason.nvim',
 		'williamboman/mason-lspconfig.nvim',
 
-		{ 'j-hui/fidget.nvim', opts = {} },
+		-- { 'j-hui/fidget.nvim', opts = {} },
 
 		'folke/neodev.nvim'
 	},
 	config = function()
-		local servers = { 'eslint_d', 'eslint', 'lua_ls', "yamlls", "biome", "vtsls" }
+		local servers = { 'eslint', 'lua_ls', "yamlls", "biome", "vtsls" }
 		require('mason').setup({})
 		require('mason-lspconfig').setup({
 			ensure_installed = servers

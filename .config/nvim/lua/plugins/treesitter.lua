@@ -1,16 +1,17 @@
 return {
 	-- Highlight, edit, and navigate code
 	'nvim-treesitter/nvim-treesitter',
-	event = 'VeryLazy',
 	dependencies = {
 		'nvim-treesitter/nvim-treesitter-textobjects',
 	},
 	build = ':TSUpdate',
 	opts = {
 		-- Add languages to be installed here that you want installed for treesitter
-		ensure_installed = { 'lua', 'typescript', 'vimdoc', 'html', "java", "yaml", "jsdoc", "tsdoc", "javascript", "json", "jsonc", "toml", "bash", "fish", "typescriptreact", "mdx", "markdown" },
-		highlight = { enable = true, },
-		additional_vim_regex_highlighting = false,
+		ensure_installed = { 'lua', 'typescript', 'vimdoc', 'html', "java", "yaml", "jsdoc", "javascript", "json", "jsonc", "toml", "bash", "fish", "markdown_inline", "markdown", "regex", "tsx", "css" },
+		highlight = {
+			enable = true,
+			additional_vim_regex_highlighting = false,
+		},
 		indent = { enable = true },
 		incremental_selection = {
 			enable = true,
@@ -65,5 +66,8 @@ return {
 				},
 			},
 		},
-	}
+	},
+	config = function(_, opts)
+		require("nvim-treesitter.configs").setup(opts)
+	end
 }

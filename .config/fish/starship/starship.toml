@@ -3,22 +3,22 @@
  format= """
 """
 
-palette = 'my_theme'
+palette = 'onehunter'
 
-[palettes.my_theme]
-black_bright   = '#45505b'
-red_bright     = '#E61F44'
-green_bright   = '#B7F0E5'
-yellow_bright  = '#A7C7ED'
-blue_bright    = '#A7C7ED'
-magenta_bright = '#EE808B'
+[palettes.onehunter]
+black_bright   = '#45505B'
+red_bright     = '#F3447D'
+green_bright   = '#B8EFE5'
+yellow_bright  = '#45505B'
+blue_bright    = '#6282B9'
+magenta_bright = '#ED808B'
 cyan_bright    = '#D7C9F0'
 white_bright   = '#E0E0E0'
-black   = '#34393E'
-red     = '#E61F44'
-green   = '#5BD1B9'
-yellow  = '#53A1FA'
-blue    = '#53A1FA'
-magenta = '#F4457D'
-cyan    = '#B267E6'
+black   = '#191D21'
+red     = '#F44748'
+green   = '#5BD0B9'
+yellow  = '#F9C35A'
+blue    = '#43AAF9'
+magenta = '#B480D6'
+cyan    = '#70C6E6'
 white   = '#E0E0E0'
