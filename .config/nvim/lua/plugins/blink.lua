@@ -70,14 +70,7 @@ return {
 
 		},
 		sources = {
-			default = { 'lsp', 'path', 'snippets', 'buffer', "codecompanion", "minuet" },
-			providers = {
-				minuet = {
-					name = 'minuet',
-					module = 'minuet.blink',
-					score_offset = 8, -- Gives minuet higher priority among suggestions
-				},
-			},
+			default = { 'lsp', 'path', 'snippets', 'buffer', "codecompanion" },
 		},
 	},
 	opts_extend = { "sources.default" }
