@@ -1,0 +1,10 @@
+-- vim.api.nvim_create_autocmd("OptionSet", {
+-- 	pattern = "background",
+-- 	callback = function()
+-- 		if (o.background == dark) then
+-- 			vim.cmd.colorscheme(simon.config.colorscheme.dark)
+-- 		else
+-- 			vim.cmd.colorscheme(dm.config.colorscheme.light)
+-- 		end
+-- 	end
+-- })

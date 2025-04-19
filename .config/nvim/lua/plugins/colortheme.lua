@@ -1,5 +1,5 @@
 return {
-	"SimonKrenn/onehunter",
+	dir = "~/workspace/onehunter",
 	priority = 1000,
 	opts = {
 	},
