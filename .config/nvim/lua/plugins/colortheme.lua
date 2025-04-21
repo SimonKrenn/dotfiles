@@ -6,7 +6,6 @@ return {
 
 	config = function(_, opts)
 		require("one-hunter").setup({
-			theme = "dark",
 			transparent = false
 		})
 
