@@ -56,3 +56,11 @@ vim.api.nvim_create_autocmd("LspProgress", {
 		})
 	end,
 })
+
+vim.api.nvim_create_autocmd("OptionSet", {
+	pattern = "background",
+	callback = function()
+		local plugin = require("lazy.core.config").plugins["onehunter"]
+		require("lazy.core.loader").reload(plugin)
+	end
+})

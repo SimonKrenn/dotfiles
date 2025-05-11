@@ -1,9 +1,6 @@
 return {
 	dir = "~/workspace/onehunter",
 	priority = 1000,
-	opts = {
-	},
-
 	config = function(_, opts)
 		require("one-hunter").setup({
 			transparent = false
