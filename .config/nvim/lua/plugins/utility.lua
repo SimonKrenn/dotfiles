@@ -47,7 +47,6 @@ return {
 		"danymat/neogen",
 		config = true,
 	},
-
 	{
 		--https://github.com/ThePrimeagen/harpoon/tree/harpoon2
 		'ThePrimeagen/harpoon',
@@ -90,5 +89,21 @@ return {
 			end
 			return keys
 		end,
+	},
+	{
+		--https://github.com/nvim-pack/nvim-spectre
+		'nvim-pack/nvim-spectre',
+		build = false,
+		cmd = "Spectre",
+		opts = { open_cmd = "noswapfile vnew" },
+		keys = {
+			{
+				"<leader>sr",
+				function()
+					require("spectre").open()
+				end,
+				desc = "Replace in Files (Spectre)"
+			}
+		}
 	}
 }

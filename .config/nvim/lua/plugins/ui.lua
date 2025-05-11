@@ -263,5 +263,17 @@ return {
 			{ "ds",               function() Snacks.picker.lsp_document_symbols() end,          desc = "LSP: Document Symbols" },
 			{ "ws",               function() Snacks.picker.lsp_dynamic_workspace_symbols() end, desc = "LSP: Workspace Symbols" },
 		}
+	},
+	{
+		--https://github.com/mikavilpas/yazi.nvim
+		"mikavilpas/yazi.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+			"nvim-lua/plenary.nvim"
+		},
+		keys = {
+			{ "<leader>gy", "<cmd>Yazi<CR>", desc = "toggle yazi" }
+		},
 	}
 }
