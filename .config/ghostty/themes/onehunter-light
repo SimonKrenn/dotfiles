@@ -1,0 +1,21 @@
+background = fff
+foreground = 313131
+cursor-color = e0e0e0
+selection-background = 71C6E7
+palette = 0=#191d21
+palette = 1=#F44747
+palette = 2=#5BD1B9
+palette = 3=#f9c35a
+palette = 4=#43AAF9
+palette = 5=#B480D6
+palette = 6=#71C6E7
+palette = 7=#e0e0e0
+palette	= 8=#191d21
+palette	= 9=#f4457d
+palette = 10=#B7F0E5
+palette = 11=45505b
+palette = 12=#6182B8
+palette = 13=#EE808B
+palette = 14=#D7C9F0
+palette = 15=#e0e0e0
+
