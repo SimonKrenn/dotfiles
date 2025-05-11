@@ -1,5 +1,5 @@
 return {
-	-- https://github.com/zbirenbaum/copilot.lua
+
 	{
 		'zbirenbaum/copilot.lua',
 		config = function()
@@ -40,6 +40,9 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
+		},
+		keys = {
+			{ "<leader>cc", function() require("codecompanion").chat() end, desc = "[C]odecompanion [C]hat" },
 		},
 		config = function()
 			require("codecompanion").setup({

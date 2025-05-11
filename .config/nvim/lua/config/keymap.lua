@@ -8,7 +8,8 @@ keymap("n", "<C-l>", "<C-w>l", opts)
 keymap("n", "<C-s>", "<Cmd>w<CR>", opts)
 
 keymap('t', '<esc>', '<C-\\><C-n>', { silent = true })
-keymap('n', '<leader>df', vim.diagnostic.open_float, { desc = 'open diagnostic as a float' })
+keymap('n', '<leader>df', "<cmd>lua vim.diagnostic.open_float({ border = 'rounded', max_width = 100 })<CR>",
+	{ desc = 'open diagnostic as a float' })
 
 
 vim.g.copilot_no_tab_map = true

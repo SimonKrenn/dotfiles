@@ -23,5 +23,9 @@
         "/Users/simonkrenn/.local/share/nvim/lazy/darkplus.nvim/after",
         "${3rd}/luassert/library"
     ],
-    "workspace.checkThirdParty": false
+    "workspace.checkThirdParty": false,
+    "diagnostics.globals": [
+        "vim",
+        "Snacks"
+    ]
 }

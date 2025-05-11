@@ -19,12 +19,21 @@ return {
 		},
 		config = function()
 			require("noice").setup({
+				lsp = {
+					-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+					override = {
+						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+						["vim.lsp.util.stylize_markdown"] = true,
+						["cmp.entry.get_documentation"] = true,
+					},
+				},
+				-- you can enable a preset for easier configuration
 				presets = {
-					bottom_search = true,
-					command_palette = true,
-					long_message_to_split = true,
-					lsp_doc_border = true,
-					inc_rename = true
+					bottom_search = true,    -- use a classic bottom cmdline for search
+					command_palette = true,  -- position the cmdline and popupmenu together
+					long_message_to_split = true, -- long messages will be sent to a split
+					inc_rename = false,      -- enables an input dialog for inc-rename.nvim
+					lsp_doc_border = false,  -- add a border to hover docs and signature
 				},
 			})
 		end
@@ -69,6 +78,190 @@ return {
 				"<cmd>Trouble qflist toggle<cr>",
 				desc = "Quickfix List (Trouble)",
 			},
+		}
+	},
+	-- https://github.com/folke/edgy.nvim
+	{
+		"folke/edgy.nvim",
+		enabled = true,
+		event = "VeryLazy",
+		init = function()
+			vim.opt.laststatus = 3
+			vim.opt.splitkeep = "screen"
+		end,
+		keys = {
+			-- stylua: ignore
+			{ "<leader>uE", function() require("edgy").select() end, desc = "Edgy Select Window" },
+			{ "<leader>ue", function() require("edgy").toggle() end, desc = "Edgy Toggle" }
+		},
+		opts = {
+			animate = {
+				enabled = false
+			},
+			bottom = {
+				-- toggleterm / lazyterm at the bottom with a height of 40% of the screen
+				{
+					ft = "toggleterm",
+					size = { height = 0.25 },
+					-- exclude floating windows
+					filter = function(buf, win)
+						return vim.api.nvim_win_get_config(win).relative == ""
+					end,
+				},
+				"Trouble",
+				{
+					ft = "qf",
+					title = "QuickFix",
+					size = {
+						height = 30
+					}
+				},
+				{
+					ft = "help",
+					size = { height = 20 },
+					-- only show help buffers
+					filter = function(buf)
+						return vim.bo[buf].buftype == "help"
+					end,
+				},
+				{ ft = "spectre_panel", size = { height = 0.4 } },
+			},
+			right = {
+				{
+					ft = "codecompanion",
+					title = "codecompanion",
+					size = {
+						width = 60
+					}
+				}
+			}
+		},
+	},
+	-- https://github.com/nvim-lualine/lualine.nvim
+	{
+		'nvim-lualine/lualine.nvim',
+		opts = {
+			theme = 'auto',
+			icons_enabled = false,
+			component_separators = '|',
+			section_separators = '',
+			sections = {
+				lualine_c = {
+					{
+						'filename',
+						path = 1,
+					},
+					{
+						'codecompanion'
+					}
+				}
+			}
+		},
+		extensions = {
+			'neo-tree'
+		},
+	},
+	{
+		-- https://github.com/akinsho/bufferline.nvim
+		'akinsho/bufferline.nvim',
+		version = "*",
+		dependencies = 'nvim-tree/nvim-web-devicons',
+		opts = {
+			options = {
+				mode = "tabs",
+				seperator_style = "slant"
+			}
+		},
+	},
+	-- https://github.com/folke/which-key.nvim
+	{
+		"folke/which-key.nvim",
+		enabled = true,
+		event = "VeryLazy",
+		init = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+		end,
+		opts = {
+			preset = 'helix'
+		},
+		config = function(_, opts)
+			local wk = require("which-key")
+			wk.setup(opts)
+		end
+	},
+	-- https://github.com/brenoprata10/nvim-highlight-colors
+	{
+		'brenoprata10/nvim-highlight-colors',
+		opts = {
+			enable_tailwind = true,
+			render = "virtual"
+		},
+	},
+	--https://github.com/folke/snacks.nvim
+	{
+		"folke/snacks.nvim",
+		priority = 1000,
+		lazy = false,
+		opts = {
+			statuscolumn = { enabled = true },
+			dashboard = { enabled = true },
+			indent = { enabled = true },
+			toggle = { enabled = true },
+			scope = { enabled = true },
+			notifier = { enabled = true, top_down = false },
+			explorer = {
+				enabled = true
+			},
+			picker = {
+				sources = {
+					files = {
+						hidden = true,
+						ignored = true
+					},
+					grep = {
+						hidden = true,
+						ignored = true,
+					},
+					explorer = {
+						finder = "explorer",
+						sort = { fields = { "sort" } },
+						hidden = true,
+						tree = true,
+						supports_live = true,
+						follow_file = true,
+						auto_close = true,
+						jump = { close = false },
+						layout = { preset = "ivy_split", preview = "left" },
+						formatters = { file = { filename_only = true } },
+						matcher = { sort_empty = false, fuzzy = false },
+						config = function(opts)
+							return require("snacks.picker.source.explorer").setup(opts)
+						end,
+					},
+					projects = {
+						dev = { "~/Workspace" }
+					}
+				}
+			}
+		},
+		keys = {
+			{ "<leader>lg",       function() Snacks.lazygit() end,                              desc = "Lazygit" },
+			{ "<leader>gB",       function() Snacks.gitbrowse() end,                            desc = "Gitbrowse" },
+			{ "<c-/>",            function() Snacks.terminal() end,                             desc = "Toggle Terminal" },
+			{ "<leader>nf",       function() Snacks.explorer() end,                             desc = "Snacks Explorer" },
+			{ "<leader>ff",       function() Snacks.picker.files() end,                         desc = "File Picker" },
+			{ "<leader>gs",       function() Snacks.picker.git_status() end,                    desc = "Git Status" },
+			{ "<leader>fg",       function() Snacks.picker.grep() end,                          desc = "Grep Picker" },
+			{ "<leader><leader>", function() Snacks.picker.smart() end,                         desc = "Smart Picker" },
+			{ "<leader>sp",       function() Snacks.picker() end,                               desc = "All Pickers" },
+			{ "<leader>fb",       function() Snacks.picker.buffers() end,                       desc = "Buffers" },
+			{ "gd",               function() Snacks.picker.lsp_definitions() end,               desc = "LSP: Definitions" },
+			{ "gr",               function() Snacks.picker.lsp_references() end,                desc = "LSP: References" },
+			{ "gI",               function() Snacks.picker.lsp_implementations() end,           desc = "LSP: Implementations" },
+			{ "D",                function() Snacks.picker.lsp_type_definition() end,           desc = "LSP: Type Definition" },
+			{ "ds",               function() Snacks.picker.lsp_document_symbols() end,          desc = "LSP: Document Symbols" },
+			{ "ws",               function() Snacks.picker.lsp_dynamic_workspace_symbols() end, desc = "LSP: Workspace Symbols" },
 		}
 	}
 }
