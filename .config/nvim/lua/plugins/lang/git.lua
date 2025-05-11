@@ -82,5 +82,15 @@ return {
 	--diff-viewer/merge editor
 	{
 		"sindrets/diffview.nvim"
+	},
+	{
+		'https://gitlab.com/gitlab-org/editor-extensions/gitlab.vim.git',
+		event = { 'BufReadPre', 'BufNewFile' },
+		opts = {
+			statusline = {
+				enabled = true,
+			},
+		},
 	}
+
 }
