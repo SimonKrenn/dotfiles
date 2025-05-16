@@ -1,138 +1,174 @@
 return {
 	{
 		'neovim/nvim-lspconfig',
-		event = 'VeryLazy',
 		dependencies = {
-			'williamboman/mason.nvim',
-			'williamboman/mason-lspconfig.nvim',
+			{ 'mason-org/mason.nvim', opts = {} },
+			'mason-org/mason-lspconfig.nvim',
+			'WhoIsSethDaniel/mason-tool-installer.nvim',
 
-			-- { 'j-hui/fidget.nvim', opts = {} },
+			-- Useful status updates for LSP.
+			{ 'j-hui/fidget.nvim',    opts = {} },
 
-			'folke/neodev.nvim'
-		},
-		opts = {
+			-- Allows extra capabilities provided by blink.cmp
+			'saghen/blink.cmp',
 		},
 		config = function()
-			local servers = { 'eslint', 'lua_ls', "yamlls", "biome", "vtsls" }
-			require('mason').setup({})
-			require('mason-lspconfig').setup({
-				ensure_installed = servers
+			vim.api.nvim_create_autocmd('LspAttach', {
+				group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
+				callback = function(event)
+					local map = function(keys, func, desc, mode)
+						mode = mode or 'n'
+						vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+					end
+
+					map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+					map('<leader>ca', vim.lsp.buf.code_action, 'Goto [C]ode [A]ction', { 'n', 'x' })
+					map('gr', function() Snacks.picker.lsp_references() end, '[G]oto [R]eferences')
+					map('gI', function() Snacks.picker.lsp_implementations() end, '[G]oto [I]mplementation')
+					map('gd', function() Snacks.picker.lsp_definitions() end, '[G]oto [D]efinition')
+					map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+					map('gO', function() Snacks.picker.lsp_document_symbols() end, 'Open Document Symbols')
+					map('gW', function() Snacks.picker.lsp_dynamic_workspace_symbols() end, 'Open Workspace Symbols')
+					map('grt', function() Snacks.picker.lsp_dynamic_workspace_symbols() end, '[G]oto [T]ype Definition')
+
+					---@param client vim.lsp.Client
+					---@param method vim.lsp.protocol.Method
+					---@param bufnr? integer some lsp support methods only in specific files
+					---@return boolean
+					local function client_supports_method(client, method, bufnr)
+						if vim.fn.has 'nvim-0.11' == 1 then
+							return client:supports_method(method, bufnr)
+						else
+							return client.supports_method(method, { bufnr = bufnr })
+						end
+					end
+
+					local client = vim.lsp.get_client_by_id(event.data.client_id)
+					if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
+						local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
+						vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+							buffer = event.buf,
+							group = highlight_augroup,
+							callback = vim.lsp.buf.document_highlight,
+						})
+
+						vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+							buffer = event.buf,
+							group = highlight_augroup,
+							callback = vim.lsp.buf.clear_references,
+						})
+
+						vim.api.nvim_create_autocmd('LspDetach', {
+							group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
+							callback = function(event2)
+								vim.lsp.buf.clear_references()
+								vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
+							end,
+						})
+					end
+
+					if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
+						map('<leader>th', function()
+							vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
+						end, '[T]oggle Inlay [H]ints')
+					end
+				end,
+
 			})
 
-			local on_attach = function(client, bufnr)
-				local nmap = function(keys, func, desc)
-					if desc then
-						desc = 'LSP: ' .. desc
-					end
-
-					vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
-				end
-
-				nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-				nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-				nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-
-				nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-				nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-				nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-				nmap('<leader>wl', function()
-					print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-				end, '[W]orkspace [L]ist Folders')
-
-				if client.supports_method('textDocument/inlayHint') then
-					vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-				end
-
-				vim.diagnostic.config({ virtual_text = true })
-
-				vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-					if vim.lsp.buf.format then
-						vim.lsp.buf.format()
-					elseif vim.lsp.buf.formatting then
-						vim.lsp.buf.formatting()
-					end
-				end, { desc = 'Format current buffer with LSP' })
-			end
-
-
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-			capabilities.textDocument.foldingRange = {
-				dynamicRegistration = false,
-				lineFoldingOnly = true
+			vim.diagnostic.config {
+				severity_sort = true,
+				float = { border = 'rounded', source = 'if_many' },
+				underline = { severity = vim.diagnostic.severity.ERROR },
+				signs = vim.g.have_nerd_font and {
+					text = {
+						[vim.diagnostic.severity.ERROR] = '󰅚 ',
+						[vim.diagnostic.severity.WARN] = '󰀪 ',
+						[vim.diagnostic.severity.INFO] = '󰋽 ',
+						[vim.diagnostic.severity.HINT] = '󰌶 ',
+					},
+				} or {},
+				virtual_text = {
+					source = 'if_many',
+					spacing = 2,
+					format = function(diagnostic)
+						local diagnostic_message = {
+							[vim.diagnostic.severity.ERROR] = diagnostic.message,
+							[vim.diagnostic.severity.WARN] = diagnostic.message,
+							[vim.diagnostic.severity.INFO] = diagnostic.message,
+							[vim.diagnostic.severity.HINT] = diagnostic.message,
+						}
+						return diagnostic_message[diagnostic.severity]
+					end,
+				},
 			}
 
+			local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-
-			for _, lsp in ipairs(servers) do
-				require('lspconfig')[lsp].setup({
-					on_attach = on_attach,
-					capabilities = capabilities,
-				})
-			end
-
-			require("lspconfig").mdx_analyzer.setup({
-				filetypes = { "markdown.mdx", "mdx" },
-				capabilities = capabilities,
-				root_dir = require('lspconfig.util').root_pattern('.git'),
-			})
-
-			require("lspconfig").vtsls.setup({
-				capabilities = capabilities,
-				settings = {
-					complete_function_calls = true,
-					vtsls = {
-						enableMoveToFileCodeAction = true,
-						autoUseWorkspaceTsdk = true,
-						experimental = {
-							maxInlayHintLength = 30,
-							completion = {
-								enableServerSideFuzzyMatch = true,
+			local servers = {
+				-- clangd = {},
+				-- gopls = {},
+				-- pyright = {},
+				-- rust_analyzer = {},
+				vtsls = {
+					settings = {
+						complete_function_calls = true,
+						vtsls = {
+							enableMoveToFileCodeAction = true,
+							autoUseWorkspaceTsdk = true,
+							experimental = {
+								maxInlayHintLength = 30,
+								completion = {
+									enableServerSideFuzzyMatch = true,
+								},
+							},
+						},
+						typescript = {
+							updateImportsOnFileMove = { enabled = "always" },
+							suggest = {
+								completeFunctionCalls = true,
+							},
+							inlayHints = {
+								enumMemberValues = { enabled = true },
+								functionLikeReturnTypes = { enabled = true },
+								parameterNames = { enabled = "literals" },
+								parameterTypes = { enabled = true },
+								propertyDeclarationTypes = { enabled = true },
+								variableTypes = { enabled = false },
 							},
 						},
 					},
-					typescript = {
-						updateImportsOnFileMove = { enabled = "always" },
-						suggest = {
-							completeFunctionCalls = true,
-						},
-						inlayHints = {
-							enumMemberValues = { enabled = true },
-							functionLikeReturnTypes = { enabled = true },
-							parameterNames = { enabled = "literals" },
-							parameterTypes = { enabled = true },
-							propertyDeclarationTypes = { enabled = true },
-							variableTypes = { enabled = false },
-						},
-					},
 				},
-			})
-
-			require('lspconfig').lua_ls.setup {
-				on_attach = on_attach,
-				capabilities = capabilities,
-				settings = {
-					Lua = {
-						runtime = {
-							version = 'LuaJIT',
-							path = runtime_path,
+				eslint = {
+					settings = {
+						validate = "on",
+						run = "onType",
+						workingDirectory = { mode = "auto" }
+					}
+				},
+				lua_ls = {
+					settings = {
+						Lua = {
+							completion = {
+								callSnippet = 'Replace',
+							},
 						},
-						diagnostics = {
-							globals = { 'vim' },
-						},
-						workspace = { library = vim.api.nvim_get_runtime_file('', true) },
-						telemetry = { enable = false },
 					},
 				},
 			}
-		end
+
+			local ensure_installed = vim.tbl_keys(servers or {})
+			vim.list_extend(ensure_installed, {
+				'stylua', -- Used to format Lua code
+			})
+
+
+			for server_name, config in pairs(servers) do
+				vim.lsp.config(server_name, config)
+				require("lspconfig")[server_name].setup(config)
+			end
+
+			require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+		end,
 	},
-	{
-		"williamboman/mason.nvim",
-		cmd = "Mason",
-		keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } }
-	},
-	{
-		"williamboman/mason-lspconfig.nvim"
-	}
 }
