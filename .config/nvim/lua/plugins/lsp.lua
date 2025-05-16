@@ -105,6 +105,8 @@ return {
 
 			local capabilities = require('blink.cmp').get_lsp_capabilities()
 
+			local util = require('lspconfig.util')
+
 			local servers = {
 				-- clangd = {},
 				-- gopls = {},
@@ -144,7 +146,9 @@ return {
 						validate = "on",
 						run = "onType",
 						workingDirectory = { mode = "auto" }
-					}
+					},
+					root_dir = util.root_pattern('.eslintrc.js', '.eslintrc.cjs', '.eslintrc.json', '.eslintrc.yaml',
+						'.eslintrc.yml', '.eslintrc'),
 				},
 				lua_ls = {
 					settings = {
