@@ -26,6 +26,7 @@
     "workspace.checkThirdParty": false,
     "diagnostics.globals": [
         "vim",
-        "Snacks"
+        "Snacks",
+        "util"
     ]
 }

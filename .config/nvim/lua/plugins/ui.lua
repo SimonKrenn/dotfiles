@@ -217,11 +217,11 @@ return {
 				sources = {
 					files = {
 						hidden = true,
-						ignored = true
+						ignored = false
 					},
 					grep = {
 						hidden = true,
-						ignored = true,
+						ignored = false,
 					},
 					explorer = {
 						finder = "explorer",

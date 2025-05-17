@@ -105,5 +105,15 @@ return {
 				desc = "Replace in Files (Spectre)"
 			}
 		}
+	},
+	{
+		--https://github.com/m4xshen/hardtime.nvim
+		"m4xshen/hardtime.nvim",
+		dependencies = { "MunifTanjim/nui.nvim" },
+		opts = {
+			enabled = false
+		},
+		event = "BufEnter"
+
 	}
 }
