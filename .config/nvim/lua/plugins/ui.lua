@@ -99,15 +99,6 @@ return {
 				enabled = false
 			},
 			bottom = {
-				-- toggleterm / lazyterm at the bottom with a height of 40% of the screen
-				{
-					ft = "toggleterm",
-					size = { height = 0.25 },
-					-- exclude floating windows
-					filter = function(buf, win)
-						return vim.api.nvim_win_get_config(win).relative == ""
-					end,
-				},
 				"Trouble",
 				{
 					ft = "qf",
@@ -204,7 +195,21 @@ return {
 		priority = 1000,
 		lazy = false,
 		opts = {
-			statuscolumn = { enabled = true },
+			statuscolumn = {
+
+				left = { "mark", "sign" }, -- priority of signs on the left (high to low)
+				right = { "fold", "git" }, -- priority of signs on the right (high to low)
+				folds = {
+					open = true,         -- show open fold icons
+					git_hl = false,      -- use Git Signs hl for fold icons
+				},
+				git = {
+					-- patterns to match Git signs
+					patterns = { "GitSign", "MiniDiffSign" },
+				},
+				refresh = 50, -- refresh at most every 50ms
+
+			},
 			dashboard = { enabled = true },
 			indent = { enabled = true },
 			toggle = { enabled = true },
@@ -269,11 +274,10 @@ return {
 		"mikavilpas/yazi.nvim",
 		event = "VeryLazy",
 		dependencies = {
-			"nvim-telescope/telescope.nvim",
-			"nvim-lua/plenary.nvim"
+			"folke/snacks.nvim"
 		},
 		keys = {
 			{ "<leader>gy", "<cmd>Yazi<CR>", desc = "toggle yazi" }
 		},
-	}
+	},
 }
