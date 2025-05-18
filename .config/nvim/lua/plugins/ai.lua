@@ -1,5 +1,4 @@
 return {
-
 	{
 		'zbirenbaum/copilot.lua',
 		config = function()
@@ -42,29 +41,46 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 		},
 		keys = {
-			{ "<leader>cc", function() require("codecompanion").chat() end, desc = "[C]odecompanion [C]hat" },
+			{ "<leader>cc", "<cmd>CodeCompanionChat<cr>", desc = "[C]odecompanion [C]hat" },
 		},
-		config = function()
-			require("codecompanion").setup({
-				strategies = {
-					chat = {
-						adapater = "copilot",
-						tools = {
-							["mcp"] = {
-								-- calling it in a function would prevent mcphub from being loaded before it's needed
-								callback = function() return require("mcphub.extensions.codecompanion") end,
-								description = "Call tools and resources from the MCP Servers",
-							}
-						}
-					},
-					inline = {
-						adapter = "copilot",
-					},
-					agent = {
-						adapter = "copilot",
-					},
+		opts = {
+			opts = {
+				log_level = "TRACE",
+			},
+			display = {
+				chat = {
+					show_settings = false
 				},
-			})
-		end
-	}
+			},
+			adapters = {
+				copilot = function()
+					return require("codecompanion.adapters").extend("copilot", {
+						schema = {
+							model = {
+								default = "gemini-2.5-pro", -- this model seems to not be able to use the @editor, probably because it's reasoning aloud
+							},
+						},
+					})
+				end,
+			},
+			strategies = {
+				chat = {
+					adapter = "copilot",
+					tools = {
+						["mcp"] = {
+							-- calling it in a function would prevent mcphub from being loaded before it's needed
+							callback = function() return require("mcphub.extensions.codecompanion") end,
+							description = "Call tools and resources from the MCP Servers",
+						}
+					}
+				},
+				inline = {
+					adapter = "copilot",
+				},
+				agent = {
+					adapter = "copilot",
+				},
+			}
+		},
+	},
 }
