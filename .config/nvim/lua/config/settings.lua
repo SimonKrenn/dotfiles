@@ -6,7 +6,7 @@ vim.opt.splitkeep = "screen"
 vim.wo.relativenumber = true
 vim.wo.number = true
 
-
+vim.o.winborder = "rounded"
 
 
 -- hide eob fillchars

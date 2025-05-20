@@ -57,7 +57,7 @@ return {
 					return require("codecompanion.adapters").extend("copilot", {
 						schema = {
 							model = {
-								default = "gemini-2.5-pro", -- this model seems to not be able to use the @editor, probably because it's reasoning aloud
+								default = "gemini-2.5-pro",
 							},
 						},
 					})
