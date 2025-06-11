@@ -131,12 +131,19 @@ return {
 	-- https://github.com/nvim-lualine/lualine.nvim
 	{
 		'nvim-lualine/lualine.nvim',
+		enabled = true,
 		opts = {
 			theme = 'auto',
 			icons_enabled = false,
 			component_separators = '|',
 			section_separators = '',
 			sections = {
+				lualine_a = {
+					"mode"
+				},
+				lualine_b = {
+					"branch"
+				},
 				lualine_c = {
 					{
 						'filename',
@@ -145,7 +152,20 @@ return {
 					{
 						'codecompanion'
 					}
-				}
+				},
+				lualine_x = {
+					"diff",
+				},
+				lualine_y = {
+
+					"diagnostics"
+				},
+				lualine_z = {
+					"filetype",
+					"fileformat",
+					"encoding",
+					"location"
+				},
 			}
 		},
 		extensions = {
@@ -279,5 +299,10 @@ return {
 		keys = {
 			{ "<leader>gy", "<cmd>Yazi<CR>", desc = "toggle yazi" }
 		},
+	},
+	{
+		-- https://github.com/rebelot/heirline.nvim
+		"rebelot/heirline.nvim",
+		enabled = false,
 	},
 }
