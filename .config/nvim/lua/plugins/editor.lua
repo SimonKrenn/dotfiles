@@ -27,7 +27,7 @@ return {
 	-- https://cmp.saghen.dev/
 	{
 		'saghen/blink.cmp',
-		dependencies = { 'rafamadriz/friendly-snippets', "giuxtaposition/blink-cmp-copilot" },
+		dependencies = { 'rafamadriz/friendly-snippets', "giuxtaposition/blink-cmp-copilot", "Kaiser-Yang/blink-cmp-avante" },
 		version = '*',
 		opts = {
 			-- 'default' for mappings similar to built-in completion
@@ -97,7 +97,13 @@ return {
 
 			},
 			sources = {
-				default = { 'lsp', 'path', 'snippets', 'buffer' },
+				default = { 'avante', 'lsp', 'path', 'snippets', 'buffer' },
+				providers = {
+					avante = {
+						module = "blink-cmp-avante",
+						name = "Avante"
+					}
+				}
 			},
 		},
 		opts_extend = { "sources.default" }

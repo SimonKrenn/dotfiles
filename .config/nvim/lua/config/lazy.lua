@@ -15,5 +15,3 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 require("lazy").setup("plugins")
-
--- { 'folke/which-key.nvim', opts = {} },

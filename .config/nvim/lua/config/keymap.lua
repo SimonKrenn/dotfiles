@@ -11,5 +11,8 @@ keymap('t', '<esc>', '<C-\\><C-n>', { silent = true })
 keymap('n', '<leader>df', "<cmd>lua vim.diagnostic.open_float({ border = 'rounded', max_width = 100 })<CR>",
 	{ desc = 'open diagnostic as a float' })
 
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 
 vim.g.copilot_no_tab_map = true

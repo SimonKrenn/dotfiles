@@ -29,6 +29,9 @@ return {
 						make_vars = true,     -- make chat #variables from MCP server resources
 						make_slash_commands = true, -- make /slash_commands from MCP server prompts
 					},
+					avante = {
+						make_slash_commands = true
+					}
 				}
 			})
 		end
@@ -36,6 +39,7 @@ return {
 	-- https://github.com/olimorris/codecompanion.nvim
 	{
 		"olimorris/codecompanion.nvim",
+		enabled = false,
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
@@ -81,6 +85,59 @@ return {
 					adapter = "copilot",
 				},
 			}
+		},
+	},
+	{
+		"yetone/avante.nvim",
+		event = "VeryLazy",
+		version = false, -- Never set this value to "*"! Never!
+		opts = {
+			input = {
+				provider = "snacks",
+				provider_opts = {
+					title = "Avante Input"
+				}
+			},
+			provider = "copilot",
+			system_prompt = function()
+				local hub = require("mcphub").get_hub_instance()
+				return hub and hub:get_active_servers_prompt() or ""
+			end,
+			custom_tools = function()
+				return {
+					require("mcphub.extensions.avante").mcp_tool(),
+				}
+			end,
+		},
+		build = "make",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+			"stevearc/dressing.nvim", -- for input provider dressing
+			"folke/snacks.nvim",   -- for input provider snacks
+			"zbirenbaum/copilot.lua", -- for providers='copilot'
+			{
+				"HakonHarnes/img-clip.nvim",
+				event = "VeryLazy",
+				opts = {
+					default = {
+						embed_image_as_base64 = false,
+						prompt_for_file_name = false,
+						drag_and_drop = {
+							insert_mode = true,
+						},
+						use_absolute_path = true,
+					},
+				},
+			},
+			{
+				'MeanderingProgrammer/render-markdown.nvim',
+				opts = {
+					file_types = { "markdown", "Avante" },
+				},
+				ft = { "markdown", "Avante" },
+			},
 		},
 	},
 }
