@@ -107,12 +107,41 @@ return {
 
 			local util = require('lspconfig.util')
 
+			local configs = require "lspconfig.configs"
+			if not configs.tsgo then
+				configs.tsgo = {
+					default_config = {
+						cmd = { "tsgo", "--lsp", "--stdio" },
+						filetypes = {
+							"javascript",
+							"javascriptreact",
+							"javascript.jsx",
+							"typescript",
+							"typescriptreact",
+							"typescript.tsx",
+						},
+						root_dir = util.root_pattern(
+							"tsconfig.json",
+							"jsconfig.json",
+							"package.json",
+							".git",
+							"tsconfig.base.json"
+						),
+						settings = {},
+					},
+				}
+			end
+
 			local servers = {
 				-- clangd = {},
 				-- gopls = {},
 				-- pyright = {},
 				-- rust_analyzer = {},
+				tsgo = {
+					enabled = false
+				},
 				vtsls = {
+					enabled = true,
 					settings = {
 						complete_function_calls = true,
 						vtsls = {

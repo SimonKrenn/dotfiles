@@ -31,3 +31,8 @@ set -q EDITOR || set -Ux EDITOR nvim
 
 # Created by `pipx` on 2025-04-21 18:22:51
 set PATH $PATH /Users/int004977/.local/bin
+
+# Added by LM Studio CLI (lms)
+set -gx PATH $PATH /Users/int004977/.lmstudio/bin
+# End of LM Studio CLI section
+
