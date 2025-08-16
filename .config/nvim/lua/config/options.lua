@@ -1,11 +1,13 @@
-local o, opt, wo = vim.o, vim.opt, vim.wo
+local o, opt, wo, g = vim.o, vim.opt, vim.wo, vim.g
 
 o.clipboard = 'unnamedplus'
+g.mapleader = " "
+g.maplocalleader = "\\"
 
 opt.tabstop = 2
 opt.shiftwidth = 2
 
-vim.wo.number = true
+wo.number = true
 
 opt.fillchars = {
   eob = ' '
