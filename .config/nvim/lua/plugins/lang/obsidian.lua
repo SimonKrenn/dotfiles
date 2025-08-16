@@ -2,7 +2,7 @@ return {
     'obsidian-nvim/obsidian.nvim',
     version = '*',
     lazy = 'true',
-    ft = 'markdown'
+    ft = 'markdown',
     opts = {
         workspaces = {
           {
@@ -11,8 +11,11 @@ return {
           },
           {
             name = 'work',
-            paht = '~/vaults/work'
-          }
+            paht = '~/vaults/work',
+          },
         },
+    completion = {
+        blink = true
+      },
     }
 }
