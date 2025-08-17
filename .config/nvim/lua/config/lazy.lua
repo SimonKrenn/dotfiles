@@ -22,6 +22,7 @@ require("lazy").setup({
     { import = 'plugins.ui'},
     { import = 'plugins.lang'},
     { import = 'plugins.editor'},
+    { import = 'plugins.utils'},
   },
   checker = { enabled = true },
 })
