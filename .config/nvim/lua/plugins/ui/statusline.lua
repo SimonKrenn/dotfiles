@@ -1,20 +1,23 @@
 return {
-  'nvim-lualine/lualine.nvim',
+  "nvim-lualine/lualine.nvim",
   enabled = true,
   opts = {
     options = {
-      theme = 'auto',
+      theme = "auto",
       icons_enabled = true,
-      component_separators = '',
-      section_separators = '',
+      component_separators = "",
+      section_separators = "",
     },
     sections = {
-      lualine_a = {"branch"},
-      lualine_b = {"filename"},
-      lualine_c = {"diff"},
-      lualine_x = {},
-      lualine_y = {},
-      lualine_z = {'mode'},
+      lualine_a = { "branch" },
+      lualine_b = { "filename" },
+      lualine_c = { { "diff", symbols = { added = "", modified = "", removed = "" } } },
+      lualine_x = {
+        { "diagnostics", symbols = { error = "", warn = "", info = "", hint = "h" } },
+        "lsp_status_icon",
+      },
+      lualine_y = { "progress" },
+      lualine_z = { "mode" },
     },
   },
 }
