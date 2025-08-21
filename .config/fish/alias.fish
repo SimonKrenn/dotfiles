@@ -10,6 +10,13 @@ alias pn='pnpm'
 alias g='git'
 alias find='fd'
 alias mux='tmuxinator'
+alias cat = 'bat'
+
+
+# obsidian related
+alias oo='cd $HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/work'
+
+# yazi
 function ya
 	set tmp (mktemp -t "yazi-cwd.XXXXX")
 	yazi $argv --cwd-file="$tmp"
