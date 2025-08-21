@@ -1,6 +1,6 @@
 # command overrides
 alias erd="erd -."
-alias ls="eza -a"
+alias ls="eza -a -g --icons"
 alias lg="lazygit"
 alias edit="nvim"
 alias browse="yazi"
@@ -10,7 +10,7 @@ alias pn='pnpm'
 alias g='git'
 alias find='fd'
 alias mux='tmuxinator'
-alias cat = 'bat'
+alias cat='bat'
 
 
 # obsidian related
