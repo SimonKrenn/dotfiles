@@ -1,6 +1,6 @@
 return {
   "obsidian-nvim/obsidian.nvim",
-  requires = { "nvim-lua/plenary.nvim" },
+  dependencies = { "nvim-lua/plenary.nvim" },
   version = "*",
   lazy = "true",
   ft = "markdown",
