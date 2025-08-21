@@ -11,6 +11,7 @@ mkdir $HOME/.config/atuin
 mkdir $HOME/.config/ghostty
 mkdir $HOME/.config/hammerspoon
 mkdir $HOME/.config/mise
+mkdir $HOME/.config/sesh
 
 echo 'stowing files'
 stow -v -d $PWD/.config -t $HOME tmux
@@ -26,3 +27,4 @@ stow -v -d $PWD/.config -t $HOME/.config/ghostty ghostty
 stow -v -d $PWD/.config -t $HOME/.config/mise mise
 stow -v -d $PWD/.config -t $HOME/.config/atuin atuin --adopt
 stow -v -d $PWD/.config -t $HOME/.config/hammerspoon hammerspoon --adopt
+stow -v -d $PWD/.config -t $HOME/.config/sesh sesh 

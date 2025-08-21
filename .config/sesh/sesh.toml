@@ -1,0 +1,9 @@
+
+## configs
+[[session]]
+name = "dotfiles"
+path = "~/dotfiles"
+
+[[session]]
+name = "neovim config"
+path = "~/dotfiles/.config/nvim"
