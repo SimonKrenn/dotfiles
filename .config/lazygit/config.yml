@@ -1,3 +1,8 @@
+git:
+  paging:
+    colorArg: always
+    pager: delta --paging=never
+
 customCommands:
   - key: 'C'
     command: 'cz c -- -S'
