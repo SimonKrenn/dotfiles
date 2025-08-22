@@ -14,7 +14,10 @@ alias cat='bat'
 
 
 # obsidian related
-alias oo='cd $HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/work'
+alias oo='sesh connect $HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/work'
+
+# utilities
+alias sf='source ~/.config/fish/config.fish'
 
 # yazi
 function ya
