@@ -21,6 +21,12 @@ opt.laststatus = 3
 o.termguicolors = true
 o.winborder = "rounded"
 
+-- folds
+o.foldenable = true
+o.foldcolumn = "0"
+o.foldlevel = 99
+o.foldlevelstart = 99
+
 vim.cmd([[let &t_Cs = "\e[4:3m"]]) -- undercurl
 vim.cmd([[let &t_Ce = "\e[4:0m"]]) -- underscore
 
