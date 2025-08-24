@@ -24,7 +24,7 @@ return {
       statuscolumn = { enabled = true, left = { "mark", "sign" }, right = { "fold", "git" } },
       notifier = { enabled = true },
       scroll = { enabled = true },
-      dashboard = { enabled = true },
+      dashboard = { enabled = false },
       scratch = { enabled = true },
     },
     keys = {

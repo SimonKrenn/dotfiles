@@ -14,7 +14,6 @@ return {
       lualine_c = { { "diff", symbols = { added = "", modified = "", removed = "" } } },
       lualine_x = {
         { "diagnostics", symbols = { error = "", warn = "", info = "", hint = "h" } },
-        "lsp_status_icon",
       },
       lualine_y = { "progress" },
       lualine_z = { "mode" },
