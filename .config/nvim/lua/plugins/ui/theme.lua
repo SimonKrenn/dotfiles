@@ -20,11 +20,25 @@ return {
         mason = true,
       },
     },
-    init = function()
-      vim.cmd.colorscheme("eldritchbase")
-    end,
+    -- init = function()
+    --   vim.cmd.colorscheme("eldritchbase")
+    -- end,
   },
   {
     "nyoom-engineering/oxocarbon.nvim",
+  },
+  {
+    "olivercederborg/poimandres.nvim",
+  },
+  {
+    "Mofiqul/adwaita.nvim",
+  },
+  {
+    "Shatur/neovim-ayu",
+    lazy = false,
+    priority = 1000,
+    init = function()
+      vim.cmd.colorscheme("ayu")
+    end,
   },
 }
