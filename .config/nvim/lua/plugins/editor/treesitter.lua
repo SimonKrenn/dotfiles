@@ -1,6 +1,46 @@
 return {
-	{
-	"nvim-treesitter/nvim-treesitter",
-	build = ":TSUpdate",
-	}
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+  },
+  opts = {
+    ensure_installed = {
+      "nix",
+      "git_config",
+      "gitcommit",
+      "git_rebase",
+      "gitignore",
+      "gitattributes",
+      "go",
+      "gomod",
+      "gowork",
+      "gosum",
+      "markdownlint-cli2",
+      "markdown-toc",
+      "markdown_inline",
+      "markdown",
+      "lua",
+      "typescript",
+      "tsx",
+      "css",
+      "javascript",
+      "json5",
+      "jsonc",
+      "json",
+      "jsdoc",
+      "vimdoc",
+      "html",
+      "java",
+      "yaml",
+      "toml",
+      "bash",
+      "fish",
+    },
+    highlight = {
+      enabled = true,
+    },
+    indent = {
+      enabled = true,
+    },
+  },
 }
