@@ -28,3 +28,4 @@ stow -v -d $PWD/.config -t $HOME/.config/mise mise
 stow -v -d $PWD/.config -t $HOME/.config/atuin atuin --adopt
 stow -v -d $PWD/.config -t $HOME/.config/hammerspoon hammerspoon --adopt
 stow -v -d $PWD/.config -t $HOME/.config/sesh sesh 
+stow -v -d $PWD/.config -t $HOME/.config/opencode opencode --adopt
