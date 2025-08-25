@@ -18,6 +18,9 @@ return {
     completion = {
       blink = true,
     },
+    picker = {
+      name = "snacks.pick",
+    },
   },
   keys = {
     {
