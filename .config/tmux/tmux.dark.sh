@@ -1,5 +1,7 @@
-tmux tmux set -g @nova-nerdfonts true
-tmux tmux set -g @nova-nerdfonts-left 
+echo "switching dark"
+
+tmux set -g @nova-nerdfonts true
+tmux set -g @nova-nerdfonts-left 
 tmux set -g @nova-nerdfonts-right 
 
 tmux set -g @nova-segment-mode "#{?client_prefix,Ω,ω}"
@@ -20,3 +22,5 @@ tmux set -g @nova-status-style-bg "#0F111A"
 tmux set -g @nova-status-style-active-fg "#2e3540" 
 tmux set -g @nova-status-style-double-bg "#2d3540"
 tmux set -g @nova-status-style-active-bg "#ABCF76"
+
+tmux source ~/.tmux.conf
