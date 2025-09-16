@@ -165,6 +165,7 @@ return {
             },
           },
         },
+        biome = {},
         gopls = {},
         nil_ls = {},
       }
