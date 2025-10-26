@@ -1,5 +1,6 @@
 return {
   "NickvanDyke/opencode.nvim",
+  enabled = false,
   keys = {
     {
       "<leader>ot",

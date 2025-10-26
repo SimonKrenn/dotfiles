@@ -1,6 +1,6 @@
 return {
   {
-    "snacks.nvim",
+    "folke/snacks.nvim",
     opts = {
       bigfile = { enabled = true },
       picker = {
@@ -26,6 +26,7 @@ return {
       scroll = { enabled = true },
       dashboard = { enabled = false },
       scratch = { enabled = true },
+      image = { enabled = true },
     },
     keys = {
       -- pickers

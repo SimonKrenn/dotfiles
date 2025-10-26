@@ -168,6 +168,8 @@ return {
         biome = {},
         gopls = {},
         nil_ls = {},
+        copilot = {},
+        rust_analyzer = {},
       }
 
       local ensure_installed = vim.tbl_keys(servers or {})

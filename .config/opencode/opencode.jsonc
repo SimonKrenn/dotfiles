@@ -19,7 +19,8 @@
 		}
 	},
 	"mcp": {
-		"playwright": {
+		"playwright": { 
+      "enabled": true,
 			"type": "local",
 			"command": [
 				"npx",
@@ -32,14 +33,20 @@
 			"url": "http://127.0.0.1:3845/mcp"
 		},
 		"atlassian-mcp": {
-			"enabled": false,
+			"enabled": true,
 			"type": "local",
 			"command": [
 				"npx",
 				"-y",
 				"mcp-remote",
-				"https://mcp.atlassian.com/v1/sse"
+				"https://mcp.atlassian.com/v1/sse",
+        "--debug"
 			]
 		},
+    "chrome-devtools" : {
+      "enabled" : true,
+      "type": "local",
+      "command": ["npx", "chrome-devtools-mcp@latest"]
+    }
 	}
 }
