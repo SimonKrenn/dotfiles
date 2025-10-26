@@ -1,5 +1,5 @@
-font-family ="MonaspiceNe Nerd Font"
-theme=dark:ayu,light:"ayu_light"
+	font-family ="MonaspiceNe Nerd Font"
+theme=dark:"Catppuccin Macchiato",light:"Catppuccin Latte"
 font-size=14
 macos-icon=custom-style
 macos-icon-frame=plastic

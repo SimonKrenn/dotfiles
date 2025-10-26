@@ -1,7 +1,18 @@
-vim.api.nvim_create_autocmd("OptionSet", {
-  pattern = "background",
-  callback = function()
-    local plugin = require("lazy.core.config").plugins["neovim-ayu"]
-    require("lazy.core.loader").reload(plugin)
-  end,
-})
+-- vim.api.nvim_create_autocmd("OptionSet", {
+--   pattern = "background",
+--   callback = function()
+--     -- Defer to avoid running in the middle of option processing
+--     vim.schedule(function()
+--       local ok_load = pcall(function()
+--         -- Newer catppuccin exposes `load()` which respects `background` mapping
+--         require("catppuccin").load()
+--       end)
+--
+--       if not ok_load then
+--         -- Fallback for older versions: re-apply the appropriate scheme directly
+--         local scheme = (vim.o.background == "light") and "catppuccin-latte" or "catppuccin-mocha"
+--         pcall(vim.cmd.colorscheme, scheme)
+--       end
+--     end)
+--   end,
+-- })
