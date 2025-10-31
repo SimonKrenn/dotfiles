@@ -1,3 +1,3 @@
 return {
-  "nvim-min/mini.surround",
+  "nvim-mini/mini.surround",
 }

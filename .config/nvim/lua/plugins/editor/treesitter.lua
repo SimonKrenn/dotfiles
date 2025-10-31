@@ -38,6 +38,9 @@ return {
         "gowork",
         "bash",
         "fish",
+        "cpp",
+        "rust",
+        "zig",
       },
       highlight = {
         enable = true,

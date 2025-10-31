@@ -1,4 +1,4 @@
-	font-family ="MonaspiceNe Nerd Font"
+font-family ="MonaspiceNe Nerd Font"
 theme=dark:"Catppuccin Macchiato",light:"Catppuccin Latte"
 font-size=14
 macos-icon=custom-style
