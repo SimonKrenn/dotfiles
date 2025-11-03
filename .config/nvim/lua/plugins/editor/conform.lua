@@ -14,10 +14,10 @@ return {
   },
   opts = {
     formatters_by_ft = {
-      typescript = { "biome", "prettierd, prettier" },
-      typescriptreact = { "biome", "prettierd", "prettier" },
-      javascript = { "biome", "prettierd", "prettier" },
-      javascriptreact = { "biome", "prettierd", "prettier" },
+      typescript = { "biome", "oxfmt", "prettierd, prettier" },
+      typescriptreact = { "biome", "oxfmt", "prettierd", "prettier" },
+      javascript = { "biome", "oxfmt", "prettierd", "prettier" },
+      javascriptreact = { "biome", "oxfmt", "prettierd", "prettier" },
       lua = { "stylua" },
       yaml = { "yamlfix" },
       nix = { "nixfmt" },
