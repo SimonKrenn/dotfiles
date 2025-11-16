@@ -36,3 +36,6 @@ set PATH $PATH /Users/int004977/.local/bin
 set -gx PATH $PATH /Users/int004977/.lmstudio/bin
 # End of LM Studio CLI section
 
+
+# amp
+fish_add_path "~/.local/bin"
