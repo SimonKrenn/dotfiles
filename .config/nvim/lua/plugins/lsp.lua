@@ -77,6 +77,15 @@ return {
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
             end, "[T]oggle Inlay [H]ints")
           end
+
+          map("<leader>df", function()
+            vim.diagnostic.open_float(event.buf, {
+              focusable = false,
+              border = "rounded",
+              source = "if_many",
+              scope = "cursor",
+            })
+          end, "Toggle [d]iagnostic [f]loat")
         end,
       })
 
