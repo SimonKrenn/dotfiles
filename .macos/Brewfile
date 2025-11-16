@@ -18,21 +18,21 @@ brew 'docker' # container
 brew 'mise' # version management
 brew 'lazygit' # git tui
 brew 'ast-grep' # ast-based search, modify, etc..
-brew 'koekeishiya/formulae/skhd' # macos hotkey daemon
 brew 'fisher' # fish plugin-manager
 brew 'eza' # ls replacement
 brew 'stow' # symlink manager
 brew 'yazi' # file explorer
 brew 'zoxide' # better cd
 brew 'fd' # find replacement
-brew 'rg' # repgrip
+brew 'ripgrep' # ripgrep
 brew 'direnv' # direnv
 brew 'commitizen' # commit-cli
 brew 'btop' # resource monitor
 brew 'atuin' # magic shell history
-brew 'ghostty' # terminal emulator
 brew 'chafa' # image rendering
 brew 'resvg' # svg rendering
+brew 'git-delta' # diff pager
+brew 'gh' # github cli
  
 #tmux plugins
 brew 'gitmux'
@@ -40,6 +40,7 @@ brew 'tmuxinator'
 
 # envs
 brew 'go'
+brew 'rust'
 
 # Casks
 cask 'chrome' #its chrome
@@ -49,10 +50,13 @@ cask '1password-cli' # password manager cli
 cask 'notion' # notes
 cask 'obsidian' # notes
 cask 'jetbrains-toolbox' # jetbrains ide manager
-cask 'bruno' # API IDE
 cask 'raycast' # spotlight replacement
 cask 'raindropio' # bookmark manager
 cask 'hammerspoon' # automation/automation
+cask 'codex' # ai coding agent
+cask 'cryptomator' # encryption
+cask 'ghostty' # terminal emulator
+cask 'yaak' # REST client
 
 # fonts
 brew 'font-monaspice-nerd-font'

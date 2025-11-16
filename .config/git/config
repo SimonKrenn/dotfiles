@@ -1,3 +1,7 @@
+[core]
+  pager = delta
+[interactive]
+  diffFilter = delta --color-only
 [user]
 	email = simon.krenn@teamviewer.com
 	name = Simon Krenn
@@ -13,5 +17,7 @@
 	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
 [commit]
 	gpgsign = true
-
-
+[delta]
+  navigate = true
+[merge]
+  conflictStyle = zdiff3

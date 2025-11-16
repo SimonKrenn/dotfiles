@@ -1,0 +1,15 @@
+- [ ] configure flash
+- [ ] finish treesitter config
+- [ ] statusline config
+- [ ] git config
+    - [ ] diffview: finish config
+    - [ ] gitsigns: correct icons, keybinds, etc 
+- [ ] lang specific stuff
+    - [ ] typescript
+    - [ ] markdown
+    - [ ] tailwind
+- [ ] test stetup (neotest, dap, etc...)
+- [ ] folds
+- [ ] setup trouble
+- [ ] setup edgy
+- [x] statuscol
