@@ -7,6 +7,11 @@ return {
           backend = "tmux",
           enabled = true,
         },
+        tools = {
+          amp = {
+            cmd = { "amp" },
+          },
+        },
       },
     },
     keys = {
@@ -32,12 +37,18 @@ return {
           require("sidekick.cli").toggle({ name = "codex", focus = true })
         end,
       },
-      -- {
-      --   "<leader>ag",
-      --   function()
-      --     require("sidekick.cli").toggle({ name = "copilot", focus = true })
-      --   end,
-      -- },
+      {
+        "<leader>ag",
+        function()
+          require("sidekick.cli").toggle({ name = "copilot", focus = true })
+        end,
+      },
+      {
+        "<leader>aa",
+        function()
+          require("sidekick.cli").toggle({ name = "amp", focus = true })
+        end,
+      },
     },
   },
   {

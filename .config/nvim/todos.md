@@ -6,8 +6,8 @@
     - [ ] gitsigns: correct icons, keybinds, etc 
 - [ ] lang specific stuff
     - [ ] typescript
-    - [ ] markdown
-    - [ ] tailwind
+    - [x] markdown
+    - [x] tailwind
 - [ ] test stetup (neotest, dap, etc...)
 - [ ] folds
 - [ ] setup trouble

@@ -179,7 +179,7 @@ return {
         nil_ls = {},
         copilot = {},
         rust_analyzer = {},
-        tailwindcss_language_server = {},
+        tailwindcss = {},
       }
 
       local ensure_installed = vim.tbl_keys(servers or {})
