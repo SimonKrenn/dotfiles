@@ -4,7 +4,7 @@ return {
   build = ":UpdateRemotePlugins",
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
-    "neovim/nvim-lspconfig", -- optional
+    "neovim/nvim-lspconfig",
   },
   opts = {
     server = {
@@ -28,5 +28,5 @@ return {
         },
       },
     },
-  }, -- your configuration
+  },
 }

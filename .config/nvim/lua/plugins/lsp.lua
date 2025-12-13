@@ -185,9 +185,17 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
 
       for server_name, config in pairs(servers) do
-        vim.lsp.config(server_name, config)
-        require("lspconfig")[server_name].setup(config)
+        local server_config = vim.tbl_deep_extend("force", {}, config)
+        server_config.capabilities = vim.tbl_deep_extend(
+          "force",
+          {},
+          capabilities,
+          server_config.capabilities or {}
+        )
+        vim.lsp.config(server_name, server_config)
       end
+
+      vim.lsp.enable(ensure_installed)
 
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
     end,

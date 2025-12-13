@@ -39,3 +39,4 @@ set -gx PATH $PATH /Users/int004977/.lmstudio/bin
 
 # amp
 fish_add_path "~/.local/bin"
+fish_add_path $HOME/.local/bin
