@@ -1,6 +1,8 @@
 return {
   {
     "folke/snacks.nvim",
+    lazy = false,
+    priority = 1000,
     opts = {
       bigfile = { enabled = true },
       picker = {
@@ -24,7 +26,7 @@ return {
       statuscolumn = { enabled = true, left = { "mark", "sign" }, right = { "fold", "git" } },
       notifier = { enabled = true },
       scroll = { enabled = true },
-      dashboard = { enabled = false },
+      dashboard = { enabled = true, example = "files" },
       scratch = { enabled = true },
       image = { enabled = true },
     },
@@ -59,6 +61,13 @@ return {
         desc = "[f]ind [r]ecent",
       },
       {
+        "<leader>fz",
+        function()
+          Snacks.picker.zoxide()
+        end,
+        desc = "[f]ind [z]oxide",
+      },
+      {
         "<leader>fp",
         function()
           Snacks.picker()
@@ -72,6 +81,14 @@ return {
           Snacks.explorer()
         end,
         desc = "[f]ile [e]xplorer",
+      },
+      -- dashboard
+      {
+        "<leader>fd",
+        function()
+          Snacks.dashboard()
+        end,
+        desc = "[f]ind [d]ashboard",
       },
       -- git
       {
