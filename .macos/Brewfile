@@ -2,6 +2,7 @@
 tap "homebrew/bundle" 
 tap "homebrew/cask-fonts" # nerd fonts
 tap "arl/arl"
+tap "max-sixty/worktrunk"
 
 # packages
 brew 'git' # version control
@@ -32,15 +33,20 @@ brew 'atuin' # magic shell history
 brew 'chafa' # image rendering
 brew 'resvg' # svg rendering
 brew 'git-delta' # diff pager
-brew 'gh' # github cli
+brew 'wt' # worktree cli 
+brew 'opencode' # ai-agent
+brew 'codex' # ai-agent
+brew 'lazydocker' # docker TUI
+brew 'sesh' # tmux session manager
  
-#tmux plugins
+# tmux plugins
 brew 'gitmux'
-brew 'tmuxinator'
 
 # envs
 brew 'go'
 brew 'rust'
+brew 'gcc'
+brew 'bun'
 
 # Casks
 cask 'chrome' #its chrome
