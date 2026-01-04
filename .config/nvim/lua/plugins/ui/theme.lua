@@ -7,7 +7,7 @@ return {
         flavour = "auto",
         background = { light = "latte", dark = "macchiato" },
       })
-      vim.cmd.colorscheme("catppuccin")
+      -- vim.cmd.colorscheme("catppuccin")
     end,
   },
   {
@@ -48,5 +48,14 @@ return {
     "Shatur/neovim-ayu",
     lazy = false,
     priority = 1000,
+  },
+  {
+    "ydkulks/cursor-dark.nvim",
+  },
+  {
+    dir = "~/Workspace/onehunter.nvim",
+    init = function()
+      vim.cmd.colorscheme("one-hunter")
+    end,
   },
 }

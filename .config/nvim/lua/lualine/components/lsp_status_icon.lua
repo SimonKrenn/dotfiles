@@ -59,39 +59,38 @@ function M:init(opts)
     uppercase = false,
     order_by = "name", -- "name" | "id"
   }, opts or self.options or {})
-
 end
 
 -- Generate status each refresh
 function M:update_status()
   local opts = self.opts
   local bufnr = vim.api.nvim_get_current_buf()
-    local clients = get_clients(bufnr)
-    if not clients or #clients == 0 then
-      return ""
-    end
+  local clients = get_clients(bufnr)
+  if not clients or #clients == 0 then
+    return ""
+  end
 
   if opts.order_by == "id" then
-      table.sort(clients, function(a, b)
-        return a.id < b.id
-      end)
-    else
-      table.sort(clients, function(a, b)
-        return (a.name or "") < (b.name or "")
-      end)
-    end
+    table.sort(clients, function(a, b)
+      return a.id < b.id
+    end)
+  else
+    table.sort(clients, function(a, b)
+      return (a.name or "") < (b.name or "")
+    end)
+  end
 
   local seen, parts = {}, {}
   for _, client in ipairs(clients) do
-      local key = client.name or tostring(client.id)
+    local key = client.name or tostring(client.id)
     if not opts.dedup or not seen[key] then
-        table.insert(parts, fmt_client(client, opts))
-        seen[key] = true
-      end
-    if opts.max and #parts >= opts.max then
-        break
-      end
+      table.insert(parts, fmt_client(client, opts))
+      seen[key] = true
     end
+    if opts.max and #parts >= opts.max then
+      break
+    end
+  end
 
   return table.concat(parts, opts.sep)
 end
