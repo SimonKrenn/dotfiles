@@ -14,7 +14,9 @@ alias cat='bat'
 
 
 # obsidian related
-alias oo='sesh connect $HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/work'
+alias oot='sesh connect $HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/'
+alias oow="cd $HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/work/"
+alias oop="cd $HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/zettelkasten/"
 
 # utilities
 alias sf='source ~/.config/fish/config.fish'

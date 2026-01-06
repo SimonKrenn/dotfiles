@@ -3,7 +3,6 @@ return {
   dependencies = { "nvim-lua/plenary.nvim" },
   version = "*",
   lazy = "true",
-  ft = "markdown",
   opts = {
     workspaces = {
       {
@@ -13,6 +12,10 @@ return {
       {
         name = "work",
         path = "/Users/int004977/Library/Mobile Documents/iCloud~md~obsidian/Documents/work",
+      },
+      {
+        name = "vault",
+        path = "/Users/simonkrenn/Library/Mobile Documents/iCloud~md~obsidian/Documents/zettelkasten/",
       },
     },
     completion = {
@@ -26,14 +29,14 @@ return {
     {
       "<leader>nf",
       function()
-        Snacks.picker.files({ cwd = "/Users/int004977/Library/Mobile Documents/iCloud~md~obsidian/Documents/work" })
+        Snacks.picker.files({ cwd = "/Users/int004977/Library/Mobile Documents/iCloud~md~obsidian/Documents/" })
       end,
       desc = "[n]otes find files",
     },
     {
       "<leader>ng",
       function()
-        Snacks.picker.grep({ cwd = "/Users/int004977/Library/Mobile Documents/iCloud~md~obsidian/Documents/work" })
+        Snacks.picker.grep({ cwd = "/Users/int004977/Library/Mobile Documents/iCloud~md~obsidian/Documents/" })
       end,
       desc = "[n]otes grep",
     },
