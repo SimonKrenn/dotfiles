@@ -16,6 +16,11 @@ if [ -f $HOME/.config/fish/private-alias.fish ]
 	source $HOME/.config/fish/private-alias.fish
 end
 
+# functions
+if [ -f $HOME/.config/fish/functions.fish ]
+source $HOME/.config/fish/functions.fish
+end
+
 # path 
 set PATH /Users/int004977/.local/share/bob/nvim-bin/ $PATH
 
