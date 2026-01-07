@@ -3,6 +3,7 @@ return {
   dependencies = { "nvim-lua/plenary.nvim" },
   version = "*",
   lazy = "true",
+  ft = "markdown",
   opts = {
     workspaces = {
       {
@@ -11,11 +12,11 @@ return {
       },
       {
         name = "work",
-        path = "/Users/int004977/Library/Mobile Documents/iCloud~md~obsidian/Documents/work",
+        path = "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/work",
       },
       {
         name = "vault",
-        path = "/Users/simonkrenn/Library/Mobile Documents/iCloud~md~obsidian/Documents/zettelkasten/",
+        path = "$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/zettelkasten",
       },
     },
     completion = {
