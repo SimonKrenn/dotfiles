@@ -12,5 +12,11 @@ return {
   },
   {
     "sindrets/diffview.nvim",
+    enabled = true,
+  },
+  {
+    "esmuellert/codediff.nvim",
+    dependencies = { "MunifTanjim/nui.nvim" },
+    cmd = "CodeDiff",
   },
 }
