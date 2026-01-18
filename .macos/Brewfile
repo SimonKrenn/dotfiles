@@ -43,10 +43,7 @@ brew 'sesh' # tmux session manager
 brew 'gitmux'
 
 # envs
-brew 'go'
-brew 'rust'
 brew 'gcc'
-brew 'bun'
 
 # Casks
 cask 'chrome' #its chrome

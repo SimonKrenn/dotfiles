@@ -1,7 +1,9 @@
 [tools]
+fnox = "latest"
+go = "latest"
 node = "22.15.0"
 opencode = "latest"
+rust = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node"]
-
