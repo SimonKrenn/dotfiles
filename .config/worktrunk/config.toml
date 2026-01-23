@@ -1,0 +1,9 @@
+[post-create]
+tmux = """
+S="{{ branch | sanitize }}"
+W="{{worktree_path}}"
+tmux new-session -d -s "$S" -c "$W" -n dev
+"""
+
+[pre-remove]
+tmux = "tmux kill-sesison -t '{{branch | sanitize}}' 2>/dev/null || true"
