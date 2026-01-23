@@ -18,6 +18,10 @@ alias oot='sesh connect $HOME/Library/Mobile Documents/iCloud~md~obsidian/Docume
 alias oow="cd $HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/work/"
 alias oop="cd $HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/zettelkasten/"
 
+# sesh
+alias slist='sesh connect $(sesh list --icons | fzf --no-sort --ansi)'
+alias slast='sesh last'
+
 # utilities
 alias sf='source ~/.config/fish/config.fish'
 
