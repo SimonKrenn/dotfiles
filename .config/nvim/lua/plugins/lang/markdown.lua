@@ -7,7 +7,9 @@ return {
   },
   {
     "davidmh/mdx.nvim",
-    config = true,
+    config = function()
+      -- No setup required for mdx.nvim
+    end,
     enabled = true,
     dependencies = { "nvim-treesitter/nvim-treesitter" },
   },
