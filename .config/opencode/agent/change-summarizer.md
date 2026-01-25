@@ -1,6 +1,6 @@
 ---
 description: summarizes code changes and provides a pull request description
-model: "github-copilot/gpt-4.1"
+model: "github-copilot/gpt-4.1-Codex-mini"
 tools:
     write: false
     edit: false
