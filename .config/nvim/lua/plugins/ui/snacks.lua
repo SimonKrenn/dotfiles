@@ -17,6 +17,21 @@ return {
             layout = { preset = "ivy_split", preview = "left" },
           },
         },
+        actions = {
+          sidekick_send = function(...)
+            return require("sidekick.cli.picker.snacks").send(...)
+          end,
+        },
+        win = {
+          input = {
+            keys = {
+              ["<a-s>"] = {
+                "sidekick_send",
+                mode = { "n", "i" },
+              },
+            },
+          },
+        },
       },
       explorer = { enabled = true },
       indent = { enabled = true },

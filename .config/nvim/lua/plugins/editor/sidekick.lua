@@ -7,6 +7,11 @@ return {
           backend = "tmux",
           enabled = true,
         },
+        win = {
+          keys = {
+            prompt = { "<leader>p", "prompt", mode = "n" },
+          },
+        },
         tools = {
           amp = {
             cmd = { "amp" },
@@ -26,25 +31,25 @@ return {
         desc = "Goto/apply next edit suggestion",
       },
       {
-        "<leader>ao",
+        "<leader>so",
         function()
           require("sidekick.cli").toggle({ name = "opencode", focus = true })
         end,
       },
       {
-        "<leader>ac",
+        "<leader>sc",
         function()
           require("sidekick.cli").toggle({ name = "codex", focus = true })
         end,
       },
       {
-        "<leader>ag",
+        "<leader>sg",
         function()
           require("sidekick.cli").toggle({ name = "copilot", focus = true })
         end,
       },
       {
-        "<leader>aa",
+        "<leader>sa",
         function()
           require("sidekick.cli").toggle({ name = "amp", focus = true })
         end,
