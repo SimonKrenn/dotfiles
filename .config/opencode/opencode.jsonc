@@ -48,6 +48,11 @@
       "enabled" : true,
       "type": "local",
       "command": ["npx", "chrome-devtools-mcp@latest"]
+    },
+    "exa-search" : {
+      "enabled" : true,
+      "type": "remote",
+      "url": "https://mcp.exa.ai/mcp"  
     }
 	}
 }
