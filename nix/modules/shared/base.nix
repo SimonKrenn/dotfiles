@@ -1,12 +1,18 @@
 { pkgs, ... }:
 {
+  imports = [
+    ./fish.nix
+    ./fzf.nix
+  ];
+
   xdg.enable = true;
 
   home.packages = with pkgs; [
+    atuin
     bat
+    direnv
     eza
     fd
-    fzf
     git
     ripgrep
     starship
@@ -14,9 +20,10 @@
   ];
 
   programs.bat.enable = true;
+  programs.atuin.enable = true;
+  programs.direnv.enable = true;
   programs.eza.enable = true;
   programs.fd.enable = true;
-  programs.fzf.enable = true;
   programs.git.enable = true;
   programs.ripgrep.enable = true;
   programs.starship.enable = true;
