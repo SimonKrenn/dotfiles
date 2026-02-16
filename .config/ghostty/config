@@ -6,4 +6,6 @@ macos-icon-frame=plastic
 macos-icon-screen-color=E6B455
 macos-option-as-alt = left
 keybind = alt+left=unbind
+background-opacity=0.9
+background-blur=80
 
