@@ -2,6 +2,7 @@
 	"$schema": "https://opencode.ai/config.json",
 	"share": "disabled",
   "theme": "one-hunter",
+  "plugin": ["@teamviewer/opencode-teamviewer-plugin"],
 	"provider": {
 		"lmstudio": {
 			"npm": "@ai-sdk/openai-compatible",
