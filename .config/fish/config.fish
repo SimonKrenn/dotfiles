@@ -45,3 +45,6 @@ set -gx PATH $PATH /Users/int004977/.lmstudio/bin
 # amp
 fish_add_path "~/.local/bin"
 fish_add_path $HOME/.local/bin
+
+# Added by git-ai installer on Tue Mar  3 13:31:21 CET 2026
+fish_add_path -g "/Users/int004977/.git-ai/bin"
