@@ -62,4 +62,6 @@ cask 'ghostty' # terminal emulator
 cask 'yaak' # REST client
 
 # fonts
-brew 'font-monaspice-nerd-font'
+cask 'font-monaspice-nerd-font'
+cask 'font-ia-writer-quattro'
+cask 'font-geist-mono'
