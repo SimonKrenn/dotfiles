@@ -33,11 +33,13 @@ brew 'atuin' # magic shell history
 brew 'chafa' # image rendering
 brew 'resvg' # svg rendering
 brew 'git-delta' # diff pager
+brew 'git-filter-repo' # diff pager
 brew 'wt' # worktree cli 
 brew 'opencode' # ai-agent
 brew 'codex' # ai-agent
 brew 'lazydocker' # docker TUI
 brew 'sesh' # tmux session manager
+brew 'mole' # clean your mac
  
 # tmux plugins
 brew 'gitmux'
