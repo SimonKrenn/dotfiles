@@ -1,0 +1,42 @@
+.config/opencode/package.json
+  111cb3193601be05 1-5
+.gitignore
+  af22737d025b3513 38-41
+.config/opencode/tools/astgrep.ts
+  111cb3193601be05 1,4-6,9-11,13-30,33,42,49,56,58,61,66,70-72,82,88-90,94-98,106-114,146-147,157,166,169-170,179,181,217-219,230,239,242-244,253,265,268-283,291,303,307,319,321,344-345,352-357,365,368-369,378,380,393-394,408,417,420,426,428
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.10",
+  "base_commit_sha": "b5bdaf7ddb3a5a1164f8599fe03a4b90ce18e306",
+  "prompts": {
+    "111cb3193601be05": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019cd839-a3f2-7691-9d17-cfb09e51e174",
+        "model": "gpt-5.3-codex"
+      },
+      "human_author": "Simon Krenn <skrenn99@gmail.com>",
+      "messages": [],
+      "total_additions": 186,
+      "total_deletions": 106,
+      "accepted_lines": 117,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/8468063e310a0af264af0bbfdfc0a0920c3f0a3c5a69da3117e4a3c6460e08e5"
+    },
+    "af22737d025b3513": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_327bea5fbffeNRABc7fI1zZJEq",
+        "model": "github-copilot/claude-haiku-4.5"
+      },
+      "human_author": "Simon Krenn <skrenn99@gmail.com>",
+      "messages": [],
+      "total_additions": 4,
+      "total_deletions": 0,
+      "accepted_lines": 4,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/658e460ed4b603a006b1137637944474a694ae69699ad3e90d6f71ef358a004d"
+    }
+  }
+}
