@@ -14,6 +14,9 @@ fisher install PatrickF1/fzf.fish
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 
-# fff mcp
 curl -L https://dmtrkovalenko.dev/install-fff-mcp.sh | bash
 
+bun install -g tokscale
+
+#git-ai extension
+curl -sSL https://usegitai.com/install.sh | bash

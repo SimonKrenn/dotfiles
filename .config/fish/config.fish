@@ -49,3 +49,9 @@ fish_add_path $HOME/.local/bin
 # Added by git-ai installer on Tue Mar  3 13:31:21 CET 2026
 fish_add_path -g "/Users/int004977/.git-ai/bin"
 
+# global bun executables 
+fish_add_path "/Users/simonkrenn/.bun/bin"
+
+
+# Added by git-ai installer on Fri Mar 13 17:11:34 CET 2026
+fish_add_path -g "/Users/simonkrenn/.git-ai/bin"
