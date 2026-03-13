@@ -29,8 +29,13 @@ const STRICTNESS_VALUES = [
 ] as const;
 const DEBUG_FORMAT_VALUES = ["pattern", "ast", "cst", "sexp"] as const;
 
-function decode(bytes: Uint8Array): string {
+function decode(bytes?: Uint8Array): string {
+  if (!bytes) return "";
   return new TextDecoder().decode(bytes);
+}
+
+function formatToolResult(payload: unknown): string {
+  return JSON.stringify(payload, null, 2);
 }
 
 function runAstGrep(cmdArgs: string[], cwd: string) {
@@ -50,7 +55,7 @@ function runAstGrep(cmdArgs: string[], cwd: string) {
 }
 
 function parseJsonStream(stdout: string): AstGrepMatch[] {
-  const lines = stdout
+  const lines = String(stdout)
     .split("\n")
     .map((line) => line.trim())
     .filter(Boolean);
@@ -157,26 +162,26 @@ export const find = tool({
     );
 
     if (!result.success) {
-      return {
+      return formatToolResult({
         ok: false,
         error:
           result.stderr ||
           result.stdout ||
           `ast-grep failed with exit code ${result.exitCode}`,
-      };
+      });
     }
 
     const all = parseJsonStream(result.stdout);
     const matches = all.slice(0, maxResults).map(compactMatch);
 
-    return {
+    return formatToolResult({
       ok: true,
       totalMatches: all.length,
       returnedMatches: matches.length,
       truncated: all.length > maxResults,
       files: uniqueFiles(all),
       matches,
-    };
+    });
   },
 });
 
@@ -230,13 +235,13 @@ export const rewrite = tool({
     );
 
     if (!before.success) {
-      return {
+      return formatToolResult({
         ok: false,
         error:
           before.stderr ||
           before.stdout ||
           `ast-grep failed with exit code ${before.exitCode}`,
-      };
+      });
     }
 
     const beforeMatches = parseJsonStream(before.stdout);
@@ -244,17 +249,17 @@ export const rewrite = tool({
     const files = uniqueFiles(beforeMatches);
 
     if (beforeMatches.length === 0) {
-      return {
+      return formatToolResult({
         ok: true,
         dryRun: !apply,
         matchedBefore: 0,
         changedFiles: [],
         preview: [],
-      };
+      });
     }
 
     if (!apply) {
-      return {
+      return formatToolResult({
         ok: true,
         dryRun: true,
         matchedBefore: beforeMatches.length,
@@ -262,7 +267,7 @@ export const rewrite = tool({
         replacement: args.replacement,
         preview,
         truncated: beforeMatches.length > maxResults,
-      };
+      });
     }
 
     const rewriteCmd = [
@@ -282,13 +287,13 @@ export const rewrite = tool({
 
     const rewriteResult = runAstGrep(rewriteCmd, cwd);
     if (!rewriteResult.success) {
-      return {
+      return formatToolResult({
         ok: false,
         error:
           rewriteResult.stderr ||
           rewriteResult.stdout ||
           `ast-grep rewrite failed with exit code ${rewriteResult.exitCode}`,
-      };
+      });
     }
 
     const after = runAstGrep(
@@ -306,7 +311,7 @@ export const rewrite = tool({
       ? parseJsonStream(after.stdout).length
       : null;
 
-    return {
+    return formatToolResult({
       ok: true,
       dryRun: false,
       matchedBefore: beforeMatches.length,
@@ -316,7 +321,7 @@ export const rewrite = tool({
         remainingMatches === null
           ? "Rewrite applied; post-check failed."
           : "Rewrite applied successfully.",
-    };
+    });
   },
 });
 
@@ -356,26 +361,26 @@ export const rule_find = tool({
 
     const result = runAstGrep(cmd, cwd);
     if (!result.success) {
-      return {
+      return formatToolResult({
         ok: false,
         error:
           result.stderr ||
           result.stdout ||
           `ast-grep scan failed with exit code ${result.exitCode}`,
-      };
+      });
     }
 
     const all = parseJsonStream(result.stdout);
     const matches = all.slice(0, maxResults).map(compactMatch);
 
-    return {
+    return formatToolResult({
       ok: true,
       totalMatches: all.length,
       returnedMatches: matches.length,
       truncated: all.length > maxResults,
       files: uniqueFiles(all),
       matches,
-    };
+    });
   },
 });
 
@@ -408,21 +413,21 @@ export const debug_query = tool({
     );
 
     if (!result.success) {
-      return {
+      return formatToolResult({
         ok: false,
         error:
           result.stderr ||
           result.stdout ||
           `ast-grep debug failed with exit code ${result.exitCode}`,
-      };
+      });
     }
 
     const text = result.stdout || result.stderr;
-    return {
+    return formatToolResult({
       ok: true,
       format,
       output:
         text.length > 12000 ? `${text.slice(0, 12000)}\n...truncated...` : text,
-    };
+    });
   },
 });
