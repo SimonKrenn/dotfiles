@@ -13,6 +13,7 @@ mkdir $HOME/.config/hammerspoon
 mkdir $HOME/.config/mise
 mkdir $HOME/.config/sesh
 mkdir $HOME/.config/worktrunk
+mkdir $HOME/.agents
 
 echo 'stowing files'
 stow -v -d $PWD/.config -t $HOME tmux
@@ -31,3 +32,4 @@ stow -v -d $PWD/.config -t $HOME/.config/hammerspoon hammerspoon --adopt
 stow -v -d $PWD/.config -t $HOME/.config/sesh sesh 
 stow -v -d $PWD/.config -t $HOME/.config/opencode opencode --adopt
 stow -v -d $PWD/.config -t $HOME/.config/worktrunk worktrunk
+stow -v -d $PWD/.config -t $HOME/.agents .agents --adopt
