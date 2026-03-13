@@ -55,20 +55,6 @@ return {
         desc = "recent buffers",
       },
       {
-        "<leader>ff",
-        function()
-          Snacks.picker.files()
-        end,
-        desc = "[f]ind [f]iles",
-      },
-      {
-        "<leader>fg",
-        function()
-          Snacks.picker.grep()
-        end,
-        desc = "[f]ind [g]rep",
-      },
-      {
         "<leader>fr",
         function()
           Snacks.picker.recent()
