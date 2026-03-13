@@ -1,0 +1,28 @@
+.config/tmux/tmux.dark.sh
+  8670f3b707965d90 3-8
+.config/tmux/.tmux.conf
+  8670f3b707965d90 53-58
+.config/tmux/tmux.light.sh
+  8670f3b707965d90 3-7,9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.12",
+  "base_commit_sha": "28b889923ccb09c4d80f26121b4bb6a6ca975c1f",
+  "prompts": {
+    "8670f3b707965d90": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_31786df07ffeSFxCwjJGfLrFY2",
+        "model": "openai/gpt-5.3-codex"
+      },
+      "human_author": "Simon Krenn <skrenn99@gmail.com>",
+      "messages": [],
+      "total_additions": 49,
+      "total_deletions": 19,
+      "accepted_lines": 19,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/527865bba00527bdf2e50c41f51f46f1edaac38ff34eb4c2ce712389cc61c2a8"
+    }
+  }
+}
