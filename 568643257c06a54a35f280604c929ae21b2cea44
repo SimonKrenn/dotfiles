@@ -1,0 +1,36 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.12",
+  "base_commit_sha": "568643257c06a54a35f280604c929ae21b2cea44",
+  "prompts": {
+    "266d438e7e2a175d": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_317d9ae5effeqy8Pbim5cP2wPt",
+        "model": "openai/gpt-5.3-codex"
+      },
+      "human_author": "Simon Krenn <skrenn99@gmail.com>",
+      "messages": [],
+      "total_additions": 23,
+      "total_deletions": 4,
+      "accepted_lines": 11,
+      "overriden_lines": 3,
+      "messages_url": "https://usegitai.com/cas/7de6a1a221079a9366045b83c07d4d9286e341485231044edb1a795b0088cafa"
+    },
+    "f0667af7c5d4e387": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_317ca8e56ffe2tbktziFkbyOX1",
+        "model": "openai/gpt-5.3-codex"
+      },
+      "human_author": "Simon Krenn <skrenn99@gmail.com>",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 1,
+      "accepted_lines": 1,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/ff0bfbbb84be8c55f152d3adb1e64268224c813a3e125c130c781efb14a304e2"
+    }
+  }
+}
