@@ -1,0 +1,22 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.10",
+  "base_commit_sha": "3d2597c2a68396db7ce739fc5df343fdc3901212",
+  "prompts": {
+    "111cb3193601be05": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019cd839-a3f2-7691-9d17-cfb09e51e174",
+        "model": "gpt-5.3-codex"
+      },
+      "human_author": "Simon Krenn <skrenn99@gmail.com>",
+      "messages": [],
+      "total_additions": 186,
+      "total_deletions": 106,
+      "accepted_lines": 117,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/8468063e310a0af264af0bbfdfc0a0920c3f0a3c5a69da3117e4a3c6460e08e5"
+    }
+  }
+}
