@@ -12,3 +12,8 @@ fisher install PatrickF1/fzf.fish
 
 # install tmux plugin manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+
+# fff mcp
+curl -L https://dmtrkovalenko.dev/install-fff-mcp.sh | bash
+

@@ -53,6 +53,13 @@
       "enabled" : true,
       "type": "remote",
       "url": "https://mcp.exa.ai/mcp"  
-    }
+    },
+   "fff": {
+      "type": "local",
+      "command": [
+        "fff-mcp"
+      ],
+      "enabled": true
+    },
 	}
 }
