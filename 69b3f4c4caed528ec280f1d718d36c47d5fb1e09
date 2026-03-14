@@ -1,0 +1,24 @@
+.config/opencode/agent/ask.md
+  5a7f17e26bd1e92c 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.12",
+  "base_commit_sha": "69b3f4c4caed528ec280f1d718d36c47d5fb1e09",
+  "prompts": {
+    "5a7f17e26bd1e92c": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_313191028ffeElNAGHaJ4kjTh7",
+        "model": "github-copilot/claude-haiku-4.5"
+      },
+      "human_author": "Simon Krenn <skrenn99@gmail.com>",
+      "messages": [],
+      "total_additions": 1,
+      "total_deletions": 3,
+      "accepted_lines": 1,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/bbe1eb0de6ce27e5c67056b0c7fa19875e09e9a961a8a91863a79139230aee34"
+    }
+  }
+}
