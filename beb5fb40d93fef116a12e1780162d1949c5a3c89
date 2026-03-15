@@ -1,0 +1,24 @@
+.config/.agents/skills/astgrep-tool/SKILL.md
+  dade48669652bc98 1-138
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.1.12",
+  "base_commit_sha": "beb5fb40d93fef116a12e1780162d1949c5a3c89",
+  "prompts": {
+    "dade48669652bc98": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_30efc15e1ffezXIzlXH7bhDZKG",
+        "model": "openai/gpt-5.3-codex"
+      },
+      "human_author": "Simon Krenn <skrenn99@gmail.com>",
+      "messages": [],
+      "total_additions": 138,
+      "total_deletions": 0,
+      "accepted_lines": 138,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/5d52d0afa8b4cfadb8c9e291019cfa3892286d65d598f6f8d2543e19da66cc6f"
+    }
+  }
+}
