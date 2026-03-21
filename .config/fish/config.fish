@@ -55,3 +55,11 @@ fish_add_path "/Users/simonkrenn/.bun/bin"
 
 # Added by git-ai installer on Fri Mar 13 17:11:34 CET 2026
 fish_add_path -g "/Users/simonkrenn/.git-ai/bin"
+
+fish_add_path -g "/Users/simonkrenn/.browser-use/bin"
+fish_add_path -g "/Users/simonkrenn/.browser-use-env/bin"
+
+
+
+
+
