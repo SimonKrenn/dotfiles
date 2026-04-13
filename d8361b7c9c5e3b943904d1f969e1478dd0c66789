@@ -1,0 +1,24 @@
+.config/nvim/lua/plugins/editor/treesitter.lua
+  3a5a27bc7d046290 4-5,7-8,39-69,71,74,76-127,133-139
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.2.8",
+  "base_commit_sha": "d8361b7c9c5e3b943904d1f969e1478dd0c66789",
+  "prompts": {
+    "3a5a27bc7d046290": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_2786248a7ffe8MEJfdD3x96fX7",
+        "model": "openai/gpt-5.3-codex"
+      },
+      "human_author": "Simon Krenn",
+      "messages": [],
+      "total_additions": 96,
+      "total_deletions": 73,
+      "accepted_lines": 96,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/9af2ef60adc86866bc4b8d978161e7cee297a7e897f2ea6fd69b34d27ae0b339"
+    }
+  }
+}
