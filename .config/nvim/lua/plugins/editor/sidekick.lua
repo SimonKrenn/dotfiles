@@ -33,25 +33,25 @@ return {
       {
         "<leader>so",
         function()
-          require("sidekick.cli").toggle({ name = "opencode", focus = true })
+          require("sidekick.cli").toggle({ name = "opencode", focus = true, desc = "open opencode" })
         end,
       },
       {
         "<leader>sc",
         function()
-          require("sidekick.cli").toggle({ name = "codex", focus = true })
+          require("sidekick.cli").toggle({ name = "codex", focus = true, desc = "open codex cli" })
         end,
       },
       {
         "<leader>sg",
         function()
-          require("sidekick.cli").toggle({ name = "copilot", focus = true })
+          require("sidekick.cli").toggle({ name = "copilot", focus = true, desc = "open copilot" })
         end,
       },
       {
         "<leader>sa",
         function()
-          require("sidekick.cli").toggle({ name = "amp", focus = true })
+          require("sidekick.cli").toggle({ name = "amp", focus = true, desc = "open amp code" })
         end,
       },
     },
