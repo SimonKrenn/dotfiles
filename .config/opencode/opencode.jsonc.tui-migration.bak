@@ -1,7 +1,24 @@
 {
 	"$schema": "https://opencode.ai/config.json",
-  "share": "disabled",
-  "plugin": ["opencode-pty"]
+	"share": "disabled",
+  "theme": "one-hunter",
+	"provider": {
+		"lmstudio": {
+			"npm": "@ai-sdk/openai-compatible",
+			"name": "LM Studio (local)",
+			"options": {
+				"baseURL": "http://127.0.0.1:1234/v1"
+			},
+			"models": {
+				"qwen/qwen3-coder-30b": {
+					"name": "qwen/qwen3-coder-30b"
+				},
+				"openai/gpt-oss-20b": {
+					"name": "openai/gpt-oss-20b"
+				}
+			}
+		},
+	},
 	"mcp": {
 		"playwright": { 
       "enabled": true,

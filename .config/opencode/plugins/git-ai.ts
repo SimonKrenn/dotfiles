@@ -7,8 +7,8 @@
  *
  * Installation:
  *   - Automatically installed by `git-ai install-hooks`
- *   - Or manually copy to ~/.config/opencode/plugin/git-ai.ts (global)
- *   - Or to .opencode/plugin/git-ai.ts (project-local)
+ *   - Or manually copy to ~/.config/opencode/plugins/git-ai.ts (global)
+ *   - Or to .opencode/plugins/git-ai.ts (project-local)
  *
  * Requirements:
  *   - git-ai must be installed (path is injected at install time)
@@ -17,326 +17,277 @@
  * @see https://opencode.ai/docs/plugins/
  */
 
-import type { Plugin } from "@opencode-ai/plugin";
-import { existsSync, statSync } from "fs";
-import { dirname, isAbsolute, resolve } from "path";
+import type { Plugin } from "@opencode-ai/plugin"
+import { dirname, isAbsolute, join } from "path"
 
-// Absolute path to the git-ai binary, replaced at install time by `git-ai install-hooks`
-const GIT_AI_BIN = "__GIT_AI_BINARY_PATH__";
+// Absolute path to git-ai binary, replaced at install time by `git-ai install-hooks`
+const GIT_AI_BIN = "/Users/simonkrenn/.git-ai/bin/git-ai"
 
-const resolveGitAiBin = () => {
-  if (typeof process !== "undefined" && process.env.GIT_AI_BIN) {
-    return process.env.GIT_AI_BIN;
-  }
-
-  if (GIT_AI_BIN && GIT_AI_BIN !== "__GIT_AI_BINARY_PATH__") {
-    return GIT_AI_BIN;
-  }
-
-  return "git-ai";
-};
-
-const isDebugEnabled =
-  typeof process !== "undefined" && process.env.GIT_AI_DEBUG === "1";
-
-const logDebug = (...args: unknown[]) => {
-  if (isDebugEnabled) {
-    console.error("[git-ai:debug]", ...args);
-  }
-};
-
-// Tools that modify files and should be monitored
-const FILE_EDIT_TOOLS = [
+// Tools that modify files and should be tracked
+const FILE_EDIT_TOOLS = new Set([
   "edit",
   "write",
   "patch",
-  "apply_patch",
   "multiedit",
-  "astgrep_rewrite",
-];
+  "apply_patch",
+  "applypatch",
+])
 
-type PendingEdit = {
-  filePaths: string[];
-  repoDirs: string[];
-  sessionID: string;
-  tool: string;
-};
+const APPLY_PATCH_FILE_PREFIXES = [
+  "*** Update File: ",
+  "*** Add File: ",
+  "*** Delete File: ",
+  "*** Move to: ",
+]
 
-const dedupe = (items: string[]) => [...new Set(items.filter(Boolean))];
+const isEditTool = (toolName: string): boolean => FILE_EDIT_TOOLS.has(toolName.toLowerCase())
 
-const parseApplyPatchPaths = (patchText: string): string[] => {
-  const paths: string[] = [];
+const isBashTool = (toolName: string): boolean => {
+  const name = toolName.toLowerCase()
+  return name === "bash" || name === "shell"
+}
 
-  for (const line of patchText.split("\n")) {
-    if (line.startsWith("*** Add File: ")) {
-      paths.push(line.slice("*** Add File: ".length).trim());
+const normalizePath = (rawPath: string, cwd?: string): string | null => {
+  const trimmed = rawPath.trim().replace(/^['"]|['"]$/g, "")
+  if (!trimmed) {
+    return null
+  }
+
+  const withoutScheme = trimmed
+    .replace(/^file:\/\/localhost/, "")
+    .replace(/^file:\/\//, "")
+
+  const isWindowsAbs = /^[a-zA-Z]:[\\/]/.test(withoutScheme)
+  if (isAbsolute(withoutScheme) || isWindowsAbs) {
+    return withoutScheme
+  }
+
+  // Use provided cwd, or fall back to process.cwd() for relative paths
+  const resolvedCwd = cwd || process.cwd()
+  return join(resolvedCwd, withoutScheme)
+}
+
+const collectApplyPatchPaths = (raw: string, out: Set<string>): void => {
+  for (const line of raw.split("\n")) {
+    const trimmed = line.trim()
+    for (const prefix of APPLY_PATCH_FILE_PREFIXES) {
+      if (trimmed.startsWith(prefix)) {
+        const path = trimmed.slice(prefix.length).trim().replace(/^['"]|['"]$/g, "")
+        if (path) {
+          out.add(path)
+        }
+      }
     }
-    if (line.startsWith("*** Update File: ")) {
-      paths.push(line.slice("*** Update File: ".length).trim());
+  }
+}
+
+const collectToolPaths = (value: unknown, out: Set<string>): void => {
+  if (typeof value === "string") {
+    if (value.startsWith("file://")) {
+      out.add(value)
     }
-    if (line.startsWith("*** Delete File: ")) {
-      paths.push(line.slice("*** Delete File: ".length).trim());
+    collectApplyPatchPaths(value, out)
+    return
+  }
+
+  if (Array.isArray(value)) {
+    for (const item of value) {
+      collectToolPaths(item, out)
     }
-    if (line.startsWith("*** Move to: ")) {
-      paths.push(line.slice("*** Move to: ".length).trim());
+    return
+  }
+
+  if (!value || typeof value !== "object") {
+    return
+  }
+
+  for (const [key, val] of Object.entries(value)) {
+    const keyLower = key.toLowerCase()
+    const isSinglePathKey = keyLower === "file_path" || keyLower === "filepath" || keyLower === "path" || keyLower === "fspath"
+    const isMultiPathKey = keyLower === "files" || keyLower === "filepaths" || keyLower === "file_paths"
+
+    if (isSinglePathKey && typeof val === "string") {
+      out.add(val)
+    } else if (isMultiPathKey) {
+      if (typeof val === "string") {
+        out.add(val)
+      } else if (Array.isArray(val)) {
+        for (const item of val) {
+          if (typeof item === "string") {
+            out.add(item)
+          }
+        }
+      }
+    }
+
+    collectToolPaths(val, out)
+  }
+}
+
+const extractFilePaths = (args: unknown, cwd?: string): string[] => {
+  const rawPaths = new Set<string>()
+  collectToolPaths(args, rawPaths)
+
+  const normalizedPaths = new Set<string>()
+  for (const rawPath of rawPaths) {
+    const normalized = normalizePath(rawPath, cwd)
+    if (normalized) {
+      normalizedPaths.add(normalized)
     }
   }
 
-  return dedupe(paths);
-};
+  return [...normalizedPaths]
+}
 
 export const GitAiPlugin: Plugin = async (ctx) => {
-  const { $, directory, worktree } = ctx;
-  const gitAiBin = resolveGitAiBin();
+  const { $ } = ctx
 
   // Check if git-ai is installed
-  let gitAiInstalled = false;
+  let gitAiInstalled = false
   try {
-    await $`${gitAiBin} --version`.quiet();
-    gitAiInstalled = true;
+    await $`${GIT_AI_BIN} --version`.quiet()
+    gitAiInstalled = true
   } catch {
     // git-ai not installed, plugin will be a no-op
   }
 
   if (!gitAiInstalled) {
-    return {};
+    return {}
   }
 
-  // Track pending edits by callID so we can reference them in the after hook
-  const pendingEdits = new Map<string, PendingEdit>();
-
-  const toAbsolutePaths = (filePaths: string[]): string[] =>
-    dedupe(
-      filePaths.map((filePath) =>
-        isAbsolute(filePath) ? filePath : resolve(directory, filePath),
-      ),
-    );
-
-  const extractToolPaths = (
-    tool: string,
-    args: Record<string, unknown>,
-  ): string[] => {
-    if (tool === "astgrep_rewrite" && args.apply !== true) {
-      return [];
-    }
-
-    const directFilePath =
-      typeof args.filePath === "string" ? args.filePath : null;
-    if (directFilePath) {
-      return [directFilePath];
-    }
-
-    if (tool === "astgrep_rewrite" && typeof args.path === "string") {
-      return [args.path];
-    }
-
-    if (typeof args.patchText === "string") {
-      return parseApplyPatchPaths(args.patchText);
-    }
-
-    if (typeof args.patch === "string") {
-      return parseApplyPatchPaths(args.patch);
-    }
-
-    return [];
-  };
-
-  const existingDirForPath = (filePath: string): string => {
-    let current = filePath;
-
-    if (existsSync(current)) {
-      try {
-        if (!statSync(current).isDirectory()) {
-          current = dirname(current);
-        }
-      } catch {
-        current = dirname(current);
-      }
-    } else {
-      current = dirname(current);
-    }
-
-    let previous = "";
-
-    while (current !== previous) {
-      if (existsSync(current)) {
-        return current;
-      }
-      previous = current;
-      current = dirname(current);
-    }
-
-    return directory;
-  };
+  // Track pending calls by callID so we can reference them in the after hook
+  const pendingCalls = new Map<string, { repoDir: string; sessionID: string; toolInput: unknown }>()
 
   // Helper to find git repo root from a file path
-  const findGitRepo = async (filePath: string): Promise<string | null> => {
-    try {
-      const dir = existingDirForPath(filePath);
-      const result = await $`git -C ${dir} rev-parse --show-toplevel`.quiet();
-      const repoRoot = result.stdout.toString().trim();
-      return repoRoot || null;
-    } catch {
-      // Not a git repo or git not available
-      return null;
-    }
-  };
+  const findGitRepo = async (pathHint: string): Promise<string | null> => {
+    const candidateDirs = [pathHint, dirname(pathHint)]
 
-  const buildToolInput = (filePaths: string[], tool: string) => {
-    if (filePaths.length === 1) {
-      return {
-        filePath: filePaths[0],
-        tool_name: tool,
-      };
+    for (const dir of candidateDirs) {
+      try {
+        const result = await $`git -C ${dir} rev-parse --show-toplevel`.quiet()
+        const repoRoot = result.stdout.toString().trim()
+        if (repoRoot) {
+          return repoRoot
+        }
+      } catch {
+        // try next candidate
+      }
     }
 
-    if (filePaths.length > 1) {
-      return {
-        filePaths,
-        tool_name: tool,
-      };
+    return null
+  }
+
+  const resolveRepoDir = async (filePaths: string[], cwd?: string): Promise<string | null> => {
+    if (cwd) {
+      const fromCwd = await findGitRepo(cwd)
+      if (fromCwd) {
+        return fromCwd
+      }
     }
 
-    return {
-      tool_name: tool,
-    };
-  };
+    const fromProcessCwd = await findGitRepo(process.cwd())
+    if (fromProcessCwd) {
+      return fromProcessCwd
+    }
 
-  const createCheckpoint = async (
-    hookEventName: "PreToolUse" | "PostToolUse",
-    sessionID: string,
-    repoDir: string,
-    filePaths: string[],
-    tool: string,
-  ) => {
-    const hookInput = JSON.stringify({
-      hook_event_name: hookEventName,
-      session_id: sessionID,
-      cwd: repoDir,
-      tool_input: buildToolInput(filePaths, tool),
-    });
+    for (const filePath of filePaths) {
+      const repo = await findGitRepo(filePath)
+      if (repo) {
+        return repo
+      }
+    }
 
-    logDebug("checkpoint", hookEventName, tool, repoDir, filePaths.length);
-    await $`echo ${hookInput} | ${gitAiBin} checkpoint opencode --hook-input stdin`.quiet();
-  };
+    return null
+  }
+
+  const extractToolCwd = (inputCwd: unknown, outputArgs: Record<string, unknown> | undefined): string | undefined => {
+    if (typeof outputArgs?.workdir === "string") return outputArgs.workdir
+    if (typeof outputArgs?.cwd === "string") return outputArgs.cwd
+    if (typeof inputCwd === "string") return inputCwd
+    return undefined
+  }
 
   return {
     "tool.execute.before": async (input, output) => {
-      // Only intercept file editing tools
-      if (!FILE_EDIT_TOOLS.includes(input.tool)) {
-        return;
-      }
+      const toolInput = output.args
+      const toolCwd = extractToolCwd((input as { cwd?: unknown }).cwd ?? (input as { workdir?: unknown }).workdir, output.args)
 
-      const args = (output.args ?? {}) as Record<string, unknown>;
-      const filePaths = toAbsolutePaths(extractToolPaths(input.tool, args));
-
-      const repoCandidates = await Promise.all(
-        filePaths.map((filePath) => findGitRepo(filePath)),
-      );
-      let repoDirs = dedupe(
-        repoCandidates.filter((repoDir): repoDir is string => Boolean(repoDir)),
-      );
-
-      // Fall back to the current worktree repo for tools with no explicit file paths
-      if (repoDirs.length === 0) {
-        const fallbackRepo = await findGitRepo(worktree);
-        if (fallbackRepo) {
-          repoDirs = [fallbackRepo];
+      if (isEditTool(input.tool)) {
+        // File-edit tools: extract file paths for rich repo resolution
+        const filePaths = extractFilePaths(toolInput, toolCwd)
+        const repoDir = await resolveRepoDir(filePaths, toolCwd)
+        if (!repoDir) {
+          return
         }
-      }
 
-      if (repoDirs.length === 0) {
-        return;
-      }
+        pendingCalls.set(input.callID, { repoDir, sessionID: input.sessionID, toolInput })
 
-      pendingEdits.set(input.callID, {
-        filePaths,
-        repoDirs,
-        sessionID: input.sessionID,
-        tool: input.tool,
-      });
-
-      for (const repoDir of repoDirs) {
         try {
-          // Create human checkpoint before AI edit
-          // This marks any changes since the last checkpoint as human-authored
-          await createCheckpoint(
-            "PreToolUse",
-            input.sessionID,
-            repoDir,
-            filePaths,
-            input.tool,
-          );
+          const hookInput = JSON.stringify({
+            hook_event_name: "PreToolUse",
+            session_id: input.sessionID,
+            tool_use_id: input.callID,
+            cwd: repoDir,
+            tool_name: input.tool,
+            tool_input: toolInput,
+          })
+          await $`echo ${hookInput} | ${GIT_AI_BIN} checkpoint opencode --hook-input stdin`.quiet()
         } catch (error) {
-          // Log to stderr for debugging, but don't throw - git-ai errors shouldn't break the agent
-          console.error(
-            "[git-ai] Failed to create human checkpoint:",
-            String(error),
-          );
+          console.error("[git-ai] Failed to create human checkpoint:", String(error))
+        }
+
+      } else if (isBashTool(input.tool)) {
+        // Bash tool: no file paths in input; resolve repo from workdir or cwd
+        const repoDir = await resolveRepoDir([], toolCwd)
+        if (!repoDir) {
+          return
+        }
+
+        pendingCalls.set(input.callID, { repoDir, sessionID: input.sessionID, toolInput })
+
+        try {
+          const hookInput = JSON.stringify({
+            hook_event_name: "PreToolUse",
+            session_id: input.sessionID,
+            tool_use_id: input.callID,
+            cwd: repoDir,
+            tool_name: input.tool,
+            tool_input: toolInput,
+          })
+          await $`echo ${hookInput} | ${GIT_AI_BIN} checkpoint opencode --hook-input stdin`.quiet()
+        } catch (error) {
+          console.error("[git-ai] Failed to create human checkpoint:", String(error))
         }
       }
     },
 
     "tool.execute.after": async (input, _output) => {
-      // Only intercept file editing tools
-      if (!FILE_EDIT_TOOLS.includes(input.tool)) {
-        return;
+      if (!isEditTool(input.tool) && !isBashTool(input.tool)) {
+        return
       }
 
-      let editInfo = pendingEdits.get(input.callID);
-      pendingEdits.delete(input.callID);
+      const callInfo = pendingCalls.get(input.callID)
+      pendingCalls.delete(input.callID)
 
-      if (!editInfo) {
-        const args = (input.args ?? {}) as Record<string, unknown>;
-        const filePaths = toAbsolutePaths(extractToolPaths(input.tool, args));
-        const repoCandidates = await Promise.all(
-          filePaths.map((filePath) => findGitRepo(filePath)),
-        );
-        let repoDirs = dedupe(
-          repoCandidates.filter((repoDir): repoDir is string => Boolean(repoDir)),
-        );
-
-        if (repoDirs.length === 0) {
-          const fallbackRepo = await findGitRepo(worktree);
-          if (fallbackRepo) {
-            repoDirs = [fallbackRepo];
-          }
-        }
-
-        if (repoDirs.length === 0) {
-          return;
-        }
-
-        editInfo = {
-          filePaths,
-          repoDirs,
-          sessionID: input.sessionID,
-          tool: input.tool,
-        };
+      if (!callInfo) {
+        return
       }
 
-      const { filePaths, repoDirs, sessionID, tool } = editInfo;
+      const { repoDir, sessionID, toolInput } = callInfo
 
-      for (const repoDir of repoDirs) {
-        try {
-          // Create AI checkpoint after edit
-          // This marks the changes made by this tool call as AI-authored
-          // Transcript is fetched from OpenCode's local storage by the preset
-          await createCheckpoint(
-            "PostToolUse",
-            sessionID,
-            repoDir,
-            filePaths,
-            tool,
-          );
-        } catch (error) {
-          // Log to stderr for debugging, but don't throw - git-ai errors shouldn't break the agent
-          console.error(
-            "[git-ai] Failed to create AI checkpoint:",
-            String(error),
-          );
-        }
+      try {
+        const hookInput = JSON.stringify({
+          hook_event_name: "PostToolUse",
+          session_id: sessionID,
+          tool_use_id: input.callID,
+          cwd: repoDir,
+          tool_name: input.tool,
+          tool_input: toolInput,
+        })
+        await $`echo ${hookInput} | ${GIT_AI_BIN} checkpoint opencode --hook-input stdin`.quiet()
+      } catch (error) {
+        console.error("[git-ai] Failed to create AI checkpoint:", String(error))
       }
     },
-  };
-};
+  }
+}

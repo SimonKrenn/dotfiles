@@ -45,6 +45,70 @@
       "skillFolderHash": "9e127714fb8d78638ab42b5b121c8584b59f68bf",
       "installedAt": "2026-03-21T15:58:18.527Z",
       "updatedAt": "2026-03-21T15:58:18.527Z"
+    },
+    "defuddle": {
+      "source": "git@github.com:kepano/obsidian-skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:kepano/obsidian-skills.git",
+      "skillPath": "skills/defuddle/SKILL.md",
+      "skillFolderHash": "",
+      "installedAt": "2026-04-19T15:13:08.810Z",
+      "updatedAt": "2026-04-19T15:13:08.810Z"
+    },
+    "json-canvas": {
+      "source": "git@github.com:kepano/obsidian-skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:kepano/obsidian-skills.git",
+      "skillPath": "skills/json-canvas/SKILL.md",
+      "skillFolderHash": "",
+      "installedAt": "2026-04-19T15:13:08.814Z",
+      "updatedAt": "2026-04-19T15:13:08.814Z"
+    },
+    "obsidian-bases": {
+      "source": "git@github.com:kepano/obsidian-skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:kepano/obsidian-skills.git",
+      "skillPath": "skills/obsidian-bases/SKILL.md",
+      "skillFolderHash": "",
+      "installedAt": "2026-04-19T15:13:08.815Z",
+      "updatedAt": "2026-04-19T15:13:08.815Z"
+    },
+    "obsidian-cli": {
+      "source": "git@github.com:kepano/obsidian-skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:kepano/obsidian-skills.git",
+      "skillPath": "skills/obsidian-cli/SKILL.md",
+      "skillFolderHash": "",
+      "installedAt": "2026-04-19T15:13:08.816Z",
+      "updatedAt": "2026-04-19T15:13:08.816Z"
+    },
+    "obsidian-markdown": {
+      "source": "git@github.com:kepano/obsidian-skills.git",
+      "sourceType": "git",
+      "sourceUrl": "git@github.com:kepano/obsidian-skills.git",
+      "skillPath": "skills/obsidian-markdown/SKILL.md",
+      "skillFolderHash": "",
+      "installedAt": "2026-04-19T15:13:08.817Z",
+      "updatedAt": "2026-04-19T15:13:08.817Z"
+    },
+    "ui-ux-pro-max": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git",
+      "skillPath": ".claude/skills/ui-ux-pro-max/SKILL.md",
+      "skillFolderHash": "75e1acaafe8b08e59d4b86fc253ac7873aff6bba",
+      "pluginName": "ui-ux-pro-max",
+      "installedAt": "2026-04-21T13:11:50.797Z",
+      "updatedAt": "2026-04-21T13:11:50.797Z"
+    },
+    "make-interfaces-feel-better": {
+      "source": "jakubkrehel/make-interfaces-feel-better",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/jakubkrehel/make-interfaces-feel-better.git",
+      "skillPath": "skills/make-interfaces-feel-better/SKILL.md",
+      "skillFolderHash": "320672d06e899682d8923286d864efe3719d9c77",
+      "installedAt": "2026-04-21T13:36:04.644Z",
+      "updatedAt": "2026-04-21T13:36:04.644Z"
     }
   },
   "dismissed": {
