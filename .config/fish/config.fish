@@ -33,6 +33,7 @@ fzf_configure_bindings --directory=\cf --variables=\cv
 set -q XDG_CONFIG_HOME || set -Ux XDG_CONFIG_HOME $HOME/.config
 set -q XDG_HOME || set -Ux XDG_HOME $HOME
 set -q EDITOR || set -Ux EDITOR nvim
+set -q VISUAL || set -Ux VISUAL nvim
 
 # Created by `pipx` on 2025-04-21 18:22:51
 set PATH $PATH /Users/int004977/.local/bin
@@ -40,6 +41,7 @@ set PATH $PATH /Users/int004977/.local/bin
 # Added by LM Studio CLI (lms)
 set -gx PATH $PATH /Users/int004977/.lmstudio/bin
 # End of LM Studio CLI section
+
 
 
 # amp

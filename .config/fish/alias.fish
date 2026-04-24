@@ -11,6 +11,7 @@ alias g='git'
 alias find='fd'
 alias mux='tmuxinator'
 alias cat='bat'
+alias nv='nvim'
 
 
 # obsidian related
