@@ -1,0 +1,3 @@
+# Do not symlink local dependency installs into ~/.config/opencode.
+# They are machine-local artifacts and can conflict with an existing install.
+^node_modules$
