@@ -1,0 +1,24 @@
+.config/opencode/plugins/orchestrator.ts
+  f176a6f6bc59a218 277-285,293-318,320-359
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.4",
+  "base_commit_sha": "27a4e9340947cf9604d99e61dc124ca81aded541",
+  "prompts": {
+    "f176a6f6bc59a218": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_22c469d30ffe19TnsriPxiJ1Uy",
+        "model": "opencode-go/kimi-k2.6"
+      },
+      "human_author": "Simon Krenn",
+      "messages": [],
+      "total_additions": 98,
+      "total_deletions": 0,
+      "accepted_lines": 77,
+      "overriden_lines": 1,
+      "messages_url": "https://usegitai.com/cas/a931606dfa65f11af164a52e195f2a0095a02c57198936dca752c04b50b17e11"
+    }
+  }
+}
