@@ -274,12 +274,89 @@ export const OrchestratorPlugin: Plugin = async () => {
       options: {},
     },
   };
+  const pendingFileNudge = new Set<string>();
+
+  const PHASE_REMINDER = `<reminder>Recall your workflow: Understand → Path Selection → Delegation Check → Split and Parallelize → Execute. Delegate to specialists when it improves quality, speed, or reliability. If you just inspected files, prefer delegating the next step rather than doing everything yourself.</reminder>`;
+
+  const POST_FILE_NUDGE = `<reminder>You just read or wrote files. Follow your orchestrator workflow: if implementation is clear, delegate to @executor. If more exploration is needed, delegate to @explorer. If the task spans multiple files or needs sequencing, delegate to @planner. Don't monopolize work that specialists can do better.</reminder>`;
+
+  function isOrchestratorSession(agent?: string): boolean {
+    return !agent || agent === "orchestrator";
+  }
 
   return {
     config: async (config) => {
       config["default_agent"] ??= "orchestrator";
       // @ts-ignore
       config.agent = { ...agents, ...config.agent };
+    },
+
+    "experimental.chat.messages.transform": async (_input, output) => {
+      const messages = (output as any).messages as Array<{
+        info: { role: string; agent?: string; sessionID?: string };
+        parts: Array<{ type: string; text?: string }>;
+      }>;
+
+      if (!messages?.length) return;
+
+      let lastUserIdx = -1;
+      for (let i = messages.length - 1; i >= 0; i--) {
+        if (messages[i].info.role === "user") {
+          lastUserIdx = i;
+          break;
+        }
+      }
+      if (lastUserIdx === -1) return;
+
+      const msg = messages[lastUserIdx];
+      if (!isOrchestratorSession(msg.info.agent)) return;
+
+      const textPart = msg.parts.find(
+        (p) => p.type === "text" && typeof p.text === "string",
+      );
+      if (!textPart) return;
+
+      if (textPart.text?.includes("Recall your workflow:")) return;
+
+      textPart.text = `${PHASE_REMINDER}\n\n---\n\n${textPart.text}`;
+    },
+
+    "tool.execute.after": async (input) => {
+      const toolName = (input as any).tool as string;
+      const sessionID = (input as any).sessionID as string | undefined;
+      if (!sessionID) return;
+
+      if (
+        toolName === "Read" ||
+        toolName === "read" ||
+        toolName === "Write" ||
+        toolName === "write"
+      ) {
+        pendingFileNudge.add(sessionID);
+      }
+    },
+
+    "experimental.chat.system.transform": async (input, output) => {
+      const sessionID = (input as any).sessionID as string | undefined;
+      if (!sessionID) return;
+
+      if (!pendingFileNudge.delete(sessionID)) return;
+
+      const system = (output as any).system as string[];
+      if (!Array.isArray(system)) return;
+
+      system.push(POST_FILE_NUDGE);
+    },
+
+    event: async ({ event }) => {
+      if (event.type === "session.deleted") {
+        const sid =
+          (event.properties as any)?.sessionID ??
+          (event.properties as any)?.info?.id;
+        if (sid) {
+          pendingFileNudge.delete(sid);
+        }
+      }
     },
   };
 };
