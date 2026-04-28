@@ -79,3 +79,13 @@ fish_add_path -g "/Users/simonkrenn/.git-ai/bin"
 fish_add_path -g "/Users/simonkrenn/.browser-use/bin"
 fish_add_path -g "/Users/simonkrenn/.browser-use-env/bin"
 
+##colors
+set -g fish_color_command 53A1FA
+set -g fish_color_param 5BD1B9
+set -g fish_color_quote f9c35a
+set -g fish_color_error F44747
+set -g fish_color_keyword B267E6
+set -g fish_color_option 53A1FA
+set -g fish_color_valid_path --underline
+
+
