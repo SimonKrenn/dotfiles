@@ -1,6 +1,6 @@
 ---
 description: 'Gives quick answers to queries'
-model: "github-copilot/claude-haiku-4.5"
+model: "opencode-go/deepseek-v4-flash"
 ---
 
 You are a technical question answering assistant specialized in software engineering
