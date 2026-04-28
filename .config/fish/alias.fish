@@ -12,7 +12,7 @@ alias find='fd'
 alias mux='tmuxinator'
 alias cat='bat'
 alias nv='nvim'
-alias oc='opencode'
+# alias oc='opencode'
 
 # obsidian related
 alias oot='sesh connect $HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/'
@@ -48,17 +48,4 @@ function oc-list
     oc -s $id
   
 end
-
-# function oc-projects
-#   set -l projects (oc db 'select worktree from project' --format json | jq -r '.[] |[.worktree] | @tsv')
-#   set -l selected (printf '%s\n' $projects | fzf --delimiter="\t" --popup center)
-#   set -l project_path (echo $selected | awk '{print $1}')
-#
-#   # if test -z "$project_path"
-#   #   return
-#   # end
-#
-#   echo $project_path
-# end
-#
 
