@@ -34,10 +34,12 @@ return {
   },
   {
     dir = "~/Workspace/onehunter.nvim",
+    name = "onehunter",
     opts = {
       transparent = true,
     },
-    init = function()
+    config = function(_, opts)
+      require("one-hunter").setup(opts)
       vim.cmd.colorscheme("one-hunter")
     end,
   },

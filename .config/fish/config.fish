@@ -7,6 +7,24 @@ fzf --fish | source
 atuin init fish | source
 # global Aliases
 
+function __onehunter_sync_fzf_colors --on-variable fish_terminal_color_theme
+    set -l theme unknown
+    if test "$ONEHUNTER_APPEARANCE" = dark -o "$ONEHUNTER_APPEARANCE" = light
+        set theme $ONEHUNTER_APPEARANCE
+    else if set -q fish_terminal_color_theme
+        set theme $fish_terminal_color_theme
+    end
+
+    switch $theme
+        case dark
+            set -gx FZF_DEFAULT_OPTS "--color=bg+:#34393E,bg:#191d21,spinner:#5BD1B9,hl:#53A1FA --color=fg:#E0E0E0,header:#F4457D,info:#B267E6,pointer:#5BD1B9 --color=marker:#53A1FA,fg+:#E6E6E6,prompt:#B267E6,hl+:#F4457D --color=selected-bg:#34393E --color=border:#45505b,label:#E0E0E0"
+        case light
+            set -gx FZF_DEFAULT_OPTS "--color=bg+:#E6E6E6,bg:#ffffff,spinner:#0BA463,hl:#0488DB --color=fg:#313131,header:#E1239A,info:#B267E6,pointer:#0BA463 --color=marker:#0488DB,fg+:#212121,prompt:#B267E6,hl+:#E1239A --color=selected-bg:#E6E6E6 --color=border:#ADADAD,label:#313131"
+    end
+end
+
+__onehunter_sync_fzf_colors
+
 if [ -f $HOME/.config/fish/alias.fish ]
 	source $HOME/.config/fish//alias.fish
 end
@@ -60,8 +78,4 @@ fish_add_path -g "/Users/simonkrenn/.git-ai/bin"
 
 fish_add_path -g "/Users/simonkrenn/.browser-use/bin"
 fish_add_path -g "/Users/simonkrenn/.browser-use-env/bin"
-
-
-
-
 

@@ -1,25 +1,20 @@
--- vim.api.nvim_create_autocmd("OptionSet", {
---   pattern = "background",
---   callback = function()
---     -- Defer to avoid running in the middle of option processing
---     vim.schedule(function()
---       local ok_load = pcall(function()
---         -- Newer catppuccin exposes `load()` which respects `background` mapping
---         require("catppuccin").load()
---       end)
---
---       if not ok_load then
---         -- Fallback for older versions: re-apply the appropriate scheme directly
---         local scheme = (vim.o.background == "light") and "catppuccin-latte" or "catppuccin-mocha"
---         pcall(vim.cmd.colorscheme, scheme)
---       end
---     end)
---   end,
--- })
+local function reload_onehunter()
+  if vim.g.colors_name ~= "onehunter" then
+    return
+  end
 
--- vim.api.nvim_create_autocmd("OptionSet", {
---   pattern = "background",
---   callback = function()
---     vim.cmd("Catppuccin " .. (vim.v.option_new == "light" and "latte" or "mocha"))
---   end,
--- })
+  package.loaded["one-hunter"] = nil
+  package.loaded["one-hunter.colorscheme"] = nil
+
+  pcall(vim.cmd.colorscheme, "one-hunter")
+end
+
+local onehunter_background = vim.api.nvim_create_augroup("onehunter_background", { clear = true })
+
+vim.api.nvim_create_autocmd("OptionSet", {
+  group = onehunter_background,
+  pattern = "background",
+  callback = function()
+    vim.schedule(reload_onehunter)
+  end,
+})
