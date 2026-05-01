@@ -3,7 +3,8 @@
   "share": "disabled",
   "plugin": [
     "opencode-pty",
-    "oh-my-opencode-slim"
+    // "oh-my-opencode-slim",
+    // "opencode-wakatime"
   ],
   "mcp": {
     "playwright": {
@@ -54,15 +55,15 @@
       "type": "remote",
       "url": "https://mcp.grep.app",
       "oauth": false,
-      "enabled": false
+      "enabled": true
     }
   },
   "agent": {
-    "explore": {
-      "disable": true
-    },
-    "general": {
-      "disable": true
-    }
+    // "explore": {
+    //   // "disable": true
+    // },
+    // "general": {
+    //   "disable": true
+    // }
   }
 }

@@ -40,6 +40,7 @@ brew 'codex' # ai-agent
 brew 'lazydocker' # docker TUI
 brew 'sesh' # tmux session manager
 brew 'mole' # clean your mac
+brew 'wakatime-cli' # time tracking
  
 # tmux plugins
 brew 'gitmux'
