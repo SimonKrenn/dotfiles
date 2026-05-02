@@ -6,7 +6,7 @@
       nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     
       home-manager = {
-        url = "github:nix-community/home-manager";
+        url = "github:nix-community/home-manager/release-25.11";
         inputs.nixpkgs.follows = "nixpkgs";
       };
 
@@ -16,7 +16,7 @@
       };
 
       nix-homebrew = {
-        url = "github:zheaofengli/nix-homebrew";
+        url = "github:zhaofengli/nix-homebrew";
       };
 
       devenv = {
@@ -24,17 +24,19 @@
       };
   };
 
-  outputs = {self, nixpkgs, nix-darwin, home-manager, nix-homebrew, devenv}@inputs: {
+  outputs = {self, nixpkgs, nix-darwin, home-manager, nix-homebrew, devenv, ...}@inputs: {
       darwinConfigurations."simon-mac" = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
-          ./darwin/default.nix
+          ./nix/darwin.nix
+          ./nix/homebrew.nix
           home-manager.darwinModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.simonkrenn = import ./home;
+            home-manager.backupFileExtension = "stow-backup";
+            home-manager.users.simonkrenn = import ./nix/home.nix;
         }
-      ]  
+      ];
     };
   };
 }
