@@ -1,18 +1,16 @@
 {
   description = "Nix dotfiles configuration";
   inputs = {
-      nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
-      nixpkgs-darwin.url = "github:NixOs/nixpkgs/nixpkgs-25.11-darwin";
-      nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+      nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     
       home-manager = {
-        url = "github:nix-community/home-manager/release-25.11";
+        url = "github:nix-community/home-manager/master";
         inputs.nixpkgs.follows = "nixpkgs";
       };
 
       nix-darwin = {
-        url = "github:lnl7/nix-darwin/nix-darwin-25.11";
-        inputs.nixpkgs.follows = "nixpkgs-darwin";
+        url = "github:lnl7/nix-darwin/master";
+        inputs.nixpkgs.follows = "nixpkgs";
       };
 
       nix-homebrew = {

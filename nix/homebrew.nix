@@ -7,6 +7,7 @@
       "homebrew/cask-fonts"
       "arl/arl"
       "max-sixty/worktrunk"
+      "sozercan/repo"
     ];
 
     brews = [
@@ -18,25 +19,24 @@
       "opencode"
       "wakatime-cli"
       "wt"
+      "trufflehog"
     ];
 
     casks = [
       "google-chrome"
-      "visual-studio-code"
       "1password"
       "1password-cli"
       "obsidian"
-      "jetbrains-toolbox"
       "raycast"
       "raindropio"
       "hammerspoon"
-      "codex"
       "cryptomator"
       "ghostty"
       "yaak"
       "font-monaspice-nerd-font"
       "font-ia-writer-quattro"
       "font-geist-mono"
+      "kaset"
     ];
   };
 }

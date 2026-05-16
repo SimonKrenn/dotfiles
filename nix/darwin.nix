@@ -19,7 +19,7 @@
     glab
     starship
     fzf
-    # mise
+    mise
     lazygit
     ast-grep
     eza
@@ -28,7 +28,6 @@
     zoxide
     fd
     ripgrep
-    # direnv
     btop
     atuin
     chafa
@@ -38,6 +37,11 @@
     lazydocker
     sesh
     gcc
+    rtk
+    erdtree
+    hyperfine
+    libiconv
+    cargo
   ];
   
   programs.fish.enable = true;
