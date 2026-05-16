@@ -1,0 +1,21 @@
+nix/home.nix
+  s_7572c4e97ba92c::t_d2ad8e0bea09a5 5
+nix/programs/ghostty.nix
+  s_7572c4e97ba92c::t_d2ad8e0bea09a5 1-24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "e34a6b52e26860dcb5ed0bd020fb2868b5c186c6",
+  "prompts": {},
+  "sessions": {
+    "s_7572c4e97ba92c": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1ceda082cffevNEKAnq5HrDaci",
+        "model": "gpt-5.4-mini"
+      },
+      "human_author": "Simon Krenn <skrenn99@gmail.com>"
+    }
+  }
+}
