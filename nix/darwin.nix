@@ -8,6 +8,7 @@
   users.users.simonkrenn = {
       name = "simonkrenn";
       home = "/Users/simonkrenn";
+      shell = pkgs.fish;
   };
 
   environment.systemPackages = with pkgs; [

@@ -4,6 +4,7 @@
   imports = [
     ./programs/ghostty.nix
     ./programs/lazygit.nix
+    ./programs/yazi.nix
     ./programs/atuin.nix
   ];
 
@@ -110,7 +111,7 @@
     
   home.file.".config/nvim".source = ../.config/nvim;
   home.file.".config/tmux".source = ../.config/tmux;
-  home.file.".config/yazi".source = ../.config/yazi;
+  # home.file.".config/yazi".source = ../.config/yazi;
   home.file.".config/git".source = ../.config/git;
   # home.file.".config/lazygit".source = ../.config/lazygit;
   home.file.".config/hammerspoon".source = ../.config/hammerspoon;
