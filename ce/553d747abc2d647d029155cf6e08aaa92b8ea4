@@ -1,0 +1,22 @@
+flake.nix
+  7b4b8b2e3bfaada2 4,7,12-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "ce553d747abc2d647d029155cf6e08aaa92b8ea4",
+  "prompts": {
+    "7b4b8b2e3bfaada2": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_211cebc02ffeQM2Xt5to4fYIbi",
+        "model": "opencode-go/deepseek-v4-flash"
+      },
+      "human_author": "Simon Krenn <skrenn99@gmail.com>",
+      "total_additions": 13,
+      "total_deletions": 15,
+      "accepted_lines": 6,
+      "overriden_lines": 0
+    }
+  }
+}
