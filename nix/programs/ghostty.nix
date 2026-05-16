@@ -1,0 +1,26 @@
+{ pkgs, ... }:
+{
+  programs.ghostty = {
+    enable = true;
+    package = if pkgs.stdenv.isDarwin then pkgs.ghostty-bin else pkgs.ghostty;
+
+    settings = {
+      "font-family" = "MonaspiceNe Nerd Font";
+      theme = "dark:onehunter-dark,light:onehunter-light";
+      "font-size" = 14;
+      "macos-icon" = "custom-style";
+      "macos-icon-frame" = "plastic";
+      "macos-icon-screen-color" = "E6B455";
+      "macos-option-as-alt" = "left";
+      keybind = [
+        "alt+left=unbind"
+      ];
+      "background-opacity" = 0.9;
+      "background-blur" = 80;
+      "notify-on-command-finish" = "unfocused";
+      "notify-on-command-finish-action" = "no-bell,notify";
+      "desktop-notifications" = true;
+      "bell-features" = "attention,title";
+    };
+  };
+}

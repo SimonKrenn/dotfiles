@@ -31,7 +31,6 @@
       "raindropio"
       "hammerspoon"
       "cryptomator"
-      "ghostty"
       "yaak"
       "font-monaspice-nerd-font"
       "font-ia-writer-quattro"

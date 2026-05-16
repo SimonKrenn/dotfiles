@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./programs/ghostty.nix
     ./programs/lazygit.nix
     ./programs/atuin.nix
   ];
@@ -112,7 +113,6 @@
   home.file.".config/yazi".source = ../.config/yazi;
   home.file.".config/git".source = ../.config/git;
   # home.file.".config/lazygit".source = ../.config/lazygit;
-  home.file.".config/ghostty".source = ../.config/ghostty;
   home.file.".config/hammerspoon".source = ../.config/hammerspoon;
   home.file.".config/mise".source = ../.config/mise;
   home.file.".config/sesh".source = ../.config/sesh;
