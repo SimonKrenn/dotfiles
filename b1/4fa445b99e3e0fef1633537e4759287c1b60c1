@@ -1,0 +1,19 @@
+.config/tmux/.tmux.conf
+  s_e9d8415ef30774::t_fca6b8498a4aa9 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "b14fa445b99e3e0fef1633537e4759287c1b60c1",
+  "prompts": {},
+  "sessions": {
+    "s_e9d8415ef30774": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1d3656d7cffeC2KPoH4kDvXybP",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Simon Krenn <skrenn99@gmail.com>"
+    }
+  }
+}
