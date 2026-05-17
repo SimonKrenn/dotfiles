@@ -1,4 +1,4 @@
-{...}:
+{ ... }:
 
 {
   imports = [
@@ -17,9 +17,10 @@
   xdg.enable = true;
 
   programs.home-manager.enable = true;
-    
+
   home.file.".config/nvim".source = ../.config/nvim;
-  home.file.".config/tmux".source = ../.config/tmux;
+  home.file.".config/tmux/tmux.light.sh".source = ../.config/tmux/tmux.light.sh;
+  home.file.".config/tmux/tmux.dark.sh".source = ../.config/tmux/tmux.dark.sh;
   # home.file.".config/yazi".source = ../.config/yazi;
   home.file.".config/git".source = ../.config/git;
   # home.file.".config/lazygit".source = ../.config/lazygit;

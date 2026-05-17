@@ -1,4 +1,4 @@
-{ ... }: 
+{ ... }:
 
 {
   programs.fish = {
@@ -21,16 +21,16 @@
       # obsidian
       oot = "sesh connect $HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/";
       oow = "cd $HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/work/";
-      oop = "cd $HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/zettelkasten/"; 
+      oop = "cd $HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/zettelkasten/";
 
       # sesh
       slast = "sesh last";
-      sf ="source ~/.config/fish/config.fish";
-    
+      sf = "source ~/.config/fish/config.fish";
+
       # nix
       rebuild = "sudo darwin-rebuild switch --flake .#simon-mac";
     };
-    
+
     interactiveShellInit = ''
       starship init fish | source
       zoxide init fish --cmd cd | source
@@ -63,16 +63,16 @@
       set -g fish_color_keyword B267E6
       set -g fish_color_option 53A1FA
       set -g fish_color_valid_path --underline
-      '';
+    '';
     functions = {
-        ya = ''
+      ya = ''
         set tmp (mktemp -t "yazi-cwd.XXXXX")
         yazi $argv --cwd-file="$tmp"
         if set cwd (command cat -- "$tmp"); and test -n "$cwd"; and test "$cwd" != "$PWD"
           cd -- "$cwd"
         end
         rm -f -- "$tmp"
-        '';
+      '';
       oc = {
         wraps = "opencode";
         body = ''

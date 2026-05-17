@@ -1,11 +1,12 @@
 { pkgs, ... }:
 
-let flavors =  pkgs.fetchFromGitHub {
-  owner = "SimonKrenn";
-  repo = "onehunter.nvim";
-  rev= "main";
-  sha256 = "sha256-WiJYbcQOpN8xcBUSOxAHSK/td4QaHm62nbyerHvebs0=";
-};
+let
+  flavors = pkgs.fetchFromGitHub {
+    owner = "SimonKrenn";
+    repo = "onehunter.nvim";
+    rev = "main";
+    sha256 = "sha256-WiJYbcQOpN8xcBUSOxAHSK/td4QaHm62nbyerHvebs0=";
+  };
 in
 {
   programs.yazi = {
@@ -17,9 +18,9 @@ in
       opener = {
         edit = [
           {
-            run = "$VISUAL $@"; 
-            block = true; 
-            for = "unix"; 
+            run = "$VISUAL $@";
+            block = true;
+            for = "unix";
           }
         ];
       };
