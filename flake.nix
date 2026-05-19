@@ -70,6 +70,11 @@
           system = "aarch64-darwin";
           username = "simonkrenn";
         };
+        work = mkHost {
+          hostname = "work";
+          system = "aarch64-darwin";
+          username = "simon";
+        };
       };
     };
 }
