@@ -1,14 +1,14 @@
-{ pkgs, ... }:
+{ pkgs, username, ... }:
 {
   nix.settings.experimental-features = "nix-command flakes";
   ## turn off nix-darwin management of nix because determinate-nix uses its own daemon
   nix.enable = false;
 
-  system.primaryUser = "simonkrenn";
+  system.primaryUser = username;
 
   users.users.simonkrenn = {
-    name = "simonkrenn";
-    home = "/Users/simonkrenn";
+    name = username;
+    home = "/Users/${username}";
     shell = pkgs.fish;
   };
 
@@ -45,6 +45,7 @@
     libiconv
     cargo
     nixfmt
+    television
   ];
 
   programs.fish.enable = true;

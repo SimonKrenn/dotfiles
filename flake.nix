@@ -32,20 +32,44 @@
       devenv,
       ...
     }@inputs:
+    let
+      mkHost =
+        {
+          hostname,
+          system,
+          username,
+        }:
+        nix-darwin.lib.darwinSystem {
+          inherit system;
+          specialArgs = { inherit hostname username; };
+          modules = [
+            # ./nix/hosts/${hostname}/default.nix
+            ./nix/modules/darwin.nix
+            ./nix/modules/homebrew.nix
+
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = { inherit hostname username; };
+
+              home-manager.users.${username} = {
+                imports = [
+                  ./nix/modules/home.nix
+                  # ./nix/hosts/${hostname}/home.nix
+                ];
+              };
+            }
+          ];
+        };
+    in
     {
-      darwinConfigurations."simon-mac" = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = [
-          ./nix/darwin.nix
-          ./nix/homebrew.nix
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "stow-backup";
-            home-manager.users.simonkrenn = import ./nix/home.nix;
-          }
-        ];
+      darwinConfigurations = {
+        simon-mac = mkHost {
+          hostname = "simon-mac";
+          system = "aarch64-darwin";
+          username = "simonkrenn";
+        };
       };
     };
 }
