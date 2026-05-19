@@ -1,0 +1,21 @@
+nix/programs/tmux.nix
+  s_cc42920558f7a0::t_643fba91dd14da 18-19
+  s_cc42920558f7a0::t_fd713c943b9695 20,68
+  s_cc42920558f7a0::t_04d378b3071c6a 33-50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.10",
+  "base_commit_sha": "fbb17f374cb003f1421e6761572f96761e480d76",
+  "prompts": {},
+  "sessions": {
+    "s_cc42920558f7a0": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1c59122a1ffeWm5f8L2cvTKUcM",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Simon Krenn <skrenn99@gmail.com>"
+    }
+  }
+}
