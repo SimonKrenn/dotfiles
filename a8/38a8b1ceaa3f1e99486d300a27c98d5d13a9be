@@ -1,0 +1,23 @@
+nix/programs/hammerspoon.nix
+  s_fb313010ee5357::t_b527eff82311fc 1-5
+nix/modules/home.nix
+  s_fb313010ee5357::t_b527eff82311fc 20
+nix/modules/darwin.nix
+  s_fb313010ee5357::t_b527eff82311fc 51-56
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.10",
+  "base_commit_sha": "a838a8b1ceaa3f1e99486d300a27c98d5d13a9be",
+  "prompts": {},
+  "sessions": {
+    "s_fb313010ee5357": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1bf78f938ffeJxVtDUAuwhbicu",
+        "model": "gpt-5.4"
+      },
+      "human_author": "Simon Krenn <skrenn99@gmail.com>"
+    }
+  }
+}
