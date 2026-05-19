@@ -56,7 +56,7 @@
               home-manager.users.${username} = {
                 imports = [
                   ./nix/modules/home.nix
-                  # ./nix/hosts/${hostname}/home.nix
+                  ./nix/hosts/${hostname}/default.nix
                 ];
               };
             }
