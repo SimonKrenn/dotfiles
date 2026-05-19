@@ -1,0 +1,21 @@
+nix/programs/git.nix
+  s_ccf7afa440aff8::t_e97d099387c1b0 5-40
+nix/modules/home.nix
+  s_ccf7afa440aff8::t_e97d099387c1b0 15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.10",
+  "base_commit_sha": "046adb0836e452edec10b938801c41b973e39cd8",
+  "prompts": {},
+  "sessions": {
+    "s_ccf7afa440aff8": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1bf6ddab2ffekmq3REzYR2KHoj",
+        "model": "gpt-5.4"
+      },
+      "human_author": "Simon Krenn <skrenn99@gmail.com>"
+    }
+  }
+}
