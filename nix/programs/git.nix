@@ -2,7 +2,6 @@
 {
   programs.git = {
     enable = true;
-    userName = "Simon Krenn";
 
     signing = {
       format = "ssh";
@@ -11,33 +10,20 @@
       signer = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
     };
 
-    delta = {
-      enable = true;
-      options = {
-        navigate = true;
-      };
-    };
-
     lfs.enable = true;
 
-    extraConfig = {
-      interactive = {
-        diffFilter = "delta --color-only";
-      };
-
-      merge = {
-        conflictStyle = "zdiff3";
-      };
-
-      rerere = {
-        enabled = true;
-      };
-    };
-
     settings = {
-      core = {
-        pager = "delta";
-      };
+      user.name = "Simon Krenn";
+      core.pager = "delta";
+      merge.conflictStyle = "zdiff3";
+      rerere.enabled = true;
+    };
+  };
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+    options = {
+      navigate = true;
     };
   };
 }
