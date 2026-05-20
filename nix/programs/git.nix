@@ -17,6 +17,10 @@
       core.pager = "delta";
       merge.conflictStyle = "zdiff3";
       rerere.enabled = true;
+      merge.tool = "codediff";
+      mergetool.codediff.cmd = ''nvim "$MERGED" -c "CodeDiff merge \"$MERGED\""'';
+      diff.tool = "codediff";
+      difftool.codediff.cmd = ''nvim "$LOCAL" "$REMOTE" +"CodeDiff file $LOCAL $REMOTE"'';
     };
   };
   programs.delta = {
