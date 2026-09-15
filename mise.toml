@@ -1,0 +1,109 @@
+# Experimental Apple Silicon macOS migration. See migration/README.md.
+# This file is provisioning only; global runtime config stays separate.
+[tools]
+bun = "latest"
+fnox = "latest"
+go = "latest"
+node = "22.15.0"
+opencode = "latest"
+rust = "latest"
+
+[bootstrap.packages]
+"brew:git" = "latest"
+"brew:git-lfs" = "latest"
+"brew:tmux" = "latest"
+"brew:fish" = "latest"
+"brew:bat" = "latest"
+"brew:gh" = "latest"
+"brew:glab" = "latest"
+"brew:starship" = "latest"
+"brew:fzf" = "latest"
+"brew:lazygit" = "latest"
+"brew:ast-grep" = "latest"
+"brew:eza" = "latest"
+"brew:yazi" = "latest"
+"brew:zoxide" = "latest"
+"brew:fd" = "latest"
+"brew:ripgrep" = "latest"
+"brew:btop" = "latest"
+"brew:atuin" = "latest"
+"brew:chafa" = "latest"
+"brew:resvg" = "latest"
+"brew:git-delta" = "latest"
+"brew:git-filter-repo" = "latest"
+"brew:lazydocker" = "latest"
+"brew:sesh" = "latest"
+"brew:gcc" = "latest"
+"brew:erdtree" = "latest"
+"brew:hyperfine" = "latest"
+"brew:libiconv" = "latest"
+"brew:television" = "latest"
+"brew:direnv" = "latest"
+"brew:commitizen" = "latest"
+"brew:bob" = "latest"
+"brew:docker" = "latest"
+"brew:fisher" = "latest"
+"brew:gitmux" = "latest"
+"brew:mole" = "latest"
+"brew:wakatime-cli" = "latest"
+"brew:trufflehog" = "latest"
+"brew:jq" = "latest"
+"brew:max-sixty/worktrunk/wt" = "latest"
+"brew-cask:google-chrome" = "latest"
+"brew-cask:visual-studio-code" = "latest"
+"brew-cask:1password" = "latest"
+"brew-cask:1password-cli" = "latest"
+"brew-cask:notion" = "latest"
+"brew-cask:obsidian" = "latest"
+"brew-cask:jetbrains-toolbox" = "latest"
+"brew-cask:raycast" = "latest"
+"brew-cask:raindropio" = "latest"
+"brew-cask:hammerspoon" = "latest"
+"brew-cask:codex" = "latest"
+"brew-cask:cryptomator" = "latest"
+"brew-cask:ghostty" = "latest"
+"brew-cask:yaak" = "latest"
+"brew-cask:font-monaspice-nerd-font" = "latest"
+"brew-cask:font-ia-writer-quattro" = "latest"
+"brew-cask:font-geist-mono" = "latest"
+
+[bootstrap.repos]
+"~/.tmux/plugins/tpm" = { url = "https://github.com/tmux-plugins/tpm" }
+"~/.local/share/dotfiles/onehunter.nvim" = { url = "https://github.com/SimonKrenn/onehunter.nvim", ref = "df6e1d65bb2c54f9c4d8f86b089a8d2140cf1dfb" }
+
+[dotfiles]
+"~/.config/fish/config.fish" = { source = "migration/fish/config.fish", mode = "copy" }
+"~/.config/fish/alias.fish" = { source = "migration/fish/alias.fish", mode = "copy" }
+"~/.config/fish/functions.fish" = { source = "migration/fish/functions.fish", mode = "copy" }
+"~/.config/fish/fish_plugins" = { source = ".config/fish/fish_plugins", mode = "copy" }
+"~/.config/fish/starship" = { source = ".config/fish/starship", mode = "copy" }
+"~/.config/mise/config.toml" = { source = "migration/mise/config.toml", mode = "copy" }
+"~/.config/git/config" = { source = "migration/git/config", mode = "copy" }
+"~/.config/git/.gitignore" = { source = ".config/git/.gitignore", mode = "copy" }
+"~/.config/tmux/tmux.conf" = { source = "migration/tmux/tmux.conf", mode = "copy" }
+"~/.config/tmux/tmux.dark.sh" = { source = ".config/tmux/tmux.dark.sh", mode = "copy" }
+"~/.config/tmux/tmux.light.sh" = { source = ".config/tmux/tmux.light.sh", mode = "copy" }
+"~/.config/atuin/config.toml" = { source = ".config/atuin/config.toml", mode = "copy" }
+"~/.config/ghostty" = { source = ".config/ghostty", mode = "copy" }
+"~/.config/lazygit/config.yml" = { source = "migration/lazygit/config.yml", mode = "copy" }
+"~/.config/yazi/yazi.toml" = { source = ".config/yazi/yazi.toml", mode = "copy" }
+"~/.config/yazi/theme.toml" = { source = ".config/yazi/theme.toml", mode = "copy" }
+"~/.config/yazi/flavors/onehunter.yazi" = { source = "~/.local/share/dotfiles/onehunter.nvim/extras/yazi/onehunter.yazi", mode = "copy" }
+"~/.config/yazi/flavors/onehunter-light.yazi" = { source = "~/.local/share/dotfiles/onehunter.nvim/extras/yazi/onehunter-light.yazi", mode = "copy" }
+"~/.config/nvim" = { source = ".config/nvim", mode = "copy" }
+"~/.config/hammerspoon/init.lua" = { source = ".config/hammerspoon/init.lua", mode = "copy" }
+"~/.config/sesh/sesh.toml" = { source = ".config/sesh/sesh.toml", mode = "copy" }
+"~/.config/worktrunk/config.toml" = { source = ".config/worktrunk/config.toml", mode = "copy" }
+"~/.config/tmuxinator" = { source = ".config/tmuxinator", mode = "copy" }
+"~/.config/skhd/.skhdrc" = { source = ".config/skhd/.skhdrc", mode = "copy" }
+"~/.config/opencode" = { source = ".config/opencode", mode = "copy", exclude = ["node_modules", "node_modules/**", ".stow-local-ignore"] }
+"~/.agents" = { source = ".config/.agents", mode = "copy" }
+
+[bootstrap.macos.defaults]
+"NSGlobalDomain" = { AppleShowAllExtensions = true, ApplePressAndHoldEnabled = true }
+"com.apple.finder" = { ShowPathbar = true, ShowStatusBar = true, FXPreferredViewStyle = "clmv", AppleShowAllFiles = false }
+"org.hammerspoon.Hammerspoon" = { MJConfigFile = "{{ env.HOME }}/.config/hammerspoon/init.lua" }
+
+[tasks.bootstrap]
+description = "Install missing Fisher plugins and TPM plugins after tools and files"
+run = 'bash "{{ config_root }}/migration/post-bootstrap.sh"'
