@@ -1,0 +1,122 @@
+# Experimental Apple Silicon macOS migration. See migration/README.md.
+# Shared runtime definitions also deploy to the global mise config.
+min_version = "2026.10.25"
+include = ["./migration/mise/config.toml"]
+
+[bootstrap.packages]
+"brew:git" = "latest"
+"brew:git-lfs" = "latest"
+"brew:tmux" = "latest"
+"brew:fish" = "latest"
+"brew:bat" = "latest"
+"brew:gh" = "latest"
+"brew:glab" = "latest"
+"brew:starship" = "latest"
+"brew:fzf" = "latest"
+"brew:lazygit" = "latest"
+"brew:ast-grep" = "latest"
+"brew:eza" = "latest"
+"brew:yazi" = "latest"
+"brew:zoxide" = "latest"
+"brew:fd" = "latest"
+"brew:ripgrep" = "latest"
+"brew:btop" = "latest"
+"brew:atuin" = "latest"
+"brew:chafa" = "latest"
+"brew:resvg" = "latest"
+"brew:git-delta" = "latest"
+"brew:git-filter-repo" = "latest"
+"brew:lazydocker" = "latest"
+"brew:sesh" = "latest"
+"brew:gcc" = "latest"
+"brew:erdtree" = "latest"
+"brew:hyperfine" = "latest"
+"brew:libiconv" = "latest"
+"brew:television" = "latest"
+"brew:direnv" = "latest"
+"brew:commitizen" = "latest"
+"brew:bob" = "latest"
+"brew:docker" = "latest"
+"brew:fisher" = "latest"
+"brew:gitmux" = "latest"
+"brew:mole" = "latest"
+"brew:wakatime-cli" = "latest"
+"brew:trufflehog" = "latest"
+"brew:jq" = "latest"
+"brew:rtk" = "latest"
+"brew:nixfmt" = "latest"
+"brew:dmtrKovalenko/fff/fff-mcp" = "latest"
+"brew:max-sixty/worktrunk/wt" = "latest"
+"brew-cask:google-chrome" = "latest"
+"brew-cask:visual-studio-code" = "latest"
+"brew-cask:1password" = "latest"
+"brew-cask:1password-cli" = "latest"
+"brew-cask:notion" = "latest"
+"brew-cask:obsidian" = "latest"
+"brew-cask:jetbrains-toolbox" = "latest"
+"brew-cask:raycast" = "latest"
+"brew-cask:raindropio" = "latest"
+"brew-cask:hammerspoon" = "latest"
+"brew-cask:codex" = "latest"
+"brew-cask:cryptomator" = "latest"
+"brew-cask:ghostty" = "latest"
+"brew-cask:sozercan/repo/kaset" = "latest"
+"brew-cask:yaak" = "latest"
+"brew-cask:font-monaspice-nerd-font" = "latest"
+"brew-cask:font-ia-writer-quattro" = "latest"
+"brew-cask:font-geist-mono" = "latest"
+
+[bootstrap.repos]
+"~/.tmux/plugins/tpm" = { url = "https://github.com/tmux-plugins/tpm" }
+
+[dotfiles]
+"~/.config/fish/config.fish" = { source = "migration/fish/config.fish", mode = "copy" }
+"~/.config/fish/alias.fish" = { source = "migration/fish/alias.fish", mode = "copy" }
+"~/.config/fish/functions.fish" = { source = "migration/fish/functions.fish", mode = "copy" }
+"~/.config/fish/fish_plugins" = { source = ".config/fish/fish_plugins", mode = "copy" }
+"~/.config/fish/starship" = { source = ".config/fish/starship", mode = "copy" }
+"~/.config/mise/config.toml" = { source = "migration/mise/config.toml", mode = "copy" }
+"~/.config/mise/conf.d/settings.toml" = { source = "migration/mise/settings.toml", mode = "copy" }
+"~/.config/mise/mise.lock" = { source = "mise.lock", mode = "copy" }
+"~/.config/mise/.mise/locks" = { source = ".mise/locks", mode = "copy" }
+"~/.config/git/config" = { source = "migration/git/config", mode = "copy" }
+"~/.config/git/.gitignore" = { source = ".config/git/.gitignore", mode = "copy" }
+"~/.config/tmux/tmux.conf" = { source = "migration/tmux/tmux.conf", mode = "copy" }
+"~/.config/tmux/tmux.dark.sh" = { source = ".config/tmux/tmux.dark.sh", mode = "copy" }
+"~/.config/tmux/tmux.light.sh" = { source = ".config/tmux/tmux.light.sh", mode = "copy" }
+"~/.config/atuin/config.toml" = { source = ".config/atuin/config.toml", mode = "copy" }
+"~/.config/ghostty" = { source = ".config/ghostty", mode = "copy" }
+"~/.config/lazygit/config.yml" = { source = "migration/lazygit/config.yml", mode = "copy" }
+"~/.config/yazi/yazi.toml" = { source = ".config/yazi/yazi.toml", mode = "copy" }
+"~/.config/yazi/theme.toml" = { source = ".config/yazi/theme.toml", mode = "copy" }
+"~/.config/yazi/flavors/onehunter.yazi" = { source = "migration/yazi/flavors/onehunter.yazi", mode = "copy" }
+"~/.config/yazi/flavors/onehunter-light.yazi" = { source = "migration/yazi/flavors/onehunter-light.yazi", mode = "copy" }
+"~/.config/nvim" = { source = ".config/nvim", mode = "copy" }
+"~/.config/hammerspoon/init.lua" = { source = ".config/hammerspoon/init.lua", mode = "copy" }
+"~/.config/sesh/sesh.toml" = { source = ".config/sesh/sesh.toml", mode = "copy" }
+"~/.config/worktrunk/config.toml" = { source = ".config/worktrunk/config.toml", mode = "copy" }
+"~/.config/tmuxinator" = { source = ".config/tmuxinator", mode = "copy" }
+"~/.config/skhd/.skhdrc" = { source = ".config/skhd/.skhdrc", mode = "copy" }
+"~/.config/opencode/AGENTS.md" = { source = ".config/opencode/AGENTS.md", mode = "copy" }
+"~/.config/opencode/agent/ask.md" = { source = ".config/opencode/agent/ask.md", mode = "copy" }
+"~/.config/opencode/agent/deep-research-citations.md" = { source = ".config/opencode/agent/deep-research-citations.md", mode = "copy" }
+"~/.config/opencode/oh-my-opencode-slim.json" = { source = ".config/opencode/oh-my-opencode-slim.json", mode = "copy" }
+"~/.config/opencode/opencode.jsonc" = { source = ".config/opencode/opencode.jsonc", mode = "copy" }
+"~/.config/opencode/package-lock.json" = { source = ".config/opencode/package-lock.json", mode = "copy" }
+"~/.config/opencode/package.json" = { source = ".config/opencode/package.json", mode = "copy" }
+"~/.config/opencode/plugins/git-ai.ts" = { source = ".config/opencode/plugins/git-ai.ts", mode = "copy" }
+"~/.config/opencode/plugins/notify.ts" = { source = ".config/opencode/plugins/notify.ts", mode = "copy" }
+"~/.config/opencode/tui.json" = { source = ".config/opencode/tui.json", mode = "copy" }
+"~/.agents/skills" = { source = ".config/.agents/skills", mode = "copy", exclude = ["**/.git", "**/node_modules", "**/__pycache__"] }
+
+[bootstrap.user]
+login_shell = "/opt/homebrew/bin/fish"
+
+[bootstrap.macos.defaults]
+"NSGlobalDomain" = { AppleShowAllExtensions = true, ApplePressAndHoldEnabled = true }
+"com.apple.finder" = { ShowPathbar = true, ShowStatusBar = true, FXPreferredViewStyle = "clmv", AppleShowAllFiles = false }
+"org.hammerspoon.Hammerspoon" = { MJConfigFile = "~/.config/hammerspoon/init.lua" }
+
+[tasks.bootstrap]
+description = "Install Neovim, OpenCode dependencies, Fisher and TPM plugins"
+run = 'bash "{{ config_root }}/migration/post-bootstrap.sh"'

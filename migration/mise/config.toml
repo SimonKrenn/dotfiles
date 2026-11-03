@@ -1,0 +1,9 @@
+[tools]
+bun = "latest"
+fnox = "latest"
+go = "latest"
+node = "22.15.0"
+opencode = "latest"
+rust = "latest"
+"npm:tokscale" = "latest"
+"npm:@openai/codex" = "latest"

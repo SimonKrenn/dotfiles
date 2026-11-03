@@ -1,0 +1,50 @@
+# command overrides
+alias erd="erd -."
+alias ls="eza -a -g --icons"
+alias lg="lazygit"
+alias edit="nvim"
+alias browse="yazi"
+alias ya="yazi"
+alias y="yarn"
+alias pn='pnpm'
+alias g='git'
+alias find='fd'
+alias mux='tmuxinator'
+alias cat='bat'
+alias nv='nvim'
+# alias oc='opencode'
+
+# obsidian related
+alias oot='sesh connect $HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/'
+alias oow="cd $HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/work/"
+alias oop="cd $HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/zettelkasten/"
+
+# sesh
+alias slist='sesh connect $(sesh list --icons | fzf --no-sort --ansi --tmux)'
+alias slast='sesh last'
+
+# utilities
+alias sf='source ~/.config/fish/config.fish'
+
+# yazi
+function ya
+	set tmp (mktemp -t "yazi-cwd.XXXXX")
+	yazi $argv --cwd-file="$tmp"
+	if set cwd (command cat -- "$tmp"); and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+		cd -- "$cwd"
+	end
+	rm -f -- "$tmp"
+end  
+
+function oc-list
+    set -l sessions (oc session list --format json | jq -r '.[] | [.id,.title,.directory] | @tsv')
+    set -l selected (printf '%s\n' $sessions | fzf --delimiter="\t" --height=40% --popup center)
+    set -l id (echo $selected | awk '{print $1}')
+  
+    if test -z "$id"
+      return
+    end
+
+    oc -s $id
+  
+end
