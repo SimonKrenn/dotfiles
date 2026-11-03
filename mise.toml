@@ -1,14 +1,7 @@
 # Experimental Apple Silicon macOS migration. See migration/README.md.
-# This file is provisioning only; global runtime config stays separate.
-[tools]
-bun = "latest"
-fnox = "latest"
-go = "latest"
-node = "22.15.0"
-opencode = "latest"
-rust = "latest"
-"npm:tokscale" = "latest"
-"npm:@openai/codex" = "latest"
+# Shared runtime definitions also deploy to the global mise config.
+min_version = "2026.10.25"
+include = ["./migration/mise/config.toml"]
 
 [bootstrap.packages]
 "brew:git" = "latest"
@@ -83,6 +76,7 @@ rust = "latest"
 "~/.config/fish/fish_plugins" = { source = ".config/fish/fish_plugins", mode = "copy" }
 "~/.config/fish/starship" = { source = ".config/fish/starship", mode = "copy" }
 "~/.config/mise/config.toml" = { source = "migration/mise/config.toml", mode = "copy" }
+"~/.config/mise/conf.d/settings.toml" = { source = "migration/mise/settings.toml", mode = "copy" }
 "~/.config/mise/mise.lock" = { source = "mise.lock", mode = "copy" }
 "~/.config/mise/.mise/locks" = { source = ".mise/locks", mode = "copy" }
 "~/.config/git/config" = { source = "migration/git/config", mode = "copy" }
@@ -126,7 +120,3 @@ login_shell = "/opt/homebrew/bin/fish"
 [tasks.bootstrap]
 description = "Install Neovim, OpenCode dependencies, Fisher and TPM plugins"
 run = 'bash "{{ config_root }}/migration/post-bootstrap.sh"'
-
-[tasks."setup:git-ai"]
-description = "Install Git AI using its upstream installer (explicit opt-in)"
-run = 'bash "{{ config_root }}/migration/install-git-ai.sh"'

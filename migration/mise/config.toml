@@ -7,6 +7,3 @@ opencode = "latest"
 rust = "latest"
 "npm:tokscale" = "latest"
 "npm:@openai/codex" = "latest"
-
-[settings]
-idiomatic_version_file_enable_tools = ["node"]

@@ -8,7 +8,7 @@ case "${1:---dry-run}" in
   *) echo 'Usage: bash migration/bootstrap.sh [--dry-run|--apply]' >&2; exit 2 ;;
 esac
 if [[ $# -gt 1 ]]; then
-  echo 'Extra flags are refused (especially force/yes).' >&2
+  echo 'Usage: bash migration/bootstrap.sh [--dry-run|--apply]' >&2
   exit 2
 fi
 if [[ "$(uname -s)" != Darwin || "$(uname -m)" != arm64 ]]; then
@@ -16,18 +16,12 @@ if [[ "$(uname -s)" != Darwin || "$(uname -m)" != arm64 ]]; then
   exit 1
 fi
 export PATH="/opt/homebrew/opt/ruby/bin:/opt/homebrew/bin:$PATH"
-command -v mise >/dev/null || { echo 'Run bash migration/prepare.sh --apply first.' >&2; exit 1; }
+command -v mise >/dev/null || { echo 'Install prerequisites: brew install mise python@3.13 ruby' >&2; exit 1; }
 command -v python3 >/dev/null || { echo 'Python 3.11+ is required for preflight.' >&2; exit 1; }
-python3 migration/validate.py
-python3 -c 'import re, subprocess; v = tuple(map(int, re.search(r"(\d+)\.(\d+)\.(\d+)", subprocess.check_output(["mise", "--version"], text=True)).groups())); assert v >= (2026, 10, 25), "mise 2026.10.25+ required; brew upgrade mise"'
-mise bootstrap --help >/dev/null
 if [[ "$trial_mode" == apply ]]; then
-  if [[ "${DOTFILES_MISE_TRIAL_APPLY:-}" != 1 ]]; then
-    echo 'Read migration/README.md; then explicitly set DOTFILES_MISE_TRIAL_APPLY=1.' >&2
-    exit 1
-  fi
   python3 migration/validate.py --preflight
   mise bootstrap
 else
+  python3 migration/validate.py
   mise bootstrap --dry-run
 fi
