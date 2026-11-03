@@ -16,6 +16,18 @@ class OwnershipTests(unittest.TestCase):
       home = Path(directory)
       self.assertEqual(validate.owned_symlinks(home / '.config/fish/config.fish', home), [])
 
+  def test_symlink_above_home_is_not_a_config_owner(self):
+    with tempfile.TemporaryDirectory() as directory:
+      root = Path(directory)
+      (root / 'real/home').mkdir(parents=True)
+      (root / 'alias').symlink_to(root / 'real', target_is_directory=True)
+      home = root / 'alias/home'
+      self.assertEqual(validate.owned_symlinks(home / '.config/fish/config.fish', home), [])
+
+  def test_target_outside_home_is_rejected(self):
+    with self.assertRaises(ValueError):
+      validate.owned_symlinks(Path('/outside/config'), Path('/home/example'))
+
   def test_broken_nix_link(self):
     with tempfile.TemporaryDirectory() as directory:
       home = Path(directory)

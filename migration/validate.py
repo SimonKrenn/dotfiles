@@ -12,16 +12,32 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def owned_symlinks(target, home):
   """Include ancestors: a regular-looking file can live under a Nix symlink."""
-  paths = [target, *target.parents]
-  return [p for p in paths if p != home and p != Path('/') and p.is_symlink()]
+  # Preserve lexical paths so broken links remain visible; stop at home.
+  target.relative_to(home)
+  links = []
+  path = target
+  while path != home:
+    if path.is_symlink():
+      links.append(path)
+    path = path.parent
+  return links
 
 
 def validate(inventory=None, preflight=False):
   config = tomllib.loads((ROOT / 'mise.toml').read_text())
   runtime = tomllib.loads((ROOT / 'migration/mise/config.toml').read_text())
   assert config['tools'] == runtime['tools'], 'Root/global runtime inventory drift'
-  assert 'user' not in config['bootstrap'], 'Trial must not change login shell'
+  assert config['bootstrap']['user']['login_shell'] == '/opt/homebrew/bin/fish'
   assert 'mise_shell_activate' not in config['bootstrap'], 'Fish owns activation'
+  lock = tomllib.loads((ROOT / 'mise.lock').read_text())
+  assert set(lock['tools']) == set(config['tools']), 'Runtime lock inventory drift'
+  for tool, versions in lock['tools'].items():
+    assert config['tools'][tool] in versions[0]['specifiers'], tool
+    for version in versions:
+      if 'aube' in version:
+        metadata = ROOT / version['aube']['path']
+        assert (metadata / 'package.json').is_file(), f'Missing dependency manifest: {tool}'
+        assert (metadata / 'aube-lock.yaml').is_file(), f'Missing dependency lock: {tool}'
   packages = config['bootstrap']['packages']
   for duplicate in ('mise', 'opencode', 'rust', 'cargo', 'node', 'bun', 'stow'):
     assert 'brew:' + duplicate not in packages, duplicate

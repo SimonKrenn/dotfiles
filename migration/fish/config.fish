@@ -7,10 +7,15 @@ fish_add_path $HOME/.local/bin $HOME/.local/share/bob/nvim-bin
 fish_add_path $HOME/.bun/bin $HOME/.git-ai/bin
 fish_add_path $HOME/.browser-use/bin $HOME/.browser-use-env/bin
 
-if status is-interactive
-  if type -q mise
+if type -q mise
+  if status is-interactive
     mise activate fish | source
+  else
+    mise activate fish --shims | source
   end
+end
+
+if status is-interactive
   if type -q starship
     starship init fish | source
   end

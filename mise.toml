@@ -7,6 +7,8 @@ go = "latest"
 node = "22.15.0"
 opencode = "latest"
 rust = "latest"
+"npm:tokscale" = "latest"
+"npm:@openai/codex" = "latest"
 
 [bootstrap.packages]
 "brew:git" = "latest"
@@ -48,6 +50,9 @@ rust = "latest"
 "brew:wakatime-cli" = "latest"
 "brew:trufflehog" = "latest"
 "brew:jq" = "latest"
+"brew:rtk" = "latest"
+"brew:nixfmt" = "latest"
+"brew:dmtrKovalenko/fff/fff-mcp" = "latest"
 "brew:max-sixty/worktrunk/wt" = "latest"
 "brew-cask:google-chrome" = "latest"
 "brew-cask:visual-studio-code" = "latest"
@@ -62,6 +67,7 @@ rust = "latest"
 "brew-cask:codex" = "latest"
 "brew-cask:cryptomator" = "latest"
 "brew-cask:ghostty" = "latest"
+"brew-cask:sozercan/repo/kaset" = "latest"
 "brew-cask:yaak" = "latest"
 "brew-cask:font-monaspice-nerd-font" = "latest"
 "brew-cask:font-ia-writer-quattro" = "latest"
@@ -69,7 +75,6 @@ rust = "latest"
 
 [bootstrap.repos]
 "~/.tmux/plugins/tpm" = { url = "https://github.com/tmux-plugins/tpm" }
-"~/.local/share/dotfiles/onehunter.nvim" = { url = "https://github.com/SimonKrenn/onehunter.nvim", ref = "df6e1d65bb2c54f9c4d8f86b089a8d2140cf1dfb" }
 
 [dotfiles]
 "~/.config/fish/config.fish" = { source = "migration/fish/config.fish", mode = "copy" }
@@ -78,6 +83,8 @@ rust = "latest"
 "~/.config/fish/fish_plugins" = { source = ".config/fish/fish_plugins", mode = "copy" }
 "~/.config/fish/starship" = { source = ".config/fish/starship", mode = "copy" }
 "~/.config/mise/config.toml" = { source = "migration/mise/config.toml", mode = "copy" }
+"~/.config/mise/mise.lock" = { source = "mise.lock", mode = "copy" }
+"~/.config/mise/.mise/locks" = { source = ".mise/locks", mode = "copy" }
 "~/.config/git/config" = { source = "migration/git/config", mode = "copy" }
 "~/.config/git/.gitignore" = { source = ".config/git/.gitignore", mode = "copy" }
 "~/.config/tmux/tmux.conf" = { source = "migration/tmux/tmux.conf", mode = "copy" }
@@ -88,22 +95,38 @@ rust = "latest"
 "~/.config/lazygit/config.yml" = { source = "migration/lazygit/config.yml", mode = "copy" }
 "~/.config/yazi/yazi.toml" = { source = ".config/yazi/yazi.toml", mode = "copy" }
 "~/.config/yazi/theme.toml" = { source = ".config/yazi/theme.toml", mode = "copy" }
-"~/.config/yazi/flavors/onehunter.yazi" = { source = "~/.local/share/dotfiles/onehunter.nvim/extras/yazi/onehunter.yazi", mode = "copy" }
-"~/.config/yazi/flavors/onehunter-light.yazi" = { source = "~/.local/share/dotfiles/onehunter.nvim/extras/yazi/onehunter-light.yazi", mode = "copy" }
+"~/.config/yazi/flavors/onehunter.yazi" = { source = "migration/yazi/flavors/onehunter.yazi", mode = "copy" }
+"~/.config/yazi/flavors/onehunter-light.yazi" = { source = "migration/yazi/flavors/onehunter-light.yazi", mode = "copy" }
 "~/.config/nvim" = { source = ".config/nvim", mode = "copy" }
 "~/.config/hammerspoon/init.lua" = { source = ".config/hammerspoon/init.lua", mode = "copy" }
 "~/.config/sesh/sesh.toml" = { source = ".config/sesh/sesh.toml", mode = "copy" }
 "~/.config/worktrunk/config.toml" = { source = ".config/worktrunk/config.toml", mode = "copy" }
 "~/.config/tmuxinator" = { source = ".config/tmuxinator", mode = "copy" }
 "~/.config/skhd/.skhdrc" = { source = ".config/skhd/.skhdrc", mode = "copy" }
-"~/.config/opencode" = { source = ".config/opencode", mode = "copy", exclude = ["node_modules", "node_modules/**", ".stow-local-ignore"] }
-"~/.agents" = { source = ".config/.agents", mode = "copy" }
+"~/.config/opencode/AGENTS.md" = { source = ".config/opencode/AGENTS.md", mode = "copy" }
+"~/.config/opencode/agent/ask.md" = { source = ".config/opencode/agent/ask.md", mode = "copy" }
+"~/.config/opencode/agent/deep-research-citations.md" = { source = ".config/opencode/agent/deep-research-citations.md", mode = "copy" }
+"~/.config/opencode/oh-my-opencode-slim.json" = { source = ".config/opencode/oh-my-opencode-slim.json", mode = "copy" }
+"~/.config/opencode/opencode.jsonc" = { source = ".config/opencode/opencode.jsonc", mode = "copy" }
+"~/.config/opencode/package-lock.json" = { source = ".config/opencode/package-lock.json", mode = "copy" }
+"~/.config/opencode/package.json" = { source = ".config/opencode/package.json", mode = "copy" }
+"~/.config/opencode/plugins/git-ai.ts" = { source = ".config/opencode/plugins/git-ai.ts", mode = "copy" }
+"~/.config/opencode/plugins/notify.ts" = { source = ".config/opencode/plugins/notify.ts", mode = "copy" }
+"~/.config/opencode/tui.json" = { source = ".config/opencode/tui.json", mode = "copy" }
+"~/.agents/skills" = { source = ".config/.agents/skills", mode = "copy", exclude = ["**/.git", "**/node_modules", "**/__pycache__"] }
+
+[bootstrap.user]
+login_shell = "/opt/homebrew/bin/fish"
 
 [bootstrap.macos.defaults]
 "NSGlobalDomain" = { AppleShowAllExtensions = true, ApplePressAndHoldEnabled = true }
 "com.apple.finder" = { ShowPathbar = true, ShowStatusBar = true, FXPreferredViewStyle = "clmv", AppleShowAllFiles = false }
-"org.hammerspoon.Hammerspoon" = { MJConfigFile = "{{ env.HOME }}/.config/hammerspoon/init.lua" }
+"org.hammerspoon.Hammerspoon" = { MJConfigFile = "~/.config/hammerspoon/init.lua" }
 
 [tasks.bootstrap]
-description = "Install missing Fisher plugins and TPM plugins after tools and files"
+description = "Install Neovim, OpenCode dependencies, Fisher and TPM plugins"
 run = 'bash "{{ config_root }}/migration/post-bootstrap.sh"'
+
+[tasks."setup:git-ai"]
+description = "Install Git AI using its upstream installer (explicit opt-in)"
+run = 'bash "{{ config_root }}/migration/install-git-ai.sh"'

@@ -5,6 +5,8 @@ go = "latest"
 node = "22.15.0"
 opencode = "latest"
 rust = "latest"
+"npm:tokscale" = "latest"
+"npm:@openai/codex" = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node"]

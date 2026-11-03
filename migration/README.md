@@ -1,137 +1,129 @@
 # Mise bootstrap trial (Apple Silicon macOS)
 
-This is an additive trial, not an instruction to uninstall Nix. Nix and Stow are
-currently active side-by-side. Their original files, setup scripts and flake are
-unchanged. Trial-specific changes live here, so switching branches does not edit
-files already linked by Stow. Use a **separate checkout**: keep the original checkout
-at its original path for existing Stow links and Nix rebuilds.
+This branch provides replacement setup while keeping active Nix/Stow sources
+intact. Use a separate, persistent checkout: existing Stow links must keep their
+original checkout path. Do not uninstall Nix before testing its replacement.
 
-## Try it
+## Prepare and preview
 
-Prerequisites: Git/Xcode command-line tools, Python 3.11+, and a mise version
-supporting the current bootstrap schema. The target schema is the documentation
-published for mise 2026.9.8; native execution against that release still needs
-verification. Older mise supplied by your Nix generation may lack these features.
-Do not uninstall Nix to obtain a newer mise.
+Prerequisites: Apple Silicon macOS, Xcode command-line tools, Homebrew at
+`/opt/homebrew` (https://brew.sh). Kaset requires macOS 15.4+.
 
 ```sh
-git clone --branch codex/mise-bootstrap-trial \
-  https://github.com/SimonKrenn/dotfiles.git ~/workspace/dotfiles-mise-trial
-cd ~/workspace/dotfiles-mise-trial
+bash migration/prepare.sh --dry-run
+bash migration/prepare.sh --apply
+export PATH="/opt/homebrew/bin:$PATH"
 python3 migration/validate.py
 python3 -m unittest discover -s migration -p 'test_*.py'
+python3 migration/check-packages.py
 # Review mise.toml and migration/ before granting trust.
 mise trust
 bash migration/bootstrap.sh --dry-run
 ```
 
-The wrapper defaults to dry-run and accepts no arbitrary passthrough flags.
-No hooks or plugin task run in dry-run. A mise dry-run can still evaluate trusted
-configuration expressions and inspect/download metadata; it is not a sandbox.
+Preparation installs missing mise, Python 3.13 and Ruby. The wrapper requires
+mise 2026.10.25+ and Python 3.11+, and puts Homebrew Ruby 3 on PATH so third-party
+package definitions can be evaluated. Upgrade an older mise with `brew upgrade mise`.
+Both scripts default to preview. Preview can fetch metadata and evaluate trusted
+expressions, but prints bootstrap hooks/tasks without executing them. It is not
+a sandbox. The package checker checks every definition, including installed
+packages the native preview skips; availability does not prove installation.
 
-For a full apply use a disposable Apple Silicon macOS VM. A separate account
-isolates dotfiles but NOT /opt/homebrew, /Applications or other shared host paths.
-Changing HOME or XDG_CONFIG_HOME is NOT a full-machine isolation strategy.
+## Apply in a disposable macOS VM
+
+A separate account does not isolate `/opt/homebrew` or `/Applications`; changing
+XDG paths does not isolate the machine either.
 
 ```sh
-# In the disposable VM, after reviewing the preview:
 DOTFILES_MISE_TRIAL_APPLY=1 bash migration/bootstrap.sh --apply
-# Run again to check convergence:
+# Repeat to test convergence:
 DOTFILES_MISE_TRIAL_APPLY=1 bash migration/bootstrap.sh --apply
 mise bootstrap status
 ```
 
-On a populated account, preflight refuses symlink targets, symlink ancestors,
-nested symlinks, and legacy ~/.tmux.conf or ~/.gitconfig precedence. It does not
-delete, adopt, overwrite or back up anything. Regular-file conflicts are left
-to mise's own conflict handling. Never add --force-dotfiles to bypass ownership.
-The guard belongs to the wrapper: direct `mise bootstrap` bypasses it.
+Apply preflight refuses target, ancestor and nested symlinks and legacy
+`~/.tmux.conf` / `~/.gitconfig` precedence. It stops at the home boundary, so
+macOS's `/var` symlink is not mistaken for a config owner. It never adopts or
+backs up existing files; regular-file conflicts use mise's own handling. Direct
+`mise bootstrap` bypasses the wrapper; do not force deployment past existing owners.
 
-## Migration decisions
+Apply installs packages, copies configs, selects `/opt/homebrew/bin/fish` as the
+login shell, installs runtimes and runs final setup. A login-shell change may
+request authorization; open a new terminal afterward. Final setup installs
+Neovim through bob, locked OpenCode dependencies when manifests change, missing
+Fisher/TPM plugins and unhides `~/Library`. Existing Fisher plugins are not upgraded.
 
-- mise.toml: host packages, repos, dotfiles, macOS defaults and a final task.
-- migration/mise/config.toml: global runtime configuration copied to the home
-  directory. Root tools match it for first-run installation; validation catches
-  drift. Retains Node 22.15.0 and the existing floating runtime versions; adds Bun.
-- OpenCode is owned by mise tools, not also brew. No second mise, Rust or Cargo
-  package. Fish/tmux stay in /opt/homebrew; login shell is deliberately unchanged.
-- Native Fish combines theme handling, aliases/functions and private/local
-  hooks; activates mise explicitly; removes machine-specific usernames.
-- Native Git retains signing, LFS, delta and rerere and adds Nix's CodeDiff
-  commands. Email is deliberately not selected: create
-  ~/.config/git/local.gitconfig with the appropriate [user] email for each machine.
-  It is not a declared target. Check `git config --show-origin --get user.email`.
-- Ghostty/Atuin/Yazi native settings agree with the inspected Nix configuration.
-  Yazi flavors are copied from a pinned theme checkout instead of the existing
-  machine-dependent flavor symlinks. Lazygit uses Nix's pagers structure and
-  preserves Stow's commitizen command.
-- Both old tmux loaders are replaced by one canonical ~/.config/tmux/tmux.conf;
-  preflight stops if ~/.tmux.conf could override it.
-- Trial deployment uses copies: editing runtime configs or plugin state cannot
-  write back into the checkout. Existing edits may conflict on subsequent apply;
-  transfer intentional changes back to the source explicitly.
-- Fish and Git are file-granular; private aliases and identity stay unmanaged.
-  OpenCode excludes node_modules and the Stow ignore file. No history watcher
-  or synchronization to a public repository is enabled.
-- TPM checkout is declarative. The final task installs missing Fisher plugins
-  and invokes TPM in a dedicated tmux server, leaving the real server alone.
-  No updates to already-installed Fisher plugins are requested.
+## Ownership and versions
 
-## Deliberately deferred
+- `mise.toml` owns host packages, dotfiles, TPM, defaults, login shell and setup.
+  Packages include rtk, nixfmt, Kaset and fff-mcp. Codex desktop is a cask; its CLI
+  is a separate mise tool.
+- `migration/mise/config.toml` deploys the global runtimes, matching the root
+  inventory so tools work outside the checkout. Bun, Node, Go, Rust, fnox,
+  OpenCode, tokscale and Codex CLI are mise-owned. Node remains 22.15.0.
+- `mise.lock` and `.mise/locks/` record runtime versions/dependencies and deploy
+  beside the global config. They do not lock Homebrew or provide Nix generations.
+  Refresh with `mise lock --platform macos-arm64`; add `--bump` to update floating
+  requests. Review root outputs and discard extra locks emitted for legacy
+  `.config/mise`; only the root lock and its dependency metadata are deployed.
+- Bob owns Neovim, pinned to 0.12.6 in `migration/neovim-version`. Change that file
+  to select another exact release; final setup applies the selection.
+- Fish preserves theme handling, aliases/functions and private/local hooks;
+  mise activates interactively and uses shims in noninteractive Fish scripts.
+- Git retains signing, LFS, delta, rerere and CodeDiff. Set per-machine email in
+  unmanaged `~/.config/git/local.gitconfig`, for example `[user]` followed by
+  `email = mail@simonkrenn.dev`. Use the work address on the work machine and
+  check `git config --show-origin --get user.email`.
+- Yazi themes are vendored from an explicit commit with license/provenance under
+  `migration/yazi/flavors`, allowing preview before any repository clone.
+- One canonical tmux config uses Homebrew Fish. TPM setup uses an independent
+  tmux server, leaving the existing server alone.
+- Deployment uses copies. Edit checkout sources and reapply; transfer intentional
+  runtime edits back first. Private Fish hooks and Git overrides stay unmanaged.
+  OpenCode deploys individual files and leaves node_modules to npm, with lifecycle
+  scripts disabled. Agent deployment targets only `~/.agents/skills`.
+- Personal/work hosts currently share packages. Local overrides own identity;
+  add explicit host profiles if package inventories need to differ.
 
-This trial is not yet a complete Nix replacement. Package availability and third-
-party tap compatibility need a real macOS apply. Floating package versions do
-not provide Nix generation reproducibility or transactional rollback.
+## Optional integrations
 
-- rtk, kaset and nixfmt from the Nix inventory await package/backend decisions;
-  Nix itself and its daemon remain installed.
-- Keep bob as the Neovim owner; select/install the same Neovim version you use
-  today with bob before testing Neovim. No automatic latest-Neovim replacement.
-- tokscale, fff-mcp, git-ai, OpenCode dependencies, Codex CLI vs desktop app,
-  optional VS Code extensions and Raycast import need explicit follow-up.
-  Their old curl installers are not silently executed.
-- Work Git email, private aliases, app sign-in, 1Password authorization and
-  Hammerspoon accessibility permissions are manual.
-- chflags nohidden ~/Library, login-shell changes and Nix/Stow removal are not
-  performed. Change the login shell only after /opt/homebrew/bin/fish is verified.
+`mise run setup:git-ai` explicitly opts into upstream Git AI v1.7.5 installation
+and agent integration. It verifies the committed installer SHA-256 before running
+it; this is not the unrelated `daidi/tap/git-ai`. Review a release and its checksum
+before updating. fff-mcp uses Homebrew, so its curl installer is unnecessary.
+OpenCode's enabled fff entry uses the executable on PATH. Configure Codex MCP
+separately with the absolute `/opt/homebrew/bin/fff-mcp` path if needed.
 
-## Existing-machine handoff and rollback
+App sign-in, 1Password authorization, Hammerspoon accessibility permissions,
+Raycast imports and optional editor extensions remain user setup. Nix/Stow
+uninstallation is a separate final migration step.
 
-Before an eventual real migration, record the current Nix generation, login shell,
-package inventory, symlink destinations, resolved config contents and private
-files. Keep a filesystem backup and the original checkout.
+## Existing-machine handoff and recovery
 
-For EACH target, determine whether Stow or Home Manager owns it. Remove that
-target's declaration from the owning manager and activate that change first,
-or unstow only its owning package. Recheck links and move conflicting regular
-files into your backup deliberately. Do not blanket-unstow, force copies, or
-remove the Nix store. Then run the wrapper preflight and preview again.
+Save the active Nix generation, login shell, package inventory, symlink ownership,
+resolved generated configs and private files. Keep a filesystem backup and the
+original checkout. For each target, remove its declaration from its current
+manager and activate that change, or unstow its owning package. Recheck ownership
+and move conflicting regular files into backup deliberately before preview/apply.
+Verify replacement Fish before releasing the old login shell's package.
 
-On rollback, restore the saved files/links and manager declarations and activate
-the saved Nix generation as appropriate. Merely checking out main does not undo
-copied files, installed packages or preferences. Removing the trial does not
-uninstall its host packages. Prefer a VM snapshot for complete trial rollback.
+Recovery requires restoring saved files, links, manager declarations, login shell
+and the Nix generation. Checking out main does not undo copies, packages or
+preferences. Use a VM snapshot for complete trial rollback.
 
-## Verification checklist
+## Validation
 
-- Static validator and unit tests pass.
-- Native mise bootstrap --dry-run accepts all configuration sections.
-- Apply twice; the second run creates no duplicate plugins or altered configs.
-- Open a new Fish shell; check mise doctor, mise which node, node --version.
-- Outside the checkout, confirm the same global tools are available.
-- Start tmux with its new config; verify splits use Fish and themes/plugins work.
-- Verify Neovim, Ghostty, Yazi flavors, Lazygit and Git LFS.
-- In a throwaway Git repository, verify identity and a signed commit after
-  configuring 1Password; do not change a real project's history to test signing.
+Static inventory/runtime-lock parity, Bash/Git parsing, nine ownership/wrapper
+regression tests, Fish syntax, package availability, and native bootstrap preview
+are checked without applying to the live machine. Preview can warn that the
+current Nix-owned global config target is untrusted; apply preflight refuses
+that owner, and root/global tool parity is validated independently.
 
-Local validation in the implementation environment covers TOML parsing, source
-inventory, package ownership constraints, runtime parity, Bash parsing, Git
-config parsing and seven unit tests. That Linux environment has neither mise nor
-Fish; native mise/Fish execution and macOS package/application testing are outstanding.
+Full VM apply, repeat-run convergence, plugin downloads, Neovim startup and GUI
+behavior remain unverified. Check mise doctor, runtimes outside the checkout,
+noninteractive Fish, tmux splits, Git LFS/signing, Ghostty and Yazi in that test.
 
-References:
-- [Bootstrap](https://mise.jdx.dev/bootstrap.html)
-- [Brew packages](https://mise.jdx.dev/bootstrap/packages/brew.html)
-- [Dotfiles](https://mise.jdx.dev/dotfiles.html)
-- [Repos](https://mise.jdx.dev/bootstrap/repos.html)
-- [Shell](https://mise.jdx.dev/bootstrap/shell.html)
+References: [Bootstrap](https://mise.jdx.dev/bootstrap.html),
+[Homebrew packages](https://mise.jdx.dev/bootstrap/packages/brew.html),
+[Dotfiles](https://mise.jdx.dev/dotfiles.html),
+[Shell](https://mise.jdx.dev/bootstrap/shell.html).
