@@ -36,11 +36,12 @@ Keep an existing terminal session open throughout the handoff.
 
    The new files must be visible to Nix flakes: review and `git add` the changes
    before rebuilding. Staging is sufficient; committing is optional.
-3. Run `./setup.sh --apply`. The preflight refuses deployment while configured
-   targets are still declared by the active Home Manager generation, or their
+3. Run `./setup.sh --apply`. The pre-dotfiles hook refuses deployment while
+   configured targets are still declared by the active Home Manager generation, or their
    ownership cannot be verified. Links left behind by older generations are
-   allowed only after checking they are absent from the current manifest. A second backup is taken before mise
-   installs the packages, deploys configs, sets preferences and the login shell,
+   allowed only after checking they are absent from the current manifest. Mise
+   installs packages, then runs the shared preflight and backup hook once before
+   deploying configs. It also sets preferences and the login shell,
    and installs shell/tmux plugin managers. It does not upgrade existing packages
    unless explicitly requested. Real files that conflict with links require
    reconciliation; inspect them instead of using a blanket force flag.
@@ -82,5 +83,14 @@ Fish, Git, and tmux. Bob, Nix Cargo, Homebrew runtimes, and Homebrew OpenCode ar
 not declared by the new manifest. Existing duplicate installs are left in place
 until their consumers are verified; no package pruning is run.
 
+For subsequent changes, use the same entry points:
+
+```sh
+./setup.sh             # Preview (the default)
+./setup.sh --apply     # Bootstrap; preflight and backup run once before linking
+mise dot diff         # Review only dotfile changes
+mise dot apply        # Deploy only dotfiles, with the same preflight and backup
+```
+
 The Yazi flavors are vendored from the deployed snapshot rather than linked to a
-user-specific checkout. See `mise/MIGRATION.md` for the initial investigation.
+user-specific checkout. See `mise/MIGRATION.md` for the remaining migration checks.

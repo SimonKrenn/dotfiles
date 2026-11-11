@@ -7,7 +7,11 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def entries():
-  return tomllib.loads((ROOT / "mise.toml").read_text())["dotfiles"].items()
+  config = tomllib.loads((ROOT / "mise.toml").read_text())
+  default_mode = config.get("settings", {}).get("dotfiles", {}).get("default_mode", "symlink")
+  for target, value in config["dotfiles"].items():
+    spec = {"source": value} if isinstance(value, str) else value
+    yield target, {"mode": default_mode, **spec}
 
 
 def excluded(relative, patterns):
