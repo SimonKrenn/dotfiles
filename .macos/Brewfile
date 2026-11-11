@@ -1,70 +1,64 @@
-# taps
-tap "homebrew/bundle" 
-tap "homebrew/cask-fonts" # nerd fonts
-tap "arl/arl"
-tap "max-sixty/worktrunk"
+# Compatibility manifest; mise.toml is authoritative for the new setup.
+brew "python@3.13"
+brew "ruby"
+brew "git"
+brew "git-lfs"
+brew "fish"
+brew "tmux"
+brew "neovim"
+brew "bat"
+brew "gh"
+brew "glab"
+brew "starship"
+brew "fzf"
+brew "lazygit"
+brew "ast-grep"
+brew "eza"
+brew "yazi"
+brew "zoxide"
+brew "fd"
+brew "ripgrep"
+brew "btop"
+brew "atuin"
+brew "chafa"
+brew "resvg"
+brew "git-delta"
+brew "git-filter-repo"
+brew "lazydocker"
+brew "sesh"
+brew "gcc"
+brew "libiconv"
+brew "rtk"
+brew "erdtree"
+brew "hyperfine"
+brew "nixfmt"
+brew "television"
+brew "direnv"
+brew "jq"
+brew "commitizen"
+brew "tmuxinator"
+brew "docker"
+brew "fisher"
+brew "gitmux"
+brew "mole"
+brew "wakatime-cli"
+brew "max-sixty/worktrunk/wt"
+brew "trufflehog"
 
-# packages
-brew 'git' # version control
-brew 'bob' # neovim version manager
-brew 'tmux' # terminal mutliplexer
-brew 'fish' # shell
-brew 'bat' # cat(1) alternative
-brew 'erdtree' # tree cmd
-brew 'gh' # github cli
-brew 'glab' # gitlab cli
-brew 'starship' # prompt
-brew 'fzf' # fuzzy-finder
-brew 'docker' # container
-brew 'mise' # version management
-brew 'lazygit' # git tui
-brew 'ast-grep' # ast-based search, modify, etc..
-brew 'fisher' # fish plugin-manager
-brew 'eza' # ls replacement
-brew 'stow' # symlink manager
-brew 'yazi' # file explorer
-brew 'zoxide' # better cd
-brew 'fd' # find replacement
-brew 'ripgrep' # ripgrep
-brew 'direnv' # direnv
-brew 'commitizen' # commit-cli
-brew 'btop' # resource monitor
-brew 'atuin' # magic shell history
-brew 'chafa' # image rendering
-brew 'resvg' # svg rendering
-brew 'git-delta' # diff pager
-brew 'git-filter-repo' # diff pager
-brew 'wt' # worktree cli 
-brew 'opencode' # ai-agent
-brew 'codex' # ai-agent
-brew 'lazydocker' # docker TUI
-brew 'sesh' # tmux session manager
-brew 'mole' # clean your mac
-brew 'wakatime-cli' # time tracking
- 
-# tmux plugins
-brew 'gitmux'
-
-# envs
-brew 'gcc'
-
-# Casks
-cask 'chrome' #its chrome
-cask 'visual-studio-code' # text-editor 
-cask '1password' # password manager
-cask '1password-cli' # password manager cli
-cask 'notion' # notes
-cask 'obsidian' # notes
-cask 'jetbrains-toolbox' # jetbrains ide manager
-cask 'raycast' # spotlight replacement
-cask 'raindropio' # bookmark manager
-cask 'hammerspoon' # automation/automation
-cask 'codex' # ai coding agent
-cask 'cryptomator' # encryption
-cask 'ghostty' # terminal emulator
-cask 'yaak' # REST client
-
-# fonts
-cask 'font-monaspice-nerd-font'
-cask 'font-ia-writer-quattro'
-cask 'font-geist-mono'
+cask "google-chrome"
+cask "1password"
+cask "1password-cli"
+cask "obsidian"
+cask "raycast"
+cask "raindropio"
+cask "hammerspoon"
+cask "cryptomator"
+cask "yaak"
+cask "ghostty"
+cask "codex"
+cask "visual-studio-code"
+cask "jetbrains-toolbox"
+cask "font-monaspice-nerd-font"
+cask "font-ia-writer-quattro"
+cask "font-geist-mono"
+cask "sozercan/repo/kaset"

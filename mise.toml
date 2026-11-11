@@ -1,0 +1,126 @@
+# Machine setup. Global runtime pins live only in .config/mise/config.toml.
+# Use ./setup.sh for preflight, backup, and the staged Home Manager handoff.
+[bootstrap.packages]
+"brew:python@3.13" = "latest"
+"brew:ruby" = "latest"
+"brew:git" = "latest"
+"brew:git-lfs" = "latest"
+"brew:fish" = "latest"
+"brew:tmux" = "latest"
+"brew:neovim" = "latest"
+"brew:bat" = "latest"
+"brew:gh" = "latest"
+"brew:glab" = "latest"
+"brew:starship" = "latest"
+"brew:fzf" = "latest"
+"brew:lazygit" = "latest"
+"brew:ast-grep" = "latest"
+"brew:eza" = "latest"
+"brew:yazi" = "latest"
+"brew:zoxide" = "latest"
+"brew:fd" = "latest"
+"brew:ripgrep" = "latest"
+"brew:btop" = "latest"
+"brew:atuin" = "latest"
+"brew:chafa" = "latest"
+"brew:resvg" = "latest"
+"brew:git-delta" = "latest"
+"brew:git-filter-repo" = "latest"
+"brew:lazydocker" = "latest"
+"brew:sesh" = "latest"
+"brew:gcc" = "latest"
+"brew:libiconv" = "latest"
+"brew:rtk" = "latest"
+"brew:erdtree" = "latest"
+"brew:hyperfine" = "latest"
+"brew:nixfmt" = "latest"
+"brew:television" = "latest"
+"brew:direnv" = "latest"
+"brew:jq" = "latest"
+"brew:commitizen" = "latest"
+"brew:tmuxinator" = "latest"
+"brew:docker" = "latest"
+"brew:fisher" = "latest"
+"brew:gitmux" = "latest"
+"brew:mole" = "latest"
+"brew:wakatime-cli" = "latest"
+"brew:max-sixty/worktrunk/wt" = "latest"
+"brew:trufflehog" = "latest"
+"brew-cask:google-chrome" = { os = "macos" }
+"brew-cask:1password" = { os = "macos" }
+"brew-cask:1password-cli" = { os = "macos" }
+"brew-cask:obsidian" = { os = "macos" }
+"brew-cask:raycast" = { os = "macos" }
+"brew-cask:raindropio" = { os = "macos" }
+"brew-cask:hammerspoon" = { os = "macos" }
+"brew-cask:cryptomator" = { os = "macos" }
+"brew-cask:yaak" = { os = "macos" }
+"brew-cask:ghostty" = { os = "macos" }
+"brew-cask:codex" = { os = "macos" }
+"brew-cask:visual-studio-code" = { os = "macos" }
+"brew-cask:jetbrains-toolbox" = { os = "macos" }
+"brew-cask:font-monaspice-nerd-font" = { os = "macos" }
+"brew-cask:font-ia-writer-quattro" = { os = "macos" }
+"brew-cask:font-geist-mono" = { os = "macos" }
+"brew-cask:sozercan/repo/kaset" = { os = "macos" }
+
+[dotfiles]
+"~/.config/fish" = { source = ".config/fish", mode = "symlink-each", exclude = ["private-alias.fish", "local.fish", "fish_variables", "starship"] }
+"~/.config/starship.toml" = { source = ".config/fish/starship/starship.toml", mode = "symlink" }
+"~/.config/git/config" = { source = ".config/git/config", mode = "symlink" }
+"~/.config/git/work.conf" = { source = ".config/git/work.conf", mode = "symlink" }
+"~/.config/ghostty" = { source = ".config/ghostty", mode = "symlink-each" }
+"~/.config/nvim" = { source = ".config/nvim", mode = "symlink" }
+"~/.config/tmux/tmux.conf" = { source = ".config/tmux/.tmux.conf", mode = "symlink" }
+"~/.config/tmux/tmux.dark.sh" = { source = ".config/tmux/tmux.dark.sh", mode = "symlink" }
+"~/.config/tmux/tmux.light.sh" = { source = ".config/tmux/tmux.light.sh", mode = "symlink" }
+"~/.config/tmuxinator" = { source = ".config/tmuxinator", mode = "symlink-each" }
+"~/.config/lazygit/config.yml" = { source = ".config/lazygit/config.yml", mode = "symlink" }
+"~/.config/yazi" = { source = ".config/yazi", mode = "symlink-each", exclude = ["flavors/README.md", "flavors/LICENSE"] }
+"~/.config/atuin/config.toml" = { source = ".config/atuin/config.toml", mode = "symlink" }
+"~/.config/hammerspoon" = { source = ".config/hammerspoon", mode = "symlink" }
+"~/.config/mise" = { source = ".config/mise", mode = "symlink" }
+"~/.config/sesh" = { source = ".config/sesh", mode = "symlink-each" }
+"~/.config/worktrunk" = { source = ".config/worktrunk", mode = "symlink-each" }
+"~/.config/opencode" = { source = ".config/opencode", mode = "symlink-each", exclude = ["node_modules", ".stow-local-ignore", ".git"] }
+"~/.agents/skills/ask" = { source = ".config/.agents/skills/ask", mode = "symlink" }
+"~/.agents/skills/astgrep-tool" = { source = ".config/.agents/skills/astgrep-tool", mode = "symlink" }
+"~/.agents/skills/ctx7-find-docs" = { source = ".config/.agents/skills/ctx7-find-docs", mode = "symlink" }
+"~/.agents/skills/fff-find-files" = { source = ".config/.agents/skills/fff-find-files", mode = "symlink" }
+"~/.agents/skills/find-skills" = { source = ".config/.agents/skills/find-skills", mode = "symlink" }
+"~/.agents/skills/git-ai-search" = { source = ".config/.agents/skills/git-ai-search", mode = "symlink" }
+"~/.agents/skills/prompt-analysis" = { source = ".config/.agents/skills/prompt-analysis", mode = "symlink" }
+"~/.agents/skills/vercel-composition-patterns" = { source = ".config/.agents/skills/vercel-composition-patterns", mode = "symlink" }
+"~/.agents/skills/vercel-react-best-practices" = { source = ".config/.agents/skills/vercel-react-best-practices", mode = "symlink" }
+"~/.agents/skills/web-design-guidelines" = { source = ".config/.agents/skills/web-design-guidelines", mode = "symlink" }
+
+[bootstrap.user]
+login_shell = "/opt/homebrew/bin/fish"
+
+[bootstrap.macos.defaults.NSGlobalDomain]
+AppleShowAllExtensions = true
+ApplePressAndHoldEnabled = true
+
+[bootstrap.macos.defaults."com.apple.finder"]
+ShowPathbar = true
+ShowStatusBar = true
+FXPreferredViewStyle = "clmv"
+AppleShowAllFiles = false
+
+[bootstrap.macos.defaults."org.hammerspoon.Hammerspoon"]
+MJConfigFile = "~/.config/hammerspoon/init.lua"
+
+[bootstrap.hooks]
+pre-dotfiles = '/opt/homebrew/bin/python3 "{{ config_root }}/scripts/mise-preflight.py" && /opt/homebrew/bin/python3 "{{ config_root }}/scripts/mise-backup.py"'
+
+[tasks.bootstrap]
+description = "Install shell/tmux plugins and restore the Library visibility preference"
+run = 'bash "{{ config_root }}/scripts/mise-plugins.sh"'
+
+[tasks.preview]
+description = "Preview machine setup without applying it"
+run = 'bash "{{ config_root }}/setup.sh" --dry-run'
+
+[tasks.backup]
+description = "Snapshot existing deployment targets before the ownership handoff"
+run = '/opt/homebrew/bin/python3 "{{ config_root }}/scripts/mise-backup.py"'

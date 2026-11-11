@@ -1,0 +1,3 @@
+# Optional machine-specific overrides. Copy to local.conf, which is ignored.
+# [user]
+#   email = you@example.com

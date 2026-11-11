@@ -1,25 +1,58 @@
-[core]
-  pager = delta
-[interactive]
-  diffFilter = delta --color-only
-[user]
-	email = simon.krenn@teamviewer.com
-	name = Simon Krenn
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKOZCQsHAYrEv2BzBLelFzdSX9aVx0sgXZBxdhS9Ojam
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-[gpg]
-	format = ssh
-[gpg "ssh"]
-	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
 [commit]
-	gpgsign = true
+  gpgSign = true
+
+[core]
+  pager = "delta"
+
 [delta]
   navigate = true
+
+[diff]
+  tool = "codediff"
+
+[difftool "codediff"]
+  cmd = "nvim \"$LOCAL\" \"$REMOTE\" +\"CodeDiff file $LOCAL $REMOTE\""
+
+[filter "lfs"]
+  clean = "git-lfs clean -- %f"
+  process = "git-lfs filter-process"
+  required = true
+  smudge = "git-lfs smudge -- %f"
+
+[gpg]
+  format = "ssh"
+
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+
+[interactive]
+  diffFilter = "delta --color-only"
+
 [merge]
-  conflictStyle = zdiff3
+  conflictStyle = "zdiff3"
+  tool = "codediff"
+
+[mergetool "codediff"]
+  cmd = "nvim \"$MERGED\" -c \"CodeDiff merge \\\"$MERGED\\\"\""
+
+[pager]
+  blame = "delta"
+  diff = "delta"
+  log = "delta"
+  show = "delta"
+
 [rerere]
-	enabled = true
+  enabled = true
+
+[tag]
+  gpgSign = true
+
+[user]
+  email = "mail@simonkrenn.dev"
+  name = "Simon Krenn"
+  signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKOZCQsHAYrEv2BzBLelFzdSX9aVx0sgXZBxdhS9Ojam"
+
+[includeIf "gitdir:~/workspace/work/"]
+  path = ~/.config/git/work.conf
+[include]
+  path = ~/.config/git/local.conf

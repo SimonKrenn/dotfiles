@@ -1,7 +1,4 @@
-"$schema" = 'https://starship.rs/config-schema.json';
-
- format= """
-"""
+"$schema" = 'https://starship.rs/config-schema.json'
 
 palette = 'onehunter'
 

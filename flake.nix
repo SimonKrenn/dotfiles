@@ -38,12 +38,12 @@
           hostname,
           system,
           username,
+          miseManaged ? false,
         }:
         nix-darwin.lib.darwinSystem {
           inherit system;
           specialArgs = { inherit hostname username; };
           modules = [
-            # ./nix/hosts/${hostname}/default.nix
             ./nix/modules/darwin.nix
             ./nix/modules/homebrew.nix
 
@@ -51,12 +51,14 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = { inherit hostname username; };
+              home-manager.extraSpecialArgs = { inherit hostname username miseManaged; };
 
               home-manager.users.${username} = {
                 imports = [
                   ./nix/modules/home.nix
-                  ./nix/hosts/${hostname}/default.nix
+                ]
+                ++ nixpkgs.lib.optionals (!miseManaged) [
+                  ./nix/hosts/${if hostname == "work" then "darwin-work" else hostname}/default.nix
                 ];
               };
             }
@@ -69,6 +71,18 @@
           hostname = "simon-mac";
           system = "aarch64-darwin";
           username = "simonkrenn";
+        };
+        simon-mac-mise = mkHost {
+          hostname = "simon-mac";
+          system = "aarch64-darwin";
+          username = "simonkrenn";
+          miseManaged = true;
+        };
+        work-mise = mkHost {
+          hostname = "work";
+          system = "aarch64-darwin";
+          username = "simon";
+          miseManaged = true;
         };
         work = mkHost {
           hostname = "work";

@@ -40,3 +40,10 @@ Temporary Items
 node_modules/
 
 private-alias.fish
+
+# Machine-specific overrides
+.config/git/local.conf
+.config/fish/local.fish
+
+# Python helper caches
+__pycache__/
