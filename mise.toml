@@ -86,16 +86,8 @@ dotfiles.default_mode = "symlink"
 "~/.config/sesh" = { source = ".config/sesh", mode = "symlink-each" }
 "~/.config/worktrunk" = { source = ".config/worktrunk", mode = "symlink-each" }
 "~/.config/opencode" = { source = ".config/opencode", mode = "symlink-each", exclude = ["node_modules", ".stow-local-ignore", ".git"] }
-"~/.agents/skills/ask" = ".config/.agents/skills/ask"
-"~/.agents/skills/astgrep-tool" = ".config/.agents/skills/astgrep-tool"
-"~/.agents/skills/ctx7-find-docs" = ".config/.agents/skills/ctx7-find-docs"
-"~/.agents/skills/fff-find-files" = ".config/.agents/skills/fff-find-files"
-"~/.agents/skills/find-skills" = ".config/.agents/skills/find-skills"
-"~/.agents/skills/git-ai-search" = ".config/.agents/skills/git-ai-search"
-"~/.agents/skills/prompt-analysis" = ".config/.agents/skills/prompt-analysis"
-"~/.agents/skills/vercel-composition-patterns" = ".config/.agents/skills/vercel-composition-patterns"
-"~/.agents/skills/vercel-react-best-practices" = ".config/.agents/skills/vercel-react-best-practices"
-"~/.agents/skills/web-design-guidelines" = ".config/.agents/skills/web-design-guidelines"
+"~/.config/opencode/skills" = ".config/.agents/skills"
+"~/.agents" = ".config/.agents"
 
 [bootstrap.user]
 login_shell = "/opt/homebrew/bin/fish"
@@ -117,8 +109,16 @@ MJConfigFile = "~/.config/hammerspoon/init.lua"
 pre-dotfiles = '/opt/homebrew/bin/python3 "{{ config_root }}/scripts/mise-preflight.py" && /opt/homebrew/bin/python3 "{{ config_root }}/scripts/mise-backup.py"'
 
 [tasks.bootstrap]
-description = "Install shell/tmux plugins and restore the Library visibility preference"
-run = 'bash "{{ config_root }}/scripts/mise-plugins.sh"'
+description = "List agent skills, install shell/tmux plugins, and restore Library visibility"
+run = [
+  'bash "{{ config_root }}/scripts/skills.sh" list',
+  'bash "{{ config_root }}/scripts/mise-plugins.sh"',
+]
+
+[tasks.skills]
+description = "Manage canonical agent skills with the Vercel Skills CLI"
+raw_args = true
+run = 'bash "{{ config_root }}/scripts/skills.sh"'
 
 [tasks.preview]
 description = "Preview machine setup without applying it"

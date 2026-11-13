@@ -1,4 +1,3 @@
-
 ---
 name: find-docs
 description: Retrieves and queries up-to-date documentation and code examples from Context7 for any programming library or framework. Use when writing code that depends on external packages, verifying API signatures, looking up usage patterns, generating code with specific libraries, or when training data may be outdated. Covers setup questions, migration guides, and version-specific docs.

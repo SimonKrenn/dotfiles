@@ -17,30 +17,43 @@ backup.mkdir(parents=True, mode=0o700)
 manifest = []
 # Preserve local files too, but omit generated dependency trees and repository metadata.
 ignore = shutil.ignore_patterns("node_modules", ".git", "__pycache__")
+
+
+def stored(path):
+  """Include dangling symlinks when checking an existing snapshot path."""
+  return path.exists() or path.is_symlink()
+
+
 for target, _ in entries():
   source = Path(target).expanduser()
-  if not source.exists() and not source.is_symlink():
+  if not stored(source):
     manifest.append({"path": str(source), "kind": "missing"})
     continue
   relative = source.relative_to(Path.home())
   record = {"path": str(source), "kind": "symlink" if source.is_symlink() else "file"}
   saved = backup / "original" / relative
   saved.parent.mkdir(parents=True, exist_ok=True)
+  # A nested target may already have been captured by its parent directory.
+  # Its manifest record is still needed, but its backup paths must not be rewritten.
+  if not stored(saved):
+    if source.is_symlink():
+      saved.symlink_to(source.readlink())
+    elif source.is_dir():
+      shutil.copytree(source, saved, symlinks=True, ignore=ignore)
+    else:
+      shutil.copy2(source, saved)
   if source.is_symlink():
     record["link"] = str(source.readlink())
-    saved.symlink_to(source.readlink())
   elif source.is_dir():
-    shutil.copytree(source, saved, symlinks=True, ignore=ignore)
     record["kind"] = "directory"
-  else:
-    shutil.copy2(source, saved)
   # Keep readable contents independently of the Nix store and symlink lifetime.
   readable = backup / "contents" / relative
   readable.parent.mkdir(parents=True, exist_ok=True)
-  if source.is_dir():
-    shutil.copytree(source, readable, symlinks=False, ignore=ignore, ignore_dangling_symlinks=True)
-  elif source.exists():
-    shutil.copy2(source, readable, follow_symlinks=True)
+  if not stored(readable):
+    if source.is_dir():
+      shutil.copytree(source, readable, symlinks=False, ignore=ignore, ignore_dangling_symlinks=True)
+    elif source.exists():
+      shutil.copy2(source, readable, follow_symlinks=True)
   manifest.append(record)
 (backup / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
 # Version inventories never include credentials or configuration values.

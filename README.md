@@ -69,6 +69,46 @@ No Nix installation or Stow run is required. Applications can require first-laun
 permissions or sign-in. Docker installs the CLI; select a container runtime
 separately if one is needed.
 
+## Agent skills
+
+`.config/.agents/skills/` is the canonical store for every vendored and custom
+agent skill. Mise links it to `~/.agents/skills/` and
+`~/.config/opencode/skills/`; the Vercel Skills lockfile remains beside it at
+`.config/.agents/.skill-lock.json`. The CLI is installed by mise as
+`npm:skills`, using Node.js 22.20 or newer.
+
+After bootstrap, manage skills from this repository with:
+
+```sh
+mise run skills list
+mise run skills find [query]
+mise run skills add owner/repo --skill skill-name
+mise run skills check
+mise run skills update [skill-name ...]
+mise run skills remove skill-name
+mise run skills init .config/.agents/skills/my-skill
+```
+
+The task wrapper defaults scoped commands to the universal global store rather
+than creating a project-local copy. Commit new or updated skill files together
+with `.skill-lock.json`. Custom skills intentionally remain untracked by the
+lockfile; updates and lock-based bulk removals leave them alone.
+See the [Vercel Skills CLI documentation](https://github.com/vercel-labs/skills)
+for source formats and additional options.
+
+`mise bootstrap` links and lists the committed skills but never downloads
+updates. This keeps setup repeatable; use `mise run skills update` when you want
+to refresh vendored content and its lockfile.
+
+For the one-time migration from the former per-skill links, an existing real
+`~/.agents` directory must be replaced explicitly. After reviewing the vendored
+inventory, run only the targeted handoff below; its pre-dotfiles hook creates a
+backup before replacing anything. Do not use `--force` for unrelated dotfiles.
+
+```sh
+mise dot apply --force ~/.agents ~/.config/opencode/skills
+```
+
 ## Local configuration
 
 Fish loads `~/.config/fish/private-alias.fish` and `local.fish` last. These files

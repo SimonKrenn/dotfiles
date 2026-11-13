@@ -31,6 +31,7 @@ dotfiles/
 │   ├── git/              # Git configuration
 │   ├── lazygit/          # Git TUI
 │   ├── opencode/         # AI agent configurations
+│   ├── .agents/          # Canonical agent skills and Vercel Skills lockfile
 │   ├── hammerspoon/      # macOS automation (Lua)
 │   └── ...               # Other tool configs
 ├── .macos/               # macOS-specific setup scripts
@@ -191,6 +192,14 @@ Formatting is handled by external tools via Neovim's conform.nvim:
 1. Create directory under `.config/<tool-name>/`
 2. Update `.config/stow.sh` if new directories need creation
 3. Add any Homebrew dependencies to `.macos/Brewfile`
+
+### Agent Skills
+
+- `.config/.agents/skills/` is the canonical store for both vendored and custom skills.
+- Use `mise run skills ...` to invoke the Vercel Skills CLI; scoped commands default to the global store linked at `~/.agents`.
+- Vendored provenance and update hashes live in `.config/.agents/.skill-lock.json`; commit the lockfile and skill contents together.
+- Use `mise run skills update` explicitly to refresh vendored skills. Bootstrap lists the installation but never updates it.
+- Custom skills do not need lockfile entries. Create them with `mise run skills init .config/.agents/skills/<name>`.
 
 ### OpenCode Agent Configurations
 
